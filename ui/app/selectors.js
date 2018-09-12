@@ -171,8 +171,8 @@ function autoAddToBetaUI (state) {
   const numberOfTokensAdded = state.metamask.tokens.length
 
   const userPassesThreshold = (numberOfTransactions > autoAddTransactionThreshold) &&
-    (numberOfAccounts > autoAddAccountsThreshold) &&
-    (numberOfTokensAdded > autoAddTokensThreshold)
+        (numberOfAccounts > autoAddAccountsThreshold) &&
+        (numberOfTokensAdded > autoAddTokensThreshold)
   const userIsNotInBeta = !state.metamask.featureFlags.betaUI
 
   return userIsNotInBeta && userPassesThreshold

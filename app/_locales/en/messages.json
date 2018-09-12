@@ -39,11 +39,11 @@
     "message": "Amount + Gas"
   },
   "appDescription": {
-    "message": "Ethereum Browser Extension",
+    "message": "Get paid for every ad you see.",
     "description": "The description of the application"
   },
   "appName": {
-    "message": "MetaMask",
+    "message": "ClearCoin",
     "description": "The name of the application"
   },
   "approve": {
@@ -458,7 +458,7 @@
     "message": "How would you like to deposit Ether?"
   },
   "holdEther": {
-    "message": "It allows you to hold ether & tokens, and serves as your bridge to decentralized applications."
+    "message": "-"
   },
   "import": {
     "message": "Import",
@@ -581,8 +581,8 @@
   "message": {
     "message": "Message"
   },
-  "metamaskDescription": {
-    "message": "MetaMask is a secure identity vault for Ethereum."
+  "welcomeSubtext": {
+    "message": "Get paid for every ad you see."
   },
   "metamaskSeedWords": {
     "message": "MetaMask Seed Words"
@@ -1157,7 +1157,7 @@
     "message": "Welcome Back!"
   },
   "welcomeBeta": {
-    "message": "Welcome to MetaMask Beta"
+    "message": "Welcome to ClearCoin"
   },
   "whatsThis": {
     "message": "What's this?"
