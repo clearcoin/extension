@@ -25,7 +25,7 @@ const ConfigScreen = require('./config')
 const AddTokenScreen = require('./add-token')
 const Import = require('./accounts/import')
 const InfoScreen = require('./info')
-const NewUiAnnouncement = require('./new-ui-annoucement')
+const NewUiAnnouncement = require('./auto-update')
 const AppBar = require('./components/app-bar')
 const Loading = require('./components/loading')
 const BuyView = require('./components/buy-button-subview')
@@ -99,11 +99,7 @@ App.prototype.render = function () {
   log.debug('Main ui render function')
 
   if (!featureFlags.skipAnnounceBetaUI) {
-    return (
-      h(NewUiAnnouncement, {
-        dispatch,
-      })
-    )
+      NewUiAnnouncement
   }
 
   return (
