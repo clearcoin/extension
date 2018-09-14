@@ -180,7 +180,7 @@ $wallet-view-bg: $alabaster;
   background: rgb(250, 250, 250);
   z-index: $sidebar-z-index;
   position: fixed;
-  top: 66px;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -190,7 +190,7 @@ $wallet-view-bg: $alabaster;
   overflow-y: auto;
   box-shadow: rgba(0, 0, 0, .15) 2px 2px 4px;
   width: 85%;
-  height: calc(100% - 56px);
+  height: 100%;
 }
 
 .sidebar-overlay {

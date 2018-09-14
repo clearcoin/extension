@@ -105,8 +105,6 @@ WalletView.prototype.render = function () {
     history,
     identities,
   } = this.props
-  // temporary logs + fake extra wallets
-  // console.log('walletview, selectedAccount:', selectedAccount)
 
   const checksummedAddress = checksumAddress(selectedAddress)
 
@@ -194,13 +192,3 @@ WalletView.prototype.render = function () {
     // }, this.context.t('addToken')),
   ])
 }
-
-// TODO: Extra wallets, for dev testing. Remove when PRing to master.
-// const extraWallet = h('div.flex-column.wallet-balance-wrapper', {}, [
-//     h('div.wallet-balance', {}, [
-//       h(BalanceComponent, {
-//         balanceValue: selectedAccount.balance,
-//         style: {},
-//       }),
-//     ]),
-// ])
