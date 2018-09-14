@@ -139,10 +139,11 @@ WalletView.prototype.render = function () {
         style: { margin: '0 auto' },
         onClick: showAccountDetailModal,
       }, [
-        h(Identicon, {
-          diameter: 54,
-          address: checksummedAddress,
-        }),
+        // TODO: Cleary Bot here?
+        // h(Identicon, {
+        //   diameter: 54,
+        //   address: checksummedAddress,
+        // }),
 
         h('span.account-name', {
           style: {},

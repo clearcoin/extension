@@ -132,7 +132,7 @@ class App extends Component {
         // global alert
         h(Alert, {visible: this.props.alertOpen, msg: alertMessage}),
 
-        h(AppHeader),
+        // h(AppHeader),
 
         // sidebar
         this.renderSidebar(),
