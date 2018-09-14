@@ -184,12 +184,13 @@ WalletView.prototype.render = function () {
 
     h(TokenList),
 
-    h('button.btn-primary.wallet-view__add-token-button', {
-      onClick: () => {
-        history.push(ADD_TOKEN_ROUTE)
-        sidebarOpen && hideSidebar()
-      },
-    }, this.context.t('addToken')),
+    // hide ability to add token
+    // h('button.btn-primary.wallet-view__add-token-button', {
+    //   onClick: () => {
+    //     history.push(ADD_TOKEN_ROUTE)
+    //     sidebarOpen && hideSidebar()
+    //   },
+    // }, this.context.t('addToken')),
   ])
 }
 
