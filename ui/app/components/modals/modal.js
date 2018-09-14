@@ -215,23 +215,6 @@ const MODALS = {
     },
   },
 
-  OLD_UI_NOTIFICATION_MODAL: {
-    contents: [
-      h(NotifcationModal, {
-        header: 'oldUI',
-        message: 'oldUIMessage',
-      }),
-    ],
-    mobileModalStyle: {
-      width: '95%',
-      top: getEnvironmentType(window.location.href) === ENVIRONMENT_TYPE_POPUP ? '52vh' : '36.5vh',
-    },
-    laptopModalStyle: {
-      width: '449px',
-      top: 'calc(33% + 45px)',
-    },
-  },
-
   CONFIRM_RESET_ACCOUNT: {
     contents: h(ConfirmResetAccount),
     mobileModalStyle: {

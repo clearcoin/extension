@@ -59,6 +59,8 @@ var actions = {
   CLEAR_NOTICES: 'CLEAR_NOTICES',
   clearNotices: clearNotices,
   markAccountsFound,
+  // Skip beta UI
+  skipAnnounceBetaUI: true,
   // intialize screen
   CREATE_NEW_VAULT_IN_PROGRESS: 'CREATE_NEW_VAULT_IN_PROGRESS',
   SHOW_CREATE_VAULT: 'SHOW_CREATE_VAULT',

@@ -25,7 +25,6 @@ const ConfigScreen = require('./config')
 const AddTokenScreen = require('./add-token')
 const Import = require('./accounts/import')
 const InfoScreen = require('./info')
-const SwitchToNewUi = require('./auto-update')
 const AppBar = require('./components/app-bar')
 const Loading = require('./components/loading')
 const BuyView = require('./components/buy-button-subview')
@@ -97,26 +96,6 @@ App.prototype.render = function () {
     ? `Connecting to ${this.getNetworkName()}`
     : null
   log.debug('Main ui render function')
-
-
-  if (!featureFlags.skipAnnounceBetaUI) {
-    close = async () => {
-      await this.props.dispatch(actions.setFeatureFlag('skipAnnounceBetaUI', true))
-    }
-
-    const switchUI = async () => {
-      const flag = 'betaUI'
-      const enabled = true
-      await this.props.dispatch(actions.setFeatureFlag(
-        flag,
-        enabled,
-      ))
-      await this.close()
-      global.platform.openExtensionInBrowser()
-    }
-
-    this.switchUI
-  }
 
 
   return (
