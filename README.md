@@ -1,5 +1,6 @@
 # ClearCoin Browser Extension
 
+Get paid to browse the web.
 
 ## MetaMask Support
 
