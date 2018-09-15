@@ -146,6 +146,13 @@ WalletView.prototype.render = function () {
       h('div.flex-column.flex-center.wallet-view__name-container',
         { style: { margin: '0 auto' } },
         [
+          h('img.app-header__metafox', {
+              src: "/images/icon-64.png",
+              height: 64,
+              width: 64
+            }
+          ),
+
           // TODO: Cleary Bot here?
           // h(Identicon, {
           //   diameter: 54,

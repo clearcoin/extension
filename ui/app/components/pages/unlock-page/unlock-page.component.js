@@ -6,7 +6,6 @@ import { ENVIRONMENT_TYPE_POPUP } from '../../../../../app/scripts/lib/enums'
 import { getEnvironmentType } from '../../../../../app/scripts/lib/util'
 import getCaretCoordinates from 'textarea-caret'
 import { EventEmitter } from 'events'
-import Mascot from '../../mascot'
 import { DEFAULT_ROUTE, RESTORE_VAULT_ROUTE } from '../../../routes'
 
 export default class UnlockPage extends Component {
@@ -82,7 +81,7 @@ export default class UnlockPage extends Component {
 
   renderSubmitButton () {
     const style = {
-      backgroundColor: '#f7861c',
+      backgroundColor: '#1d8af7',
       color: 'white',
       marginTop: '20px',
       height: '60px',
@@ -116,10 +115,10 @@ export default class UnlockPage extends Component {
       <div className="unlock-page__container">
         <div className="unlock-page">
           <div className="unlock-page__mascot-container">
-            <Mascot
-              animationEventEmitter={this.animationEventEmitter}
+            <img
+              src="/images/clearybot.svg"
               width="120"
-              height="120"
+              height="180"
             />
           </div>
           <h1 className="unlock-page__title">
