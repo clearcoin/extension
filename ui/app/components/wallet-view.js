@@ -15,7 +15,11 @@ const actions = require('../actions')
 const BalanceComponent = require('./balance-component')
 const TokenList = require('./token-list')
 const selectors = require('../selectors')
-const { ADD_TOKEN_ROUTE } = require('../routes')
+const {
+  DEFAULT_ROUTE,
+  SETTINGS_ROUTE,
+  ADD_TOKEN_ROUTE
+} = require('../routes')
 
 module.exports = compose(
   withRouter,
@@ -48,6 +52,11 @@ function mapDispatchToProps (dispatch) {
     unsetSelectedToken: () => dispatch(actions.setSelectedToken()),
     showAccountDetailModal: () => {
       dispatch(actions.showModal({ name: 'ACCOUNT_DETAILS' }))
+    },
+    lockMetamask: () => {
+      dispatch(actions.lockMetamask())
+      dispatch(actions.hideWarning())
+      dispatch(actions.hideSidebar())
     },
     showAddTokenPage: () => dispatch(actions.showAddTokenPage()),
   }
@@ -100,6 +109,7 @@ WalletView.prototype.render = function () {
     selectedAddress,
     keyrings,
     showAccountDetailModal,
+    lockMetamask,
     sidebarOpen,
     hideSidebar,
     history,
@@ -133,24 +143,41 @@ WalletView.prototype.render = function () {
 
       h('div.wallet-view__keyring-label.allcaps', isLoose ? this.context.t('imported') : ''),
 
-      h('div.flex-column.flex-center.wallet-view__name-container', {
-        style: { margin: '0 auto' },
-        onClick: showAccountDetailModal,
-      }, [
-        // TODO: Cleary Bot here?
-        // h(Identicon, {
-        //   diameter: 54,
-        //   address: checksummedAddress,
-        // }),
+      h('div.flex-column.flex-center.wallet-view__name-container',
+        { style: { margin: '0 auto' } },
+        [
+          // TODO: Cleary Bot here?
+          // h(Identicon, {
+          //   diameter: 54,
+          //   address: checksummedAddress,
+          // }),
 
-        h('span.account-name', {
-          style: {},
-        }, [
-          identities[selectedAddress].name,
+          h('span.account-name', {
+            style: {},
+          }, [
+            identities[selectedAddress].name,
+          ]),
+
+          h('div.flex-row.flex-center',
+            [
+              h('button.btn-clear.wallet-view__details-button.allcaps',
+                { onClick: showAccountDetailModal },
+                this.context.t('details')),
+              h('button.btn-clear.wallet-view__details-button.allcaps',
+                { style: { margin: '0 8px' },
+                  onClick: () => {
+                    history.push(SETTINGS_ROUTE);
+                    sidebarOpen && hideSidebar();
+                  },
+                },
+                this.context.t('settings')),
+              h('button.btn-clear.wallet-view__details-button.allcaps', {
+                onClick: () => {
+                  lockMetamask();
+                  history.push(DEFAULT_ROUTE);
+                }
+              }, this.context.t('logout')),]),
         ]),
-
-        h('button.btn-clear.wallet-view__details-button.allcaps', this.context.t('details')),
-      ]),
     ]),
 
     h(Tooltip, {
