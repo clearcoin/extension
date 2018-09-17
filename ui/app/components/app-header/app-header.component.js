@@ -108,9 +108,9 @@ class AppHeader extends Component {
           >
             <img
               className="app-header__metafox"
-              src="/images/metamask-fox.svg"
+              src="/images/clearybot.svg"
               height={42}
-              width={42}
+              width={64}
             />
             <div className="flex-row">
               <h1>{ this.context.t('appName') }</h1>
