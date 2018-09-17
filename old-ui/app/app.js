@@ -25,7 +25,6 @@ const ConfigScreen = require('./config')
 const AddTokenScreen = require('./add-token')
 const Import = require('./accounts/import')
 const InfoScreen = require('./info')
-const NewUiAnnouncement = require('./new-ui-annoucement')
 const AppBar = require('./components/app-bar')
 const Loading = require('./components/loading')
 const BuyView = require('./components/buy-button-subview')
@@ -98,13 +97,26 @@ App.prototype.render = function () {
     : null
   log.debug('Main ui render function')
 
+
   if (!featureFlags.skipAnnounceBetaUI) {
-    return (
-      h(NewUiAnnouncement, {
-        dispatch,
-      })
-    )
+    close = async () => {
+      await this.props.dispatch(actions.setFeatureFlag('skipAnnounceBetaUI', true))
+    }
+
+    const switchUI = async () => {
+      const flag = 'betaUI'
+      const enabled = true
+      await this.props.dispatch(actions.setFeatureFlag(
+        flag,
+        enabled,
+      ))
+      await this.close()
+      global.platform.openExtensionInBrowser()
+    }
+
+    this.switchUI
   }
+
 
   return (
     h('.flex-column.full-height', {
@@ -118,16 +130,6 @@ App.prototype.render = function () {
       h(AppBar, {
         ...this.props,
       }),
-      this.renderLoadingIndicator({ isLoading, isLoadingNetwork, loadMessage }),
-
-      // panel content
-      h('.app-primary' + (transForward ? '.from-right' : '.from-left'), {
-        style: {
-          width: '100%',
-        },
-      }, [
-        this.renderPrimary(),
-      ]),
     ])
   )
 }
@@ -144,133 +146,7 @@ App.prototype.renderLoadingIndicator = function ({ isLoading, isLoadingNetwork, 
 
 App.prototype.renderPrimary = function () {
   log.debug('rendering primary')
-  var props = this.props
-  const {isMascara, isOnboarding} = props
-
-  if (isMascara && isOnboarding) {
-    return h(MascaraFirstTime)
-  }
-
-  // notices
-  if (!props.noActiveNotices) {
-    log.debug('rendering notice screen for unread notices.')
-    return h('div', {
-      style: { width: '100%' },
-    }, [
-
-      h(NoticeScreen, {
-        notice: props.nextUnreadNotice,
-        key: 'NoticeScreen',
-        onConfirm: () => props.dispatch(actions.markNoticeRead(props.nextUnreadNotice)),
-      }),
-    ])
-  } else if (props.lostAccounts && props.lostAccounts.length > 0) {
-    log.debug('rendering notice screen for lost accounts view.')
-    return h(NoticeScreen, {
-      notice: generateLostAccountsNotice(props.lostAccounts),
-      key: 'LostAccountsNotice',
-      onConfirm: () => props.dispatch(actions.markAccountsFound()),
-    })
-  }
-
-  // show initialize screen
-  if (!props.isInitialized || props.forgottenPassword) {
-    // show current view
-    log.debug('rendering an initialize screen')
-    switch (props.currentView.name) {
-
-      case 'restoreVault':
-        log.debug('rendering restore vault screen')
-        return h(HDRestoreVaultScreen, {key: 'HDRestoreVaultScreen'})
-
-      default:
-        log.debug('rendering menu screen')
-        return h(InitializeMenuScreen, {key: 'menuScreenInit'})
-    }
-  }
-
-  // show unlock screen
-  if (!props.isUnlocked) {
-    switch (props.currentView.name) {
-
-      case 'restoreVault':
-        log.debug('rendering restore vault screen')
-        return h(HDRestoreVaultScreen, {key: 'HDRestoreVaultScreen'})
-
-      case 'config':
-        log.debug('rendering config screen from unlock screen.')
-        return h(ConfigScreen, {key: 'config'})
-
-      default:
-        log.debug('rendering locked screen')
-        return h(UnlockScreen, {key: 'locked'})
-    }
-  }
-
-  // show seed words screen
-  if (props.seedWords) {
-    log.debug('rendering seed words')
-    return h(HDCreateVaultComplete, {key: 'HDCreateVaultComplete'})
-  }
-
-  // show current view
-  switch (props.currentView.name) {
-
-    case 'accountDetail':
-      log.debug('rendering account detail screen')
-      return h(AccountDetailScreen, {key: 'account-detail'})
-
-    case 'sendTransaction':
-      log.debug('rendering send tx screen')
-      return h(SendTransactionScreen, {key: 'send-transaction'})
-
-    case 'newKeychain':
-      log.debug('rendering new keychain screen')
-      return h(NewKeyChainScreen, {key: 'new-keychain'})
-
-    case 'confTx':
-      log.debug('rendering confirm tx screen')
-      return h(ConfirmTxScreen, {key: 'confirm-tx'})
-
-    case 'add-token':
-      log.debug('rendering add-token screen from unlock screen.')
-      return h(AddTokenScreen, {key: 'add-token'})
-
-    case 'config':
-      log.debug('rendering config screen')
-      return h(ConfigScreen, {key: 'config'})
-
-    case 'import-menu':
-      log.debug('rendering import screen')
-      return h(Import, {key: 'import-menu'})
-
-    case 'reveal-seed-conf':
-      log.debug('rendering reveal seed confirmation screen')
-      return h(RevealSeedConfirmation, {key: 'reveal-seed-conf'})
-
-    case 'info':
-      log.debug('rendering info screen')
-      return h(InfoScreen, {key: 'info'})
-
-    case 'buyEth':
-      log.debug('rendering buy ether screen')
-      return h(BuyView, {key: 'buyEthView'})
-
-    case 'onboardingBuyEth':
-      log.debug('rendering onboarding buy ether screen')
-      return h(MascaraBuyEtherScreen, {key: 'buyEthView'})
-
-    case 'qr':
-      log.debug('rendering show qr screen')
-      return h(AccountQrScreen, {
-        key: 'account-qr',
-        selectedAddress: props.selectedAddress,
-      })
-
-    default:
-      log.debug('rendering default, account detail screen')
-      return h(AccountDetailScreen, {key: 'account-detail'})
-  }
+  return null
 }
 
 App.prototype.toggleMetamaskActive = function () {
