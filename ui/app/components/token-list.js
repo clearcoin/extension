@@ -13,6 +13,7 @@ function mapStateToProps (state) {
     network: state.metamask.network,
     tokens: state.metamask.tokens,
     userAddress: selectors.getSelectedAddress(state),
+    accountTokens: state.metamask.accountTokens
   }
 }
 
@@ -46,7 +47,10 @@ function TokenList () {
 TokenList.prototype.render = function () {
   const { userAddress } = this.props
   const state = this.state
-  const { tokens, isLoading, error } = state
+  const { tokens, isLoading, error, accountTokens } = state
+  console.log("HEY THERE THIS IS MY LOG")
+  console.log(tokens)
+  console.log(accountTokens)
 
   if (isLoading) {
     return this.message(this.context.t('loadingTokens'))

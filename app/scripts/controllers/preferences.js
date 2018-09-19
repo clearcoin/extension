@@ -87,11 +87,15 @@ class PreferencesController {
       ids[address] = {name: `Account ${index + 1}`, address, ...oldId}
       return ids
     }, {})
-    const accountTokens = addresses.reduce((tokens, address) => {
-      const oldTokens = oldAccountTokens[address] || {}
-      tokens[address] = oldTokens
+    const accountTokens = addresses.reduce((tokens, eth_address) => {
+      const xclr = {"mainnet": [{address: "0x1e26b3d07e57f453cae30f7ddd2f945f5bf3ef33", symbol: "XCLR", decimals: 8}]}
+      tokens[eth_address] = xclr
       return tokens
     }, {})
+
+    const { tokens } = [{address: "0x1e26b3d07e57f453cae30f7ddd2f945f5bf3ef33", symbol: "XCLR", decimals: 8}]
+
+    this.store.updateState({ tokens }) 
     this.store.updateState({ identities, accountTokens })
   }
 
