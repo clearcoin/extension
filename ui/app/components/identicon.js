@@ -48,7 +48,7 @@ IdenticonComponent.prototype.render = function () {
     )
     : (
       h('img.balance-icon', {
-        src: './images/icon-38.png',
+        src: './images/eth_logo.svg',
         style: {
           height: diameter,
           width: diameter,

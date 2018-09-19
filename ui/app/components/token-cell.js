@@ -92,12 +92,13 @@ TokenCell.prototype.render = function () {
       },
     }, [
 
-      h(Identicon, {
-        className: 'token-list-item__identicon',
-        diameter: 50,
-        address,
-        network,
-      }),
+      h('img.app-header__metafox', {
+        src: "/images/icon-38.png",
+        height: 46,
+        width: 46,
+        borderRadius: 23
+        }
+      ),
 
       h('div.token-list-item__balance-ellipsis', null, [
         h('div.token-list-item__balance-wrapper', null, [

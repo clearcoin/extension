@@ -213,9 +213,8 @@ WalletView.prototype.render = function () {
       ]),
     ]),
 
-    this.renderWalletBalance(),
-
     h(TokenList),
+    this.renderWalletBalance(),
 
     // hide ability to add token
     // h('button.btn-primary.wallet-view__add-token-button', {
