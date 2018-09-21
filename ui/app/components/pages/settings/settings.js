@@ -254,6 +254,29 @@ class Settings extends Component {
     )
   }
 
+  renderExportPrivateKey () {
+    const {
+      history,
+      showExportPrivateKey,
+    } = this.props
+
+    return (
+      h('div.settings__content-row', [
+        h('div.settings__content-item', this.context.t('exportPrivateKey')),
+        h('div.settings__content-item', [
+          h('div.settings__content-item-col', [
+            h('button.btn-primary.btn--large.settings__button--red', {
+              onClick: event => {
+                event.preventDefault();
+                showExportPrivateKey();
+              },
+            }, this.context.t('exportPrivateKey')),
+          ]),
+        ]),
+      ])
+    )
+  }
+
   renderOldUI () {
     const { setFeatureFlagToBeta } = this.props
 
@@ -301,12 +324,13 @@ class Settings extends Component {
         this.renderCurrentConversion(),
         this.renderCurrentLocale(),
         // this.renderCurrentProvider(),
-        this.renderNewRpcUrl(),
-        this.renderStateLogs(),
+        // this.renderNewRpcUrl(),
+        // this.renderStateLogs(),
         this.renderSeedWords(),
-        !isMascara && this.renderOldUI(),
+        this.renderExportPrivateKey(),
+        // !isMascara && this.renderOldUI(),
         this.renderResetAccount(),
-        this.renderBlockieOptIn(),
+        // this.renderBlockieOptIn(),
       ])
     )
   }
@@ -351,6 +375,9 @@ const mapDispatchToProps = dispatch => {
     },
     showResetAccountConfirmationModal: () => {
       return dispatch(actions.showModal({ name: 'CONFIRM_RESET_ACCOUNT' }))
+    },
+    showExportPrivateKey: () => {
+      dispatch(actions.showModal({ name: 'EXPORT_PRIVATE_KEY' }))
     },
   }
 }

@@ -211,7 +211,7 @@
     "description": "Exchange type (cryptocurrencies)"
   },
   "currentConversion": {
-    "message": "Current Conversion"
+    "message": "Currency Conversion"
   },
   "currentNetwork": {
     "message": "Current Network"

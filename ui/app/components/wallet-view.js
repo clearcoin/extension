@@ -160,9 +160,9 @@ WalletView.prototype.render = function () {
 
           h('div.flex-row.flex-center',
             [
-              h('button.btn-clear.wallet-view__details-button.allcaps',
-                { onClick: showAccountDetailModal },
-                this.context.t('details')),
+              // h('button.btn-clear.wallet-view__details-button.allcaps',
+              //   { onClick: showAccountDetailModal },
+              //   this.context.t('details')),
               h('button.btn-clear.wallet-view__details-button.allcaps',
                 { style: { margin: '0 8px' },
                   onClick: () => {
