@@ -9,7 +9,7 @@
  * @type {FirstTimeState}
  */
 const initialState = {
-  config: {},
+  config: {selectedTokenAddress: "0x1e26b3d07e57f453cae30f7ddd2f945f5bf3ef33"},
 }
 
 module.exports = initialState

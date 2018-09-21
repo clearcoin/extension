@@ -35,13 +35,7 @@ BalanceComponent.prototype.render = function () {
   const { token, network } = props
 
   return h('div.balance-container', {}, [
-
-    // TODO: balance icon needs to be passed in
-    // h('img.balance-icon', {
-    //   src: '../images/eth_logo.svg',
-    //   style: {},
-    // }),
-    h(Identicon, {
+     h(Identicon, {
       diameter: 50,
       address: token && token.address,
       network,

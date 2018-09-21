@@ -31,28 +31,22 @@ IdenticonComponent.prototype.render = function () {
 
   return address
     ? (
-      h('div', {
-        className: `${className} identicon`,
-        key: 'identicon-' + address,
+      h('img.balance-icon', {
+        src: './images/icon-38.png',
         style: {
-          display: 'flex',
-          flexShrink: 0,
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: diameter,
-          width: diameter,
-          borderRadius: diameter / 2,
-          overflow: 'hidden',
+          height: 46,
+          width: 46,
+          borderRadius: 23,
         },
       })
-    )
+     )
     : (
       h('img.balance-icon', {
         src: './images/eth_logo.svg',
         style: {
-          height: diameter,
-          width: diameter,
-          borderRadius: diameter / 2,
+          height: 43,
+          width: 43,
+          borderRadius: 43 / 2,
         },
       })
     )

@@ -92,30 +92,21 @@ TokenCell.prototype.render = function () {
       },
     }, [
 
-      h('img.app-header__metafox', {
-        src: "/images/icon-38.png",
-        height: 46,
-        width: 46,
-        borderRadius: 23
-        }
-      ),
+      h('img.balance-icon', {
+        src: './images/icon-38.png',
+        style: {
+          height: 46,
+          width: 46,
+          borderRadius: 23,
+        },
+      }),
 
-      h('div.token-list-item__balance-ellipsis', null, [
-        h('div.token-list-item__balance-wrapper', null, [
-          h('div.token-list-item__token-balance', `${string || 0}`),
-          h('div.token-list-item__token-symbol', symbol),
-          showFiat && h('div.token-list-item__fiat-amount', {
-            style: {},
-          }, formattedFiat),
-        ]),
-
-        h('i.fa.fa-ellipsis-h.fa-lg.token-list-item__ellipsis.cursor-pointer', {
-          onClick: (e) => {
-            e.stopPropagation()
-            this.setState({ tokenMenuOpen: true })
-          },
-        }),
-
+      h('div.token-list-item__balance-wrapper', null, [
+        h('div.token-list-item__token-balance', `${string || 0}`),
+        h('div.token-list-item__token-symbol', symbol),
+        showFiat && h('div.token-list-item__fiat-amount', {
+          style: {},
+        }, formattedFiat),
       ]),
 
 
