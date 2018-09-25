@@ -91,7 +91,7 @@ class PreferencesController {
     const xclr = {
       address: config.XCLR_ADDRESS,
       symbol: config.XCLR_SYMBOL,
-      decimals: config.XCL_DECIMALS
+      decimals: config.XCLR_DECIMALS
     }
     
     const accountTokens = addresses.reduce((account, eth_address) => {
