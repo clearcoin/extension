@@ -78,6 +78,7 @@ $wallet-balance-breakpoint-range: "screen and (min-width: #{$break-large}) and (
     flex-flow: row wrap;
     display: flex;
     min-width: 0;
+    margin-left: 15px;
   }
 }
 

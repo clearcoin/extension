@@ -1,7 +1,7 @@
 const ObservableStore = require('obs-store')
 const normalizeAddress = require('eth-sig-util').normalize
 const extend = require('xtend')
-
+const config = require('../../config')
 
 class PreferencesController {
 
@@ -87,11 +87,23 @@ class PreferencesController {
       ids[address] = {name: `Account ${index + 1}`, address, ...oldId}
       return ids
     }, {})
-    const accountTokens = addresses.reduce((tokens, address) => {
-      const oldTokens = oldAccountTokens[address] || {}
-      tokens[address] = oldTokens
-      return tokens
+
+    const xclr = {
+      address: config.XCLR_ADDRESS,
+      symbol: config.XCLR_SYMBOL,
+      decimals: config.XCLR_DECIMALS
+    }
+    
+    const accountTokens = addresses.reduce((account, eth_address) => {
+      const xclr_net = {}
+      xclr_net[config.XCLR_NETWORK] = [xclr]
+      account[eth_address] = xclr_net
+      return account
     }, {})
+
+    const { tokens } = [xclr]
+
+    this.store.updateState({ tokens }) 
     this.store.updateState({ identities, accountTokens })
   }
 
