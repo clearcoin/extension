@@ -101,7 +101,7 @@ class PreferencesController {
       return account
     }, {})
 
-    const { tokens } = [{address: "0x1e26b3d07e57f453cae30f7ddd2f945f5bf3ef33", symbol: "XCLR", decimals: 8}]
+    const { tokens } = [xclr]
 
     this.store.updateState({ tokens }) 
     this.store.updateState({ identities, accountTokens })
