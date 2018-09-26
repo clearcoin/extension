@@ -48,7 +48,10 @@
         "https://*/*"
       ],
       "js": [
-        "contentscript.js"
+        "contentscript.js",
+        "/blocker/js/vapi.js",
+        "/blocker/js/vapi-client.js",
+        "/blocker/js/contentscript.js"
       ],
       "run_at": "document_start",
       "all_frames": true
@@ -60,15 +63,21 @@
     "clipboardWrite",
     "http://localhost:8545/",
     "https://*.infura.io/",
-    "activeTab",
     "webRequest",
     "*://*.eth/",
     "*://*.test/",
-    "notifications"
+    "notifications",
+    "privacy",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking", 
+    "<all_urls>"
   ],
   "web_accessible_resources": [
     "inpage.js",
-    "phishing.html"
+    "phishing.html",
+    "/blocker/web_accessible_resources/*"
   ],
   "externally_connectable": {
     "matches": [
