@@ -786,19 +786,7 @@ vAPI.tabs.onPopupUpdated = (function() {
             }
         }
 
-        // Log only for when there was a hit against an actual filter (allow or block).
-        // https://github.com/gorhill/uBlock/issues/2776
-        if ( µb.logger.isEnabled() ) {
-            µb.logger.writeOne(
-                popupType === 'popup' ? openerTabId : targetTabId,
-                'net',
-                result !== 0 ? logData : undefined,
-                popupType,
-                popupType === 'popup' ? targetURL : openerURL,
-                µb.URI.hostnameFromURI(context.rootURL),
-                µb.URI.hostnameFromURI(context.rootURL)
-            );
-        }
+        
         logData = undefined;
 
         // Not blocked

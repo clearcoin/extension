@@ -32,7 +32,7 @@
         duplicates = new Set(),
         acceptedCount = 0,
         discardedCount = 0,
-        docRegister, loggerRegister;
+        docRegister;
 
     var PSelectorHasTextTask = function(task) {
         var arg0 = task[1], arg1;
@@ -162,18 +162,6 @@
         return false;
     };
 
-    var logOne = function(details, selector) {
-        loggerRegister.writeOne(
-            details.tabId,
-            'cosmetic',
-            { source: 'cosmetic', raw: '##^' + selector },
-            'dom',
-            details.url,
-            null,
-            details.hostname
-        );
-    };
-
     var applyProceduralSelector = function(details, selector) {
         var pselector = pselectors.get(selector);
         if ( pselector === undefined ) {
@@ -190,9 +178,7 @@
                 modified = true;
             }
         }
-        if ( modified && loggerRegister.isEnabled() ) {
-            logOne(details, pselector.raw);
-        }
+        
         return modified;
     };
 
@@ -207,9 +193,7 @@
                 modified = true;
             }
         }
-        if ( modified && loggerRegister.isEnabled() ) {
-            logOne(details, selector);
-        }
+        
         return modified;
     };
 
@@ -306,7 +290,6 @@
 
     api.apply = function(doc, details) {
         docRegister = doc;
-        loggerRegister = µb.logger;
         var modified = false;
         for ( var entry of details.selectors ) {
             if ( entry.type === 64 ) {
@@ -320,7 +303,6 @@
             }
         }
 
-        docRegister = loggerRegister = undefined;
         return modified;
     };
 

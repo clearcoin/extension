@@ -596,11 +596,7 @@ FilterContainer.prototype.compileGenericHideSelector = function(parsed, writer) 
     //   ##:xpath(...)
     //   ##.foo:style(...)
     if ( this.reNeedHostname.test(selector) ) {
-        µb.logger.writeOne(
-            '',
-            'error',
-            'Cosmetic filtering – invalid generic filter: ##' + selector
-        );
+      console.log('Cosmetic filtering – invalid generic filter: ##' + selector);
         return;
     }
 

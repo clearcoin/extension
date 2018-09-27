@@ -130,7 +130,7 @@ api.fetchText = function(url, onLoad, onError) {
 
     var onErrorEvent = function() {
         cleanup();
-        µBlock.logger.writeOne('', 'error', errorCantConnectTo.replace('{{msg}}', actualUrl));
+        console.log(errorCantConnectTo.replace('{{msg}}', actualUrl));
         onError({ url: url, content: '' });
     };
 
