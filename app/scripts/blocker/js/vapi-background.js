@@ -1038,7 +1038,7 @@
     chrome.webRequest.onBeforeRequest.addListener(
       guard,
       {
-        urls: [ root + 'web_accessible_resources/*' ]
+        urls: [ root + 'blocker/web_accessible_resources/*' ]
       },
       [ 'blocking' ]
     );

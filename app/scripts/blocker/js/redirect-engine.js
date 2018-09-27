@@ -37,7 +37,7 @@ var warResolve = (function() {
             var resource = reng.resources.get(warPairs[i+0]);
             if ( resource === undefined ) { continue; }
             resource.warURL = vAPI.getURL(
-                '/web_accessible_resources/' + warPairs[i+1]
+                '/blocker/web_accessible_resources/' + warPairs[i+1]
             );
         }
         reng.selfieFromResources();
@@ -64,7 +64,7 @@ var warResolve = (function() {
         };
 
         µBlock.assets.fetchText(
-            '/web_accessible_resources/imported.txt?secret=' + vAPI.warSecret,
+            '/blocker/web_accessible_resources/imported.txt?secret=' + vAPI.warSecret,
             onPairsLoaded
         );
     };
