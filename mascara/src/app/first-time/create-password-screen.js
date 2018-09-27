@@ -9,7 +9,6 @@ import EventEmitter from 'events'
 import Mascot from '../../../../ui/app/components/mascot'
 import classnames from 'classnames'
 import {
-  INITIALIZE_UNIQUE_IMAGE_ROUTE,
   INITIALIZE_IMPORT_WITH_SEED_PHRASE_ROUTE,
   INITIALIZE_NOTICE_ROUTE,
 } from '../../../../ui/app/routes'
@@ -73,7 +72,7 @@ class CreatePasswordScreen extends Component {
 
     this.setState({ isLoading: true })
     createAccount(password)
-      .then(() => history.push(INITIALIZE_UNIQUE_IMAGE_ROUTE))
+      .then(() => history.push(INITIALIZE_NOTICE_ROUTE))
   }
 
   handlePasswordChange (password) {

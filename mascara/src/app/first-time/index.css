@@ -95,7 +95,6 @@
 }
 
 .create-password,
-.unique-image,
 .tou,
 .backup-phrase,
 .import-account,
@@ -112,7 +111,6 @@
 
 @media only screen and (max-width: 575px) {
   .create-password,
-  .unique-image,
   .tou,
   .backup-phrase,
   .import-account,
@@ -124,7 +122,6 @@
   }
 
   .create-password__title,
-  .unique-image__title,
   .tou__title,
   .backup-phrase__title,
   .import-account__title,
@@ -219,7 +216,6 @@
 }
 
 .create-password__title,
-.unique-image__title,
 .tou__title,
 .backup-phrase__title,
 .import-account__title,
@@ -247,14 +243,12 @@
   margin-bottom: 54px;
 }
 
-.unique-image__title,
 .tou__title,
 .backup-phrase__title,
 .buy-ether__title {
   margin-top: 24px;
 }
 
-.unique-image__body-text,
 .backup-phrase__body-text,
 .buy-ether__body-text {
   color: #1B344D;
@@ -271,18 +265,6 @@
   line-height: 14px;
 }
 
-.unique-image__body-text {
-  width: 335px;
-}
-
-@media only screen and (max-width: 575px) {
-  .unique-image__body-text {
-    width: initial;
-  }
-}
-
-.unique-image__body-text +
-.unique-image__body-text,
 .backup-phrase__body-text +
 .backup-phrase__body-text,
 .backup-phrase__tips-text +
