@@ -19,11 +19,6 @@
     "16": "images/icon-16.png",
     "128": "images/icon-128.png"
   },
-  "applications": {
-    "gecko": {
-      "id": "webextension@metamask.io"
-    }
-  },
   "default_locale": "en",
   "background": {
     "scripts": [
@@ -88,6 +83,9 @@
       "run_at": "document_start",
       "all_frames": true
     }
+  ],
+  "optional_permissions": [
+    "file:///*"
   ],
   "permissions": [
     "storage",

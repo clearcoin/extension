@@ -39,7 +39,10 @@ web3.setProvider = function () {
 }
 log.debug('MetaMask - injected web3')
 
-setupDappAutoReload(web3, inpageProvider.publicConfigStore)
+// todo: do we still need this or want it?
+// setupDappAutoReload(web3, inpageProvider.publicConfigStore)
+
+
 
 // export global web3, with usage-detection and deprecation warning
 

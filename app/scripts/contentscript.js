@@ -18,7 +18,9 @@ const inpageBundle = inpageContent + inpageSuffix
 // If we create a FireFox-only code path using that API,
 // MetaMask will be much faster loading and performant on Firefox.
 
-if (shouldInjectWeb3()) {
+
+// celwell: turned off web3 injection for now... seems to have conflicts with metamask and other issue, and it's not used by our extension
+if (false && shouldInjectWeb3()) {
   setupInjection()
   setupStreams()
 }
