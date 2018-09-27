@@ -86,6 +86,13 @@ createCopyTasks('html', {
   destinations: commonPlatforms.map(platform => `./dist/${platform}`),
 })
 
+// copy blocker
+createCopyTasks('blocker', {
+  source: './app/scripts/blocker/',
+  // pattern: '/chromereload.js',
+  destinations: commonPlatforms.map(platform => `./dist/${platform}/blocker`),
+})
+
 // copy extension
 
 createCopyTasks('manifest', {
@@ -148,26 +155,26 @@ function copyTask (taskName, opts) {
 
 gulp.task('manifest:chrome', function () {
   return gulp.src('./dist/chrome/manifest.json')
-  .pipe(jsoneditor(function (json) {
-    delete json.applications
-    return json
-  }))
-  .pipe(gulp.dest('./dist/chrome', { overwrite: true }))
+    .pipe(jsoneditor(function (json) {
+      delete json.applications
+      return json
+    }))
+    .pipe(gulp.dest('./dist/chrome', { overwrite: true }))
 })
 
 gulp.task('manifest:opera', function () {
   return gulp.src('./dist/opera/manifest.json')
-  .pipe(jsoneditor(function (json) {
-    json.permissions = [
-      'storage',
-      'tabs',
-      'clipboardWrite',
-      'clipboardRead',
-      'http://localhost:8545/',
-    ]
-    return json
-  }))
-  .pipe(gulp.dest('./dist/opera', { overwrite: true }))
+    .pipe(jsoneditor(function (json) {
+      json.permissions = [
+        'storage',
+        'tabs',
+        'clipboardWrite',
+        'clipboardRead',
+        'http://localhost:8545/',
+      ]
+      return json
+    }))
+    .pipe(gulp.dest('./dist/opera', { overwrite: true }))
 })
 
 gulp.task('manifest:production', function () {
@@ -179,32 +186,32 @@ gulp.task('manifest:production', function () {
   ], {base: './dist/'})
 
   // Exclude chromereload script in production:
-  .pipe(jsoneditor(function (json) {
-    json.background.scripts = json.background.scripts.filter((script) => {
-      return !script.includes('chromereload')
-    })
-    return json
-  }))
+    .pipe(jsoneditor(function (json) {
+      json.background.scripts = json.background.scripts.filter((script) => {
+        return !script.includes('chromereload')
+      })
+      return json
+    }))
 
-  .pipe(gulp.dest('./dist/', { overwrite: true }))
+    .pipe(gulp.dest('./dist/', { overwrite: true }))
 })
 
 gulp.task('copy',
-  gulp.series(
-    gulp.parallel(...copyTaskNames),
-    'manifest:production',
-    'manifest:chrome',
-    'manifest:opera'
-  )
-)
+          gulp.series(
+            gulp.parallel(...copyTaskNames),
+            'manifest:production',
+            'manifest:chrome',
+            'manifest:opera'
+          )
+         )
 
 gulp.task('dev:copy',
-  gulp.series(
-    gulp.parallel(...copyDevTaskNames),
-    'manifest:chrome',
-    'manifest:opera'
-  )
-)
+          gulp.series(
+            gulp.parallel(...copyDevTaskNames),
+            'manifest:chrome',
+            'manifest:opera'
+          )
+         )
 
 // scss compilation and autoprefixing tasks
 
@@ -352,90 +359,90 @@ gulp.task('zip', gulp.parallel('zip:chrome', 'zip:firefox', 'zip:edge', 'zip:ope
 // high level tasks
 
 gulp.task('dev',
-  gulp.series(
-    'clean',
-    'dev:scss',
-    gulp.parallel(
-      'dev:extension:js',
-      'dev:mascara:js',
-      'dev:copy',
-      'dev:reload'
-    )
-  )
-)
+          gulp.series(
+            'clean',
+            'dev:scss',
+            gulp.parallel(
+              'dev:extension:js',
+              'dev:mascara:js',
+              'dev:copy',
+              'dev:reload'
+            )
+          )
+         )
 
 gulp.task('dev:extension',
-  gulp.series(
-    'clean',
-    'dev:scss',
-    gulp.parallel(
-      'dev:extension:js',
-      'dev:copy',
-      'dev:reload'
-    )
-  )
-)
+          gulp.series(
+            'clean',
+            'dev:scss',
+            gulp.parallel(
+              'dev:extension:js',
+              'dev:copy',
+              'dev:reload'
+            )
+          )
+         )
 
 gulp.task('dev:mascara',
-  gulp.series(
-    'clean',
-    'dev:scss',
-    gulp.parallel(
-      'dev:mascara:js',
-      'dev:copy',
-      'dev:reload'
-    )
-  )
-)
+          gulp.series(
+            'clean',
+            'dev:scss',
+            gulp.parallel(
+              'dev:mascara:js',
+              'dev:copy',
+              'dev:reload'
+            )
+          )
+         )
 
 gulp.task('build',
-  gulp.series(
-    'clean',
-    'build:scss',
-    gulpParallel(
-      'build:extension:js',
-      'build:mascara:js',
-      'copy'
-    )
-  )
-)
+          gulp.series(
+            'clean',
+            'build:scss',
+            gulpParallel(
+              'build:extension:js',
+              'build:mascara:js',
+              'copy'
+            )
+          )
+         )
 
 gulp.task('build:extension',
-  gulp.series(
-    'clean',
-    'build:scss',
-    gulp.parallel(
-      'build:extension:js',
-      'copy'
-    )
-  )
-)
+          gulp.series(
+            'clean',
+            'build:scss',
+            gulp.parallel(
+              'build:extension:js',
+              'copy'
+            )
+          )
+         )
 
 gulp.task('build:mascara',
-  gulp.series(
-    'clean',
-    'build:scss',
-    gulp.parallel(
-      'build:mascara:js',
-      'copy'
-    )
-  )
-)
+          gulp.series(
+            'clean',
+            'build:scss',
+            gulp.parallel(
+              'build:mascara:js',
+              'copy'
+            )
+          )
+         )
 
 gulp.task('dist',
-  gulp.series(
-    'build',
-    'zip'
-  )
-)
+          gulp.series(
+            'build',
+            'zip'
+          )
+         )
 
 // task generators
 
 function zipTask (target) {
   return () => {
     return gulp.src(`dist/${target}/**`)
-    .pipe(zip(`metamask-${target}-${manifest.version}.zip`))
-    .pipe(gulp.dest('builds'))
+      .pipe(zip(`metamask-${target}-${manifest.version}.zip`))
+      .pipe(gulp.dest('builds'))
   }
 }
 
@@ -487,8 +494,8 @@ function discTask (opts) {
 
     return (
       bundler.bundle()
-      .pipe(disc())
-      .pipe(fs.createWriteStream(discPath))
+        .pipe(disc())
+        .pipe(fs.createWriteStream(discPath))
     )
   }
 }
@@ -516,26 +523,26 @@ function bundleTask (opts) {
 
     // process bundles
     buildStream = buildStream
-      // convert bundle stream to gulp vinyl stream
+    // convert bundle stream to gulp vinyl stream
       .pipe(source(opts.filename))
-      // buffer file contents (?)
+    // buffer file contents (?)
       .pipe(buffer())
 
     // Initialize Source Maps
     if (opts.buildSourceMaps) {
       buildStream = buildStream
-        // loads map from browserify file
+      // loads map from browserify file
         .pipe(sourcemaps.init({ loadMaps: true }))
     }
 
     // Minification
     if (opts.minifyBuild) {
       buildStream = buildStream
-      .pipe(uglify({
-        mangle: {
-          reserved: [ 'MetamaskInpageProvider' ],
-        },
-      }))
+        .pipe(uglify({
+          mangle: {
+            reserved: [ 'MetamaskInpageProvider' ],
+          },
+        }))
     }
 
     // Finalize Source Maps (writes .map file)
