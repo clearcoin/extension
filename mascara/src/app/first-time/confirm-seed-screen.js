@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 import classnames from 'classnames'
 import shuffle from 'lodash.shuffle'
 import { compose } from 'recompose'
-import Identicon from '../../../../ui/app/components/identicon'
+import ClearyBot from '../../../../ui/app/components/clearybot'
 import { confirmSeedWords, showModal } from '../../../../ui/app/actions'
 import Breadcrumbs from './breadcrumbs'
 import LoadingScreen from './loading-screen'
@@ -76,7 +76,7 @@ class ConfirmSeedScreen extends Component {
                   >
                     {`< Back`}
                   </a>
-                  <Identicon address={this.props.address} diameter={70} />
+                  <ClearyBot />
                   <div className="backup-phrase__content-wrapper">
                     <div>
                       <div className="backup-phrase__title">

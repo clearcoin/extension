@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
-import Identicon from '../../../../ui/app/components/identicon'
+import ClearyBot from '../../../../ui/app/components/clearybot'
 import {exportAsFile} from '../../../../ui/app/util'
 import Breadcrumbs from './breadcrumbs'
 import LoadingScreen from './loading-screen'
@@ -155,7 +155,7 @@ class BackupPhraseScreen extends Component {
         <div className="first-view-main-wrapper">
           <div className="first-view-main">
             <div className="backup-phrase">
-              <Identicon address={this.props.address} diameter={70} />
+              <ClearyBot/>
               {this.renderSecretScreen()}
             </div>
           </div>
