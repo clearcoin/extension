@@ -377,7 +377,7 @@ var getAssetSourceRegistry = function(callback) {
     // First-install case.
     var createRegistry = function() {
         api.fetchText(
-            µBlock.assetsBootstrapLocation || 'assets/assets.json',
+            µBlock.assetsBootstrapLocation || 'blocker/assets/assets.json',
             function(details) {
                 updateAssetSourceRegistry(details.content, true);
                 registryReady();

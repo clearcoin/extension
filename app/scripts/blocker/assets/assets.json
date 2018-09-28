@@ -4,7 +4,7 @@
 		"updateAfter": 13,
 		"contentURL": [
 			"https://raw.githubusercontent.com/gorhill/uBlock/master/assets/assets.json",
-			"assets/assets.json"
+			"blocker/assets/assets.json"
 		]
 	},
 	"public_suffix_list.dat": {
@@ -13,7 +13,7 @@
 		"contentURL": [
 			"https://publicsuffix.org/list/public_suffix_list.dat",
 			"https://cdn.rawgit.com/publicsuffix/list/master/public_suffix_list.dat",
-			"assets/thirdparties/publicsuffix.org/list/effective_tld_names.dat"
+			"blocker/assets/thirdparties/publicsuffix.org/list/effective_tld_names.dat"
 		]
 	},
 	"ublock-resources": {
@@ -21,7 +21,7 @@
 		"updateAfter": 7,
 		"contentURL": [
 			"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resources.txt",
-			"assets/ublock/resources.txt"
+			"blocker/assets/ublock/resources.txt"
 		]
 	},
 	"ublock-filters": {
@@ -30,7 +30,7 @@
 		"title": "uBlock filters",
 		"contentURL": [
 			"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt",
-			"assets/ublock/filters.txt"
+			"blocker/assets/ublock/filters.txt"
 		],
 		"supportURL": "https://github.com/uBlockOrigin/uAssets/issues"
 	},
@@ -40,7 +40,7 @@
 		"title": "uBlock filters – Badware risks",
 		"contentURL": [
 			"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt",
-			"assets/ublock/badware.txt"
+			"blocker/assets/ublock/badware.txt"
 		],
 		"supportURL": "https://github.com/gorhill/uBlock/wiki/Badware-risks",
 		"instructionURL": "https://github.com/gorhill/uBlock/wiki/Badware-risks"
@@ -52,7 +52,7 @@
 		"off": true,
 		"contentURL": [
 			"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/experimental.txt",
-			"assets/ublock/experimental.txt"
+			"blocker/assets/ublock/experimental.txt"
 		],
 		"supportURL": "https://github.com/gorhill/uBlock/wiki/Experimental-filters",
 		"instructionURL": "https://github.com/gorhill/uBlock/wiki/Experimental-filters"
@@ -63,7 +63,7 @@
 		"title": "uBlock filters – Privacy",
 		"contentURL": [
 			"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt",
-			"assets/ublock/privacy.txt"
+			"blocker/assets/ublock/privacy.txt"
 		]
 	},
 	"ublock-abuse": {
@@ -72,7 +72,7 @@
 		"title": "uBlock filters – Resource abuse",
 		"contentURL": [
 			"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resource-abuse.txt",
-			"assets/ublock/resource-abuse.txt"
+			"blocker/assets/ublock/resource-abuse.txt"
 		]
 	},
 	"ublock-annoyances": {
@@ -88,7 +88,7 @@
 		"title": "uBlock filters – Unbreak",
 		"contentURL": [
 			"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt",
-			"assets/ublock/unbreak.txt"
+			"blocker/assets/ublock/unbreak.txt"
 		]
 	},
 	"awrl-0": {
@@ -127,7 +127,7 @@
 			"https://secure.fanboy.co.nz/easylist.txt",
 			"https://easylist-downloads.adblockplus.org/easylist.txt",
 			"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/thirdparties/easylist-downloads.adblockplus.org/easylist.txt",
-			"assets/thirdparties/easylist-downloads.adblockplus.org/easylist.txt"
+			"blocker/assets/thirdparties/easylist-downloads.adblockplus.org/easylist.txt"
 		],
 		"supportURL": "https://forums.lanik.us/"
 	},
@@ -149,7 +149,7 @@
 			"https://secure.fanboy.co.nz/easyprivacy.txt",
 			"https://easylist-downloads.adblockplus.org/easyprivacy.txt",
 			"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/thirdparties/easylist-downloads.adblockplus.org/easyprivacy.txt",
-			"assets/thirdparties/easylist-downloads.adblockplus.org/easyprivacy.txt"
+			"blocker/assets/thirdparties/easylist-downloads.adblockplus.org/easyprivacy.txt"
 		],
 		"supportURL": "https://forums.lanik.us/"
 	},
@@ -178,7 +178,7 @@
 			"https://www.malwaredomainlist.com/hostslist/hosts.txt",
 			"https://cdn.rawgit.com/NanoMeow/MDLMirror/master/filter.txt",
 			"https://raw.githubusercontent.com/NanoMeow/MDLMirror/master/filter.txt",
-			"assets/thirdparties/www.malwaredomainlist.com/hostslist/hosts.txt"
+			"blocker/assets/thirdparties/www.malwaredomainlist.com/hostslist/hosts.txt"
 		]
 	},
 	"malware-1": {
@@ -188,8 +188,8 @@
 		"contentURL": [
 			"https://mirror.cedia.org.ec/malwaredomains/justdomains",
 			"https://mirror1.malwaredomains.com/files/justdomains",
-			"assets/thirdparties/mirror1.malwaredomains.com/files/justdomains.txt",
-			"assets/thirdparties/mirror1.malwaredomains.com/files/justdomains"
+			"blocker/assets/thirdparties/mirror1.malwaredomains.com/files/justdomains.txt",
+			"blocker/assets/thirdparties/mirror1.malwaredomains.com/files/justdomains"
 		],
 		"supportURL": "https://www.malwaredomains.com/"
 	},
@@ -287,8 +287,8 @@
 		"title": "Peter Lowe’s Ad and tracking server list",
 		"contentURL": [
 			"https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext",
-			"assets/thirdparties/pgl.yoyo.org/as/serverlist.txt",
-			"assets/thirdparties/pgl.yoyo.org/as/serverlist"
+			"blocker/assets/thirdparties/pgl.yoyo.org/as/serverlist.txt",
+			"blocker/assets/thirdparties/pgl.yoyo.org/as/serverlist"
 		],
 		"supportURL": "https://pgl.yoyo.org/adservers/"
 	},
