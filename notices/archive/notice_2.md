@@ -1,6 +1,3 @@
-MetaMask is beta software. 
+Dear ClearCoin Users,
 
-When you log in to MetaMask, your current account's address is visible to every new site you visit. This can be used to look up your account balances of Ether and other tokens.
-
-For your privacy, for now, please sign out of MetaMask when you're done using a site.
-
+Cryptographic tokens and currencies have created great innovations. Unfortunately, there are malicious people and groups who attempt to steal tokens from others by creating fake websites that are phishing attempts. Be on the lookout for fake ClearCoin pages that ask for a user's seed phrases or passwords. ClearCoin will never open itself in this way and users are encouraged to report these instances immediately to either our phishing blacklist or our support email at help@clearcoin.co. Always make sure you interacting with the real [https://clearcoin.co](https://clearcoin.co) and the official extension which can be found linked from our website.
