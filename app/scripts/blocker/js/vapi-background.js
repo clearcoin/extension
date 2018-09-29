@@ -82,7 +82,6 @@
   /******************************************************************************/
 
   vAPI.app.restart = function() {
-    console.log("RESTART called.");
     chrome.runtime.reload();
   };
 

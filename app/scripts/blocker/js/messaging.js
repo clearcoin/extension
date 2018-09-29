@@ -52,7 +52,12 @@ var getDomainNames = function(targets) {
 
 /******************************************************************************/
 
-var onMessage = function(request, sender, callback) {
+  var onMessage = function(request, sender, callback) {
+    if (!request) {
+      // message possibly from metamask fork, ignore
+      return;
+    }
+    
     // Async
     switch ( request.what ) {
     case 'getAssetContent':
@@ -144,7 +149,7 @@ var onMessage = function(request, sender, callback) {
         µb.openNewTab(request.details);
         break;
 
-    case 'mouseClick':
+    case 'mouseClick': // todo: consider removing mouseClick tracking since it doesn't seem to be relevant anymore
         µb.mouseEventRegister.tabId = tabId;
         µb.mouseEventRegister.x = request.x;
         µb.mouseEventRegister.y = request.y;

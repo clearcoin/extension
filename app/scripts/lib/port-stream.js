@@ -30,6 +30,10 @@ function PortDuplexStream (port) {
  * @param {Object} msg - Payload from the onMessage listener of Port
  */
 PortDuplexStream.prototype._onMessage = function (msg) {
+  if (msg && msg.msg && msg.msg.what) {
+    // this message is meant for blocker only, ignore
+    return;
+  }
   if (Buffer.isBuffer(msg)) {
     delete msg._isBuffer
     var data = new Buffer(msg)
