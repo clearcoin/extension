@@ -20,7 +20,7 @@ const createStreamSink = require('./lib/createStreamSink')
 const NotificationManager = require('./lib/notification-manager.js')
 const MetamaskController = require('./metamask-controller')
 const firstTimeState = require('./first-time-state')
-const setupRaven = require('./lib/setupRaven')
+// const setupRaven = require('./lib/setupRaven') // celwell: removing sentry reporting
 const reportFailedTxToSentry = require('./lib/reportFailedTxToSentry')
 const setupMetamaskMeshMetrics = require('./lib/setupMetamaskMeshMetrics')
 const EdgeEncryptor = require('./edge-encryptor')
@@ -43,9 +43,9 @@ const platform = new ExtensionPlatform()
 const notificationManager = new NotificationManager()
 global.METAMASK_NOTIFIER = notificationManager
 
-// setup sentry error reporting
-const release = platform.getVersion()
-const raven = setupRaven({ release })
+// setup sentry error reporting -- celwell: removing sentry reporting
+// const release = platform.getVersion()
+// const raven = setupRaven({ release })
 
 // browser check if it is Edge - https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
 // Internet Explorer 6-11
@@ -192,14 +192,14 @@ async function loadStateFromPersistence () {
       // we were able to recover (though it might be old)
       versionedData = diskStoreState
       const vaultStructure = getObjStructure(versionedData)
-      raven.captureMessage('MetaMask - Empty vault found - recovered from diskStore', {
-        // "extra" key is required by Sentry
-        extra: { vaultStructure },
-      })
+      // raven.captureMessage('MetaMask - Empty vault found - recovered from diskStore', {
+      //   // "extra" key is required by Sentry
+      //   extra: { vaultStructure },
+      // })
     } else {
       // unable to recover, clear state
       versionedData = migrator.generateInitialState(firstTimeState)
-      raven.captureMessage('MetaMask - Empty vault found - unable to recover')
+      // raven.captureMessage('MetaMask - Empty vault found - unable to recover')
     }
   }
 
@@ -207,10 +207,10 @@ async function loadStateFromPersistence () {
   migrator.on('error', (err) => {
     // get vault structure without secrets
     const vaultStructure = getObjStructure(versionedData)
-    raven.captureException(err, {
-      // "extra" key is required by Sentry
-      extra: { vaultStructure },
-    })
+    // raven.captureException(err, {
+    //   // "extra" key is required by Sentry
+    //   extra: { vaultStructure },
+    // })
   })
 
   // migrate data
@@ -273,7 +273,7 @@ function setupController (initState, initLangCode) {
     if (status !== 'failed') return
     const txMeta = controller.txController.txStateManager.getTx(txId)
     try {
-      reportFailedTxToSentry({ raven, txMeta })
+      // reportFailedTxToSentry({ raven, txMeta })
     } catch (e) {
       console.error(e)
     }
