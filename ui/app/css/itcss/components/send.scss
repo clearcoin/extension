@@ -630,7 +630,7 @@
     &__qr-code {
       position: absolute;
       top: 13px;
-      right: 33px;
+      right: 12px;
       cursor: pointer;
       padding: 8px 5px 5px;
       border-radius: 4px;
@@ -641,7 +641,7 @@
     }
 
     &__input.with-qr {
-      padding-right: 65px;
+      padding-right: 25px;
     }
   }
 
