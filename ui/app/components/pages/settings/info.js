@@ -14,7 +14,7 @@ class Info extends Component {
   renderLogo () {
     return (
       h('div.settings__info-logo-wrapper', [
-        h('img.settings__info-logo', { src: 'images/info-logo.png' }),
+        h('img.settings__info-logo', { src: 'images/icon-64.png' }),
       ])
     )
   }
@@ -25,7 +25,7 @@ class Info extends Component {
         h('div.settings__info-link-header', this.context.t('links')),
         h('div.settings__info-link-item', [
           h('a', {
-            href: 'https://metamask.io/privacy.html',
+            href: 'https://clearcoin.co/privacy-policy',
             target: '_blank',
           }, [
             h('span.settings__info-link', this.context.t('privacyMsg')),
@@ -33,32 +33,16 @@ class Info extends Component {
         ]),
         h('div.settings__info-link-item', [
           h('a', {
-            href: 'https://metamask.io/terms.html',
+            href: 'https://clearcoin.co/terms-conditions',
             target: '_blank',
           }, [
             h('span.settings__info-link', this.context.t('terms')),
           ]),
         ]),
-        h('div.settings__info-link-item', [
-          h('a', {
-            href: 'https://metamask.io/attributions.html',
-            target: '_blank',
-          }, [
-            h('span.settings__info-link', this.context.t('attributions')),
-          ]),
-        ]),
         h('hr.settings__info-separator'),
         h('div.settings__info-link-item', [
           h('a', {
-            href: 'https://support.metamask.io',
-            target: '_blank',
-          }, [
-            h('span.settings__info-link', this.context.t('supportCenter')),
-          ]),
-        ]),
-        h('div.settings__info-link-item', [
-          h('a', {
-            href: 'https://metamask.io/',
+            href: 'https://clearcoin.co/',
             target: '_blank',
           }, [
             h('span.settings__info-link', this.context.t('visitWebSite')),
@@ -67,7 +51,7 @@ class Info extends Component {
         h('div.settings__info-link-item', [
           h('a', {
             target: '_blank',
-            href: 'mailto:help@metamask.io?subject=Feedback',
+            href: 'mailto:help@clearcoin.co?subject=Feedback',
           }, [
             h('span.settings__info-link', this.context.t('emailUs')),
           ]),
@@ -83,7 +67,7 @@ class Info extends Component {
           h('div.settings__content-item.settings__content-item--without-height', [
             this.renderLogo(),
             h('div.settings__info-item', [
-              h('div.settings__info-version-header', 'MetaMask Version'),
+              h('div.settings__info-version-header', 'Version'),
               h('div.settings__info-version-number', this.state.version),
             ]),
             h('div.settings__info-item', [
