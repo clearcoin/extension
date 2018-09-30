@@ -597,7 +597,7 @@
     "message": "Must select at least 1 token."
   },
   "needEtherInWallet": {
-    "message": "To interact with decentralized applications using MetaMask, you’ll need Ether in your wallet."
+    "message": "To send XCLR out of this extension, you’ll need Ether in your wallet."
   },
   "needImportFile": {
     "message": "You must select a file to import.",

@@ -5,7 +5,6 @@ const inherits = require('util').inherits
 const connect = require('react-redux').connect
 const actions = require('../actions')
 const CoinbaseForm = require('./coinbase-form')
-const ShapeshiftForm = require('./shapeshift-form')
 const Loading = require('./loading-screen')
 const AccountPanel = require('./account-panel')
 const RadioList = require('./custom-radio-list')
@@ -239,9 +238,7 @@ BuyButtonSubview.prototype.formVersionSubview = function () {
   if (network === '1') {
     if (this.props.buyView.formView.coinbase) {
       return h(CoinbaseForm, this.props)
-    } else if (this.props.buyView.formView.shapeshift) {
-      return h(ShapeshiftForm, this.props)
-    }
+    } 
   }
 }
 
