@@ -247,25 +247,19 @@ var actions = {
   BUY_ETH: 'BUY_ETH',
   buyEth: buyEth,
   buyEthView: buyEthView,
-  buyWithShapeShift,
   BUY_ETH_VIEW: 'BUY_ETH_VIEW',
   COINBASE_SUBVIEW: 'COINBASE_SUBVIEW',
   coinBaseSubview: coinBaseSubview,
-  SHAPESHIFT_SUBVIEW: 'SHAPESHIFT_SUBVIEW',
-  shapeShiftSubview: shapeShiftSubview,
-  PAIR_UPDATE: 'PAIR_UPDATE',
-  pairUpdate: pairUpdate,
-  coinShiftRquest: coinShiftRquest,
   SHOW_SUB_LOADING_INDICATION: 'SHOW_SUB_LOADING_INDICATION',
   showSubLoadingIndication: showSubLoadingIndication,
   HIDE_SUB_LOADING_INDICATION: 'HIDE_SUB_LOADING_INDICATION',
   hideSubLoadingIndication: hideSubLoadingIndication,
-// QR STUFF:
+  // QR STUFF:
   SHOW_QR: 'SHOW_QR',
   showQrView: showQrView,
   reshowQrCode: reshowQrCode,
   SHOW_QR_VIEW: 'SHOW_QR_VIEW',
-// FORGOT PASSWORD:
+  // FORGOT PASSWORD:
   BACK_TO_INIT_MENU: 'BACK_TO_INIT_MENU',
   goBackToInitView: goBackToInitView,
   RECOVERY_IN_PROGRESS: 'RECOVERY_IN_PROGRESS',
@@ -2006,70 +2000,6 @@ function coinBaseSubview () {
   }
 }
 
-function pairUpdate (coin) {
-  return (dispatch) => {
-    dispatch(actions.showSubLoadingIndication())
-    dispatch(actions.hideWarning())
-    shapeShiftRequest('marketinfo', {pair: `${coin.toLowerCase()}_eth`}, (mktResponse) => {
-      dispatch(actions.hideSubLoadingIndication())
-      if (mktResponse.error) return dispatch(actions.displayWarning(mktResponse.error))
-      dispatch({
-        type: actions.PAIR_UPDATE,
-        value: {
-          marketinfo: mktResponse,
-        },
-      })
-    })
-  }
-}
-
-function shapeShiftSubview (network) {
-  var pair = 'btc_eth'
-  return (dispatch) => {
-    dispatch(actions.showSubLoadingIndication())
-    shapeShiftRequest('marketinfo', {pair}, (mktResponse) => {
-      shapeShiftRequest('getcoins', {}, (response) => {
-        dispatch(actions.hideSubLoadingIndication())
-        if (mktResponse.error) return dispatch(actions.displayWarning(mktResponse.error))
-        dispatch({
-          type: actions.SHAPESHIFT_SUBVIEW,
-          value: {
-            marketinfo: mktResponse,
-            coinOptions: response,
-          },
-        })
-      })
-    })
-  }
-}
-
-function coinShiftRquest (data, marketData) {
-  return (dispatch) => {
-    dispatch(actions.showLoadingIndication())
-    shapeShiftRequest('shift', { method: 'POST', data}, (response) => {
-      dispatch(actions.hideLoadingIndication())
-      if (response.error) return dispatch(actions.displayWarning(response.error))
-      var message = `
-        Deposit your ${response.depositType} to the address below:`
-      log.debug(`background.createShapeShiftTx`)
-      background.createShapeShiftTx(response.deposit, response.depositType)
-      dispatch(actions.showQrView(response.deposit, [message].concat(marketData)))
-    })
-  }
-}
-
-function buyWithShapeShift (data) {
-  return dispatch => new Promise((resolve, reject) => {
-    shapeShiftRequest('shift', { method: 'POST', data}, (response) => {
-      if (response.error) {
-        return reject(response.error)
-      }
-      background.createShapeShiftTx(response.deposit, response.depositType)
-      return resolve(response)
-    })
-  })
-}
-
 function showQrView (data, message) {
   return {
     type: actions.SHOW_QR_VIEW,
@@ -2079,6 +2009,7 @@ function showQrView (data, message) {
     },
   }
 }
+
 function reshowQrCode (data, coin) {
   return (dispatch) => {
     dispatch(actions.showLoadingIndication())
@@ -2098,35 +2029,6 @@ function reshowQrCode (data, coin) {
       //   Qr: { data, message },
       // }))
     })
-  }
-}
-
-function shapeShiftRequest (query, options, cb) {
-  var queryResponse, method
-  !options ? options = {} : null
-  options.method ? method = options.method : method = 'GET'
-
-  var requestListner = function (request) {
-    try {
-      queryResponse = JSON.parse(this.responseText)
-      cb ? cb(queryResponse) : null
-      return queryResponse
-    } catch (e) {
-      cb ? cb({error: e}) : null
-      return e
-    }
-  }
-
-  var shapShiftReq = new XMLHttpRequest()
-  shapShiftReq.addEventListener('load', requestListner)
-  shapShiftReq.open(method, `https://shapeshift.io/${query}/${options.pair ? options.pair : ''}`, true)
-
-  if (options.method === 'POST') {
-    var jsonObj = JSON.stringify(options.data)
-    shapShiftReq.setRequestHeader('Content-Type', 'application/json')
-    return shapShiftReq.send(jsonObj)
-  } else {
-    return shapShiftReq.send()
   }
 }
 
