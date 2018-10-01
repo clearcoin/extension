@@ -32,7 +32,7 @@ IdenticonComponent.prototype.render = function () {
   return address
     ? (
       h('img.balance-icon', {
-        src: './images/icon-38.png',
+        src: './images/icon.svg',
         style: {
           height: 46,
           width: 46,

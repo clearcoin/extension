@@ -147,7 +147,7 @@ WalletView.prototype.render = function () {
         { style: { margin: '0 auto' } },
         [
           h('img.app-header__metafox', {
-              src: "/images/icon-64.png",
+              src: "/images/icon.svg",
               height: 64,
               width: 64
             }
