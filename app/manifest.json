@@ -1,7 +1,7 @@
 {
   "name": "__MSG_appName__",
   "short_name": "__MSG_appName__",
-  "version": "4.9.3",
+  "version": "0.0.1",
   "manifest_version": 2,
   "author": "https://clearcoin.co",
   "description": "__MSG_appDescription__",
@@ -72,7 +72,7 @@
   ],
   "externally_connectable": {
     "matches": [
-      "https://metamask.io/*"
+      "https://clearcoin.co/*"
     ],
     "ids": [
       "*"
