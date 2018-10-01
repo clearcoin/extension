@@ -277,26 +277,6 @@ class Settings extends Component {
     )
   }
 
-  renderOldUI () {
-    const { setFeatureFlagToBeta } = this.props
-
-    return (
-      h('div.settings__content-row', [
-        h('div.settings__content-item', this.context.t('useOldUI')),
-        h('div.settings__content-item', [
-          h('div.settings__content-item-col', [
-            h('button.btn-primary.btn--large.settings__button--orange', {
-              onClick (event) {
-                event.preventDefault()
-                setFeatureFlagToBeta()
-              },
-            }, this.context.t('useOldUI')),
-          ]),
-        ]),
-      ])
-    )
-  }
-
   renderResetAccount () {
     const { showResetAccountConfirmationModal } = this.props
 
