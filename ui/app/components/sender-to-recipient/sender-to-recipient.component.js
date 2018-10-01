@@ -34,13 +34,7 @@ export default class SenderToRecipient extends Component {
           copyToClipboard(recipientAddress)
         }}
       >
-        <div className="sender-to-recipient__sender-icon">
-          <Identicon
-            address={recipientAddress}
-            diameter={24}
-          />
-        </div>
-        <Tooltip
+       <Tooltip
           position="bottom"
           title={this.state.recipientAddressCopied ? t('copiedExclamation') : t('copyAddress')}
           wrapperClassName="sender-to-recipient__tooltip-wrapper"

@@ -5,7 +5,6 @@ import SendContent from '../send-content.component.js'
 
 import PageContainerContent from '../../../page-container/page-container-content.component'
 import SendAmountRow from '../send-amount-row/send-amount-row.container'
-import SendFromRow from '../send-from-row/send-from-row.container'
 import SendGasRow from '../send-gas-row/send-gas-row.container'
 import SendToRow from '../send-to-row/send-to-row.container'
 
@@ -29,7 +28,6 @@ describe('SendContent Component', function () {
 
     it('should render the correct row components as grandchildren of the PageContainerContent component', () => {
       const PageContainerContentChild = wrapper.find(PageContainerContent).children()
-      assert(PageContainerContentChild.childAt(0).is(SendFromRow))
       assert(PageContainerContentChild.childAt(1).is(SendToRow))
       assert(PageContainerContentChild.childAt(2).is(SendAmountRow))
       assert(PageContainerContentChild.childAt(3).is(SendGasRow))
