@@ -9,7 +9,7 @@ const extension = require('extensionizer')
 const ExtensionPlatform = require('./platforms/extension')
 const NotificationManager = require('./lib/notification-manager')
 const notificationManager = new NotificationManager()
-const setupRaven = require('./lib/setupRaven')
+// const setupRaven = require('./lib/setupRaven') // celwell: removing sentry reporting
 const log = require('loglevel')
 
 start().catch(log.error)
@@ -19,9 +19,9 @@ async function start () {
   // create platform global
   global.platform = new ExtensionPlatform()
 
-  // setup sentry error reporting
-  const release = global.platform.getVersion()
-  setupRaven({ release })
+  // setup sentry error reporting -- celwell: removing sentry reporting
+  // const release = global.platform.getVersion()
+  // setupRaven({ release })
 
   // inject css
   // const css = MetaMaskUiCss()

@@ -19,16 +19,43 @@
     "16": "images/icon-16.png",
     "128": "images/icon-128.png"
   },
-  "applications": {
-    "gecko": {
-      "id": "webextension@metamask.io"
-    }
-  },
   "default_locale": "en",
   "background": {
     "scripts": [
       "chromereload.js",
-      "background.js"
+      "background.js",
+      "blocker/lib/lz4/lz4-block-codec-any.js",
+      "blocker/lib/punycode.js",
+      "blocker/lib/publicsuffixlist.js",
+      "blocker/js/vapi.js",
+      "blocker/js/vapi-common.js",
+      "blocker/js/vapi-background.js",
+      "blocker/js/vapi-webrequest.js",
+      "blocker/js/background.js",
+      "blocker/js/hntrie.js",
+      "blocker/js/utils.js",
+      "blocker/js/uritools.js",
+      "blocker/js/lz4.js",
+      "blocker/js/cachestorage.js",
+      "blocker/js/assets.js",
+      "blocker/js/redirect-engine.js",
+      "blocker/js/dynamic-net-filtering.js",
+      "blocker/js/static-net-filtering.js",
+      "blocker/js/url-net-filtering.js",
+      "blocker/js/static-ext-filtering.js",
+      "blocker/js/cosmetic-filtering.js",
+      "blocker/js/scriptlet-filtering.js",
+      "blocker/js/html-filtering.js",
+      "blocker/js/hnswitches.js",
+      "blocker/js/ublock.js",
+      "blocker/js/messaging.js",
+      "blocker/js/storage.js",
+      "blocker/js/pagestore.js",
+      "blocker/js/tab.js",
+      "blocker/js/traffic.js",
+      "blocker/js/text-encode.js",
+      "blocker/js/reverselookup.js",
+      "blocker/js/start.js"
     ],
     "persistent": true
   },
@@ -48,11 +75,17 @@
         "https://*/*"
       ],
       "js": [
-        "contentscript.js"
+        "contentscript.js",
+        "blocker/js/vapi.js",
+        "blocker/js/vapi-client.js",
+        "blocker/js/contentscript.js"
       ],
       "run_at": "document_start",
       "all_frames": true
     }
+  ],
+  "optional_permissions": [
+    "file:///*"
   ],
   "permissions": [
     "storage",
@@ -60,15 +93,21 @@
     "clipboardWrite",
     "http://localhost:8545/",
     "https://*.infura.io/",
-    "activeTab",
     "webRequest",
     "*://*.eth/",
     "*://*.test/",
-    "notifications"
+    "notifications",
+    "privacy",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking", 
+    "<all_urls>"
   ],
   "web_accessible_resources": [
     "inpage.js",
-    "phishing.html"
+    "phishing.html",
+    "blocker/web_accessible_resources/*"
   ],
   "externally_connectable": {
     "matches": [
