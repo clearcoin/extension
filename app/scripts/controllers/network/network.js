@@ -189,7 +189,7 @@ module.exports = class NetworkController extends EventEmitter {
   }
 
   _logBlock (block) {
-    log.info(`BLOCK CHANGED: #${block.number.toString('hex')} 0x${block.hash.toString('hex')}`)
+    // log.info(`BLOCK CHANGED: #${block.number.toString('hex')} 0x${block.hash.toString('hex')}`)
     this.verifyNetwork()
   }
 }
