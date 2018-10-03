@@ -202,7 +202,7 @@ vAPI.DOMFilterer.prototype = {
             this.hideNodeStyleSheetInjected = true;
             this.addCSSRule(
                 '[' + this.hideNodeAttr + ']',
-                'display:none!important;'
+                'background:green!important;'
             );
         }
     },
@@ -493,7 +493,7 @@ vAPI.DOMFilterer.prototype = {
             });
         }
 
-        if ( declarations !== 'display:none!important;' ) {
+        if ( declarations !== 'background:green!important;' ) {
             this.specificOthers.push({
                 selectors: selectorsStr,
                 declarations: declarations
@@ -624,7 +624,7 @@ vAPI.DOMFilterer.prototype = {
             ) {
                 attr += ';';
             }
-            node.setAttribute('style', attr + 'display:none!important;');
+            node.setAttribute('style', attr + 'background:green!important;');
         }
         this.hiddenNodesetToProcess.clear();
     },
@@ -653,7 +653,7 @@ vAPI.DOMFilterer.prototype = {
         if ( this.hideNodeStyleSheetInjected === false ) {
             this.hideNodeStyleSheetInjected = true;
             vAPI.userStylesheet.add(
-                '[' + this.hideNodeAttr + ']\n{display:none!important;}'
+                '[' + this.hideNodeAttr + ']\n{background:green!important;}'
             );
         }
     },
@@ -742,31 +742,31 @@ vAPI.DOMFilterer.prototype = {
         if ( this.specificSimpleHide.size !== 0 ) {
             out.declarative.push([
                 Array.from(this.specificSimpleHide).join(',\n'),
-                'display:none!important;'
+                'background:green!important;'
             ]);
         }
         if ( this.specificComplexHide.size !== 0 ) {
             out.declarative.push([
                 Array.from(this.specificComplexHide).join(',\n'),
-                'display:none!important;'
+                'background:green!important;'
             ]);
         }
         if ( this.genericSimpleHide.size !== 0 ) {
             out.declarative.push([
                 Array.from(this.genericSimpleHide).join(',\n'),
-                'display:none!important;'
+                'background:green!important;'
             ]);
         }
         if ( this.genericComplexHide.size !== 0 ) {
             out.declarative.push([
                 Array.from(this.genericComplexHide).join(',\n'),
-                'display:none!important;'
+                'background:green!important;'
             ]);
         }
         if ( all ) {
             out.declarative.push([
                 '[' + this.hideNodeAttr + ']',
-                'display:none!important;'
+                'background:green!important;'
             ]);
         }
         for ( var entry of this.specificOthers ) {
@@ -1337,7 +1337,7 @@ if ( typeof vAPI === 'object' && !vAPI.contentScript ) { // >>>>>>>> start of HU
           if ( o.pseudoclass ) {
             this.domFilterer.addCSSRule(
               o.raw,
-              'display:none!important;'
+              'background:green!important;'
             );
             mustCommit = true;
             continue;
@@ -1806,7 +1806,7 @@ if ( typeof vAPI === 'object' && !vAPI.contentScript ) { // >>>>>>>> start of HU
         if ( Array.isArray(selectors) && selectors.length !== 0 ) {
           domFilterer.addCSSRule(
             selectors,
-            'display:none!important;',
+            'background:green!important;',
             { type: 'simple' }
           );
           mustCommit = true;
@@ -1815,7 +1815,7 @@ if ( typeof vAPI === 'object' && !vAPI.contentScript ) { // >>>>>>>> start of HU
         if ( Array.isArray(selectors) && selectors.length !== 0 ) {
           domFilterer.addCSSRule(
             selectors,
-            'display:none!important;',
+            'background:green!important;',
             { type: 'complex' }
           );
           mustCommit = true;
@@ -1824,7 +1824,7 @@ if ( typeof vAPI === 'object' && !vAPI.contentScript ) { // >>>>>>>> start of HU
         if ( typeof selectors === 'string' && selectors.length !== 0 ) {
           domFilterer.addCSSRule(
             selectors,
-            'display:none!important;',
+            'background:green!important;',
             { injected: true }
           );
           mustCommit = true;
@@ -2135,21 +2135,21 @@ if ( typeof vAPI === 'object' && !vAPI.contentScript ) { // >>>>>>>> start of HU
           cfeDetails.hideNodeStyleSheetInjected === true;
         domFilterer.addCSSRule(
           cfeDetails.declarativeFilters,
-          'display:none!important;'
+          'background:green!important;'
         );
         domFilterer.addCSSRule(
           cfeDetails.highGenericHideSimple,
-          'display:none!important;',
+          'background:green!important;',
           { type: 'simple', lazy: true }
         );
         domFilterer.addCSSRule(
           cfeDetails.highGenericHideComplex,
-          'display:none!important;',
+          'background:green!important;',
           { type: 'complex', lazy: true }
         );
         domFilterer.addCSSRule(
           cfeDetails.injectedHideFilters,
-          'display:none!important;',
+          'background:green!important;',
           { injected: true }
         );
         domFilterer.addProceduralSelectors(cfeDetails.proceduralFilters);
@@ -2157,7 +2157,7 @@ if ( typeof vAPI === 'object' && !vAPI.contentScript ) { // >>>>>>>> start of HU
 
       if ( cfeDetails.networkFilters.length !== 0 ) {
         vAPI.userStylesheet.add(
-          cfeDetails.networkFilters + '\n{display:none!important;}');
+          cfeDetails.networkFilters + '\n{background:green!important;}');
       }
 
       vAPI.userStylesheet.apply();

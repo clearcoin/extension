@@ -1119,7 +1119,7 @@
     // Cache and inject (if user stylesheets supported) looked-up low generic
     // cosmetic filters.
     if ( typeof request.hostname === 'string' && request.hostname !== '' ) {
-      console.log({
+      console.log('add this to cache: ', {
         cost: request.surveyCost || 0,
         hostname: request.hostname,
         injectedHideFilters: '',
@@ -1161,8 +1161,8 @@
         code: out.injected + '\n{background:red!important;}',
         cssOrigin: 'user',
         frameId: request.frameId,
-        runAt: 'document_start'
-        // runAt: 'document_end' // todo doc end or start???, if i can insert the html before page load in the proper place of the dom that could be ideal
+        // runAt: 'document_start'
+        runAt: 'document_end' // todo doc end or start???, if i can insert the html before page load in the proper place of the dom that could be ideal
       });
     }
 
@@ -1404,13 +1404,16 @@
         code: '',
         cssOrigin: 'user',
         frameId: request.frameId,
-        runAt: 'document_start'
+        runAt: 'document_end'
       };
       if ( out.injectedHideFilters.length !== 0 ) {
+        console.log('from cache: ', out.injectedHideFilters);
         details.code = out.injectedHideFilters + '\n{background:orange!important;}';
         vAPI.insertCSS(request.tabId, details);
       }
       if ( out.networkFilters.length !== 0 ) {
+        // todo, since we can't seem to get this one to trigger
+        // might as well put it back to display:none before release to production
         details.code = out.networkFilters + '\n{background:yellow!important;}';
         vAPI.insertCSS(request.tabId, details);
         out.networkFilters = '';
