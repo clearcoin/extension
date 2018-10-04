@@ -616,6 +616,7 @@
   /******************************************************************************/
 
   vAPI.tabs.injectScript = function(tabId, details, callback) {
+    console.log('inject script', details);
     var onScriptExecuted = function() {
       // https://code.google.com/p/chromium/issues/detail?id=410868#c8
       void chrome.runtime.lastError;

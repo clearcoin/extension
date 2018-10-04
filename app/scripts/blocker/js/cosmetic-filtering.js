@@ -1156,14 +1156,54 @@
       console.log(out.injected);
       // todo insert ad slot at root element of css declaration
       // here rather than inserting CSS
-      
+
+      // todo: insertCSS to hide element visibility but maintain dimensions
+      // run at document start to avoid flash of old content
+      // ater that, run an "insertHTML" to add the new ad slot
+      // then insertCSS to make visible again (or do that css change on DOM)
+      // all this will need to be done around line 1411 too
       vAPI.insertCSS(request.tabId, {
-        code: out.injected + '\n{background:red!important;}',
+        // this code: for debugging
+        // code: out.injected + '\n{background:red!important;opacity:0.3!important;}',
+        // this code: for real test 
+        code: out.injected + '\n{visibility:hidden;background:transparent!important}',
         cssOrigin: 'user',
         frameId: request.frameId,
-        // runAt: 'document_start'
-        runAt: 'document_end' // todo doc end or start???, if i can insert the html before page load in the proper place of the dom that could be ideal
+        runAt: 'document_start'
       });
+      
+      vAPI.tabs.injectScript(request.tabId, {
+        // file: '/blocker/js/replace-ad.js',
+        code: "[].slice.call(document.querySelectorAll('" + // todo make this regex replace any octal (use a group to sub just that part)
+        out.injected.replace(/\n/g, "").replace(/#\\5f/g, "#\\x5f") + // select all cosmetically filtered elements
+        "')).slice(1,2).forEach(function (x) {" + // function to run on each selected element
+        "x.innerHTML = '<div id=\"0x3b1855f4CA6F1C789C2581AB98971164ac9237d5\" class=\"cca\" " +
+          
+        "style=\"" + // replace element's innerHTML with a div
+        // "background: black;" +  // debugging
+        //   "color: white;" +     // debugging
+          "width:' + x.scrollWidth + 'px;" + // make it the same dimensions as the parent element
+          "height:' + x.scrollHeight + 'px\">" +
+          "AD REPLACE ' + x.scrollWidth + ' x ' + x.scrollHeight + '" + // dummy text
+          "</div>';" +
+          "x.style.visibility = 'visible';" +
+          "});",
+        frameId: request.frameId,
+        runAt: 'document_end' // to ensure DOM is loaded
+      });
+
+      vAPI.tabs.injectScript(request.tabId, {
+        file: '/blocker/js/replace-ad.js',
+        frameId: request.frameId,
+        runAt: 'document_end' // to ensure DOM is loaded
+      });
+      // setTimeout((function(request){
+      //   return function() {
+      //     vAPI.tabs.injectScript(request.tabId, {
+      //       file: '/blocker/js/replace-ad.js',
+      //       frameId: request.frameId,
+      //       runAt: 'document_end' // to ensure DOM is loaded
+      //     })}})(request), 500);
     }
 
     // Important: always clear used registers before leaving.
@@ -1404,12 +1444,15 @@
         code: '',
         cssOrigin: 'user',
         frameId: request.frameId,
-        runAt: 'document_end'
+        runAt: 'document_start' // start or end ??? todo
       };
       if ( out.injectedHideFilters.length !== 0 ) {
-        console.log('from cache: ', out.injectedHideFilters);
-        details.code = out.injectedHideFilters + '\n{background:orange!important;}';
+        //console.log('from cache: ', out.injectedHideFilters);
+        details.code = out.injectedHideFilters + '\n{background:orange!important;opacity:0.2!important;}';
         vAPI.insertCSS(request.tabId, details);
+
+
+        
       }
       if ( out.networkFilters.length !== 0 ) {
         // todo, since we can't seem to get this one to trigger
