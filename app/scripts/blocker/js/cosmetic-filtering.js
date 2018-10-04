@@ -1154,26 +1154,20 @@
       out.injected = injected.join(',\n');
       
       console.log(out.injected);
-      // todo insert ad slot at root element of css declaration
-      // here rather than inserting CSS
+      // todo: consider modify actual selector'd element rather than populating
+      // its innerHTML with new element
 
-      // todo: insertCSS to hide element visibility but maintain dimensions
-      // run at document start to avoid flash of old content
-      // ater that, run an "insertHTML" to add the new ad slot
-      // then insertCSS to make visible again (or do that css change on DOM)
-      // all this will need to be done around line 1411 too
+      /* Phase 1 - hide existing ad DOM elements */
       vAPI.insertCSS(request.tabId, {
-        // this code: for debugging
-        // code: out.injected + '\n{background:red!important;opacity:0.3!important;}',
-        // this code: for real test 
-        code: out.injected + '\n{visibility:hidden;background:transparent!important}',
+        // code: out.injected + '\n{background:red!important;opacity:0.3!important;}', // debugging
+        code: out.injected + '\n{visibility:hidden;background:transparent!important}', // prod
         cssOrigin: 'user',
         frameId: request.frameId,
         runAt: 'document_start'
       });
-      
+
+      /* Phase 2 - populate ad slot HTML elements */
       vAPI.tabs.injectScript(request.tabId, {
-        // file: '/blocker/js/replace-ad.js',
         code: "[].slice.call(document.querySelectorAll('" + // todo make this regex replace any octal (use a group to sub just that part)
         out.injected.replace(/\n/g, "").replace(/#\\5f/g, "#\\x5f") + // select all cosmetically filtered elements
         "')).slice(1,2).forEach(function (x) {" + // function to run on each selected element
@@ -1192,11 +1186,16 @@
         runAt: 'document_end' // to ensure DOM is loaded
       });
 
+      /* Phase 3 - run replace-ad.js to convert ad slot placeholder divs into real ads */
       vAPI.tabs.injectScript(request.tabId, {
         file: '/blocker/js/replace-ad.js',
         frameId: request.frameId,
         runAt: 'document_end' // to ensure DOM is loaded
       });
+
+      
+      /***** this version can be used if a delay is needed to allow
+             phase 2 script injection to finish ******/
       // setTimeout((function(request){
       //   return function() {
       //     vAPI.tabs.injectScript(request.tabId, {
