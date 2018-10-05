@@ -1126,13 +1126,15 @@
         selectors: out.simple.concat(out.complex),
         type: 'cosmetic'
       });
+      // todo - turn caching back on
+      /*
       this.addToSelectorCache({
         cost: request.surveyCost || 0,
         hostname: request.hostname,
         injectedHideFilters: '',
         selectors: out.simple.concat(out.complex),
         type: 'cosmetic'
-      });
+      }); */
     }
 
     // If user stylesheets are supported in the current process, inject the
@@ -1168,31 +1170,35 @@
 
       /* Phase 2 - populate ad slot HTML elements */
       vAPI.tabs.injectScript(request.tabId, {
-        code: "[].slice.call(document.querySelectorAll('" + // todo make this regex replace any octal (use a group to sub just that part)
+        code: "document.querySelectorAll('" + // todo make this regex replace any octal (use a group to sub just that part)
         out.injected.replace(/\n/g, "").replace(/#\\5f/g, "#\\x5f") + // select all cosmetically filtered elements
-        "')).slice(1,2).forEach(function (x) {" + // function to run on each selected element
-        "x.innerHTML = '<div id=\"0x3b1855f4CA6F1C789C2581AB98971164ac9237d5\" class=\"cca\" " +
-          
-        "style=\"" + // replace element's innerHTML with a div
-        // "background: black;" +  // debugging
-        //   "color: white;" +     // debugging
+        "').forEach(function (x) {" + // function to run on each selected element
+        // get the best fit dimensions
+        "var best_fit_width = x.scrollWidth;" +
+          "var best_fit_height = x.scrollHeight;" +
+          "x.innerHTML = '<div class=\"cca ' + best_fit_width + '-' + best_fit_height + '\" " +
+          "id=\"' + (String.fromCharCode(Date.now() % 26 + 97) + Math.floor(Math.random() * 982451653 + 982451653).toString(36)) + '\" " +
+          "style=\"" + // replace element's innerHTML with a div
+          // "background: black;" +  // debugging
+          //   "color: white;" +     // debugging
           "width:' + x.scrollWidth + 'px;" + // make it the same dimensions as the parent element
-          "height:' + x.scrollHeight + 'px\">" +
-          "AD REPLACE ' + x.scrollWidth + ' x ' + x.scrollHeight + '" + // dummy text
+          "height:' + x.scrollHeight + 'px" +
+          "\">" +
+          // "AD REPLACE ' + x.scrollWidth + ' x ' + x.scrollHeight + '" + // dummy text
           "</div>';" +
           "x.style.visibility = 'visible';" +
           "});",
         frameId: request.frameId,
         runAt: 'document_end' // to ensure DOM is loaded
-      });
-
-      /* Phase 3 - run replace-ad.js to convert ad slot placeholder divs into real ads */
-      vAPI.tabs.injectScript(request.tabId, {
-        file: '/blocker/js/replace-ad.js',
-        frameId: request.frameId,
-        runAt: 'document_end' // to ensure DOM is loaded
-      });
-
+      }, (function(request){ // callback after above script is injected
+        /* Phase 3 - run replace-ad.js to convert ad slot placeholder divs into real ads */
+        return function() {
+          vAPI.tabs.injectScript(request.tabId, {
+            file: '/blocker/js/replace-ad.js',
+            frameId: request.frameId,
+            runAt: 'document_end' // to ensure DOM is loaded
+          })};
+      })(request));
       
       /***** this version can be used if a delay is needed to allow
              phase 2 script injection to finish ******/
@@ -1447,8 +1453,8 @@
       };
       if ( out.injectedHideFilters.length !== 0 ) {
         //console.log('from cache: ', out.injectedHideFilters);
-        details.code = out.injectedHideFilters + '\n{background:orange!important;opacity:0.2!important;}';
-        vAPI.insertCSS(request.tabId, details);
+        // details.code = out.injectedHideFilters + '\n{background:orange!important;opacity:0.2!important;}';
+        // vAPI.insertCSS(request.tabId, details);
 
 
         

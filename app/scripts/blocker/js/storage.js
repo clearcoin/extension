@@ -1219,7 +1219,7 @@
       "dynamicFilteringString":"behind-the-scene * * noop\nbehind-the-scene * inline-script noop\nbehind-the-scene * 1p-script noop\nbehind-the-scene * 3p-script noop\nbehind-the-scene * 3p-frame noop\nbehind-the-scene * image noop\nbehind-the-scene * 3p noop",
       "urlFilteringString":"",
       "hostnameSwitchesString":"no-large-media: behind-the-scene false\nno-scripting: behind-the-scene false",
-      "userFilters":""
+      "userFilters": ""
     }));
   
 };
