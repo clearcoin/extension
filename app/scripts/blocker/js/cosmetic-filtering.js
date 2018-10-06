@@ -1168,17 +1168,23 @@
         runAt: 'document_start'
       });
 
-      /* Phase 2 - populate ad slot HTML elements */
-      vAPI.tabs.injectScript(request.tabId, {
-        code: "document.querySelectorAll('" + // todo make this regex replace any octal (use a group to sub just that part)
-        out.injected.replace(/\n/g, "").replace(/#\\5f/g, "#\\x5f") + // select all cosmetically filtered elements
-        "').forEach(function (x) {" + // function to run on each selected element
-        // get the best fit dimensions
-        "var best_fit_width = x.scrollWidth;" +
-          "var best_fit_height = x.scrollHeight;" +
-          "x.innerHTML = '<div class=\"cca ' + best_fit_width + '-' + best_fit_height + '\" " +
-          "id=\"' + (String.fromCharCode(Date.now() % 26 + 97) + Math.floor(Math.random() * 982451653 + 982451653).toString(36)) + '\" " +
-          "style=\"" + // replace element's innerHTML with a div
+      /* TODO
+       * - make the #\5f regex match any octal and add in the x prefix
+       */
+      var ad_slot_code = "" +
+          "document.querySelectorAll('" + // select all of the cosmetic-filtered elements
+          out.injected.replace(/\n/g, "").replace(/#\\5f/g, "#\\x5f") + 
+          "').forEach(function (x) {" + // function to run on each selected element
+          "  var element_width = x.scrollWidth,    " + // get the best fit dimensions
+          "      element_height = x.scrollHeight;  " +
+          "  x.innerHTML = '<div class=\"cca ' +                                " + // every ad has 'cca' class
+          "                              element_width + '-' + element_height + " +
+          "                            '\" ' +                                  " +
+          "                      'id=\"' + (String.fromCharCode(Date.now() % 26 + 97) + " +
+          "                                 Math.floor(Math.random() * 982451653 +      " +
+          "                                            982451653).toString(36)) +       " +
+          "                          '\" ' +                                            " +
+          "                      'style=\"" + 
           // "background: black;" +  // debugging
           //   "color: white;" +     // debugging
           "width:' + x.scrollWidth + 'px;" + // make it the same dimensions as the parent element
@@ -1187,7 +1193,11 @@
           // "AD REPLACE ' + x.scrollWidth + ' x ' + x.scrollHeight + '" + // dummy text
           "</div>';" +
           "x.style.visibility = 'visible';" +
-          "});",
+          "});";
+      
+      /* Phase 2 - populate ad slot HTML elements */
+      vAPI.tabs.injectScript(request.tabId, {
+        code: ad_slot_code,
         frameId: request.frameId,
         runAt: 'document_end' // to ensure DOM is loaded
       }, (function(request){ // callback after above script is injected
@@ -1455,8 +1465,8 @@
         //console.log('from cache: ', out.injectedHideFilters);
         // details.code = out.injectedHideFilters + '\n{background:orange!important;opacity:0.2!important;}';
         // vAPI.insertCSS(request.tabId, details);
-
-
+        details.code = out.injectedHideFilters + '\n{visibility:hidden;background:transparent!important}';
+        vAPI.insertCSS(request.tabId, details);
         
       }
       if ( out.networkFilters.length !== 0 ) {
