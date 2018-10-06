@@ -1,3 +1,19 @@
+//var requirejs = require('requirejs');
+//const signmsg = requirejs('../../lib/sign-arbitrary');
+
+//requirejs.config({
+//  nodeRequire: require
+//});
+
+  
+
+const msgParams = [
+  {
+    type: 'string',
+    name: 'Message',
+    value: 'Hello there, General Kenobi'
+  }
+]
 var cca = document.getElementsByClassName('cca');
 
 if (cca.length) {
