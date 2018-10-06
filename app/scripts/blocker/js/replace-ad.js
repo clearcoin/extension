@@ -9,20 +9,11 @@ for (var i = 0; i < cca.length; i++) {
 var cc = document.createElement('script');
 cc.type = 'text/javascript';
 cc.async = true;
+
 // prod
-// cc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') +
-//   'platform.clearcoin.co/ad/display/' +
-//   ad_slot_ids.join('-');
-
-// // dev
-// cc.src = 'https://' +
-//   'platform.clearcoin.co/ad/display-by-dims/' +
-//   w_h_ids.join('!');
-
+cc.src = 'https://platform.clearcoin.co/ad/display-by-dims/' + btoa(unescape(encodeURIComponent(w_h_ids.join('!'))));
 // dev
-cc.src = 'http://' +
-  'localhost:3000/ad/display-by-dims/' +
-  btoa(unescape(encodeURIComponent(w_h_ids.join('!'))));
+//cc.src = 'http://localhost:3000/ad/display-by-dims/' + btoa(unescape(encodeURIComponent(w_h_ids.join('!'))));
 
 // todo: ...so this will only work if there is already a script tag somewhere on page?
 var s = document.getElementsByTagName('script')[0];
