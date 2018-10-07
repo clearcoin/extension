@@ -1,24 +1,27 @@
-var signmsg = {
-  setBackgroundConnection: setBackgroundConnection,
+/*function setBackgroundConnection(backgroundConnection){
+  background = backgroundConnection
+}*/
+
+const signmsg = {
   signArbitrary: signArbitrary
 }
 
-window.signarbit = signmsg
+module.exports = signmsg
 
-module.exports = signmsg 
-
-var background = null
-function setBackgroundConnection(backgroundConnection){
-  background = backgroundConnection
+//var metamaskController=null
+function setController(controller){
+  //metamaskController=metamaskController
+  console.log("SET")
 }
 
 function logOutCall(signedMsg){
-//  console.log("CALL BACK")
-  console.log(signMsg)
+  console.log("CALL BACK")
+  console.log(signedMsg)
 }
 
 function signArbitrary(msgParams){
   console.log("CALL MADE TO SIGN")
-  background.newUnsignedPersonalMessage(msgParams, logOutCall)
-  background.signPersonalMessage(msgParams)
+  console.log(msgParams)
+  //globals.metamaskController.newUnsignedPersonalMessage(msgParams, logOutCall)
+  //globlas.metamaskController.signPersonalMessage(msgParams)
 }

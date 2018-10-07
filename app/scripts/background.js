@@ -322,6 +322,12 @@ function setupController (initState, initLangCode) {
   //
   extension.runtime.onConnect.addListener(connectRemote)
   extension.runtime.onConnectExternal.addListener(connectExternal)
+  extension.runtime.onMessage.addListener(function(msg, sendResponse) {
+    global.metamaskController.newUnsignedPersonalMessage(msg, sendResponse)
+    global.metamaskController.signPersonalMessage(msg)
+    return true
+  })
+
 
   const metamaskInternalProcessHash = {
     [ENVIRONMENT_TYPE_POPUP]: true,

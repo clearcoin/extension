@@ -1,19 +1,10 @@
-//var requirejs = require('requirejs');
-//const signmsg = requirejs('../../lib/sign-arbitrary');
-
-//requirejs.config({
-//  nodeRequire: require
-//});
-
-  
-
-const msgParams = [
-  {
+var msgParams = {
     type: 'string',
     name: 'Message',
     value: 'Hello there, General Kenobi'
   }
-]
+
+
 var cca = document.getElementsByClassName('cca');
 
 if (cca.length) {
@@ -23,7 +14,7 @@ if (cca.length) {
       cca[i].setAttribute('data-init', "true");
       w_h_ids.push(cca[i].className.replace(/cca /g, '') + '-' + cca[i].id);
     }
-  }
+ }
   var cc = document.createElement('script');
   cc.type = 'text/javascript';
   cc.async = true;
