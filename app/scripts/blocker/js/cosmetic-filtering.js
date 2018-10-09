@@ -1162,7 +1162,7 @@
       /* Phase 1 - hide existing ad DOM elements */
       vAPI.insertCSS(request.tabId, {
         // code: out.injected + '\n{background:red!important;opacity:0.3!important;}', // debugging
-        code: out.injected + '\n{visibility:hidden;background:transparent!important}', // prod
+        code: out.injected + '\n{visibility:hidden;display:block!important;background:transparent!important}', // prod
         cssOrigin: 'user',
         frameId: request.frameId,
         runAt: 'document_start'
@@ -1205,6 +1205,7 @@
             runAt: 'document_end'
           })};
       })(request));
+      
     }
 
     // Important: always clear used registers before leaving.
@@ -1441,20 +1442,30 @@
         out.highGenericHideComplex = '';
       }
       out.injectedHideFilters = injectedHideFilters.join(',\n');
+      
+      if ( out.injectedHideFilters.length !== 0 ) {
+        //console.log('from cache: ', out.injectedHideFilters);
+        vAPI.insertCSS(request.tabId, {
+          code: out.injectedHideFilters + '\n{visibility:hidden;background:transparent!important}',
+          cssOrigin: 'user',
+          frameId: request.frameId,
+          runAt: 'document_start'
+        });
+        vAPI.insertCSS(request.tabId, {
+          code: out.injectedHideFilters + '\n{display:none;}',
+          cssOrigin: 'user',
+          frameId: request.frameId,
+          runAt: 'document_idle'
+        });
+        
+      }
+      
       let details = {
         code: '',
         cssOrigin: 'user',
         frameId: request.frameId,
-        runAt: 'document_start' // start or end ??? todo
+        runAt: 'document_idle' // start or end ??? todo
       };
-      if ( out.injectedHideFilters.length !== 0 ) {
-        //console.log('from cache: ', out.injectedHideFilters);
-        // details.code = out.injectedHideFilters + '\n{background:orange!important;opacity:0.2!important;}';
-        // vAPI.insertCSS(request.tabId, details);
-        details.code = out.injectedHideFilters + '\n{visibility:hidden;background:transparent!important}';
-        vAPI.insertCSS(request.tabId, details);
-        
-      }
       if ( out.networkFilters.length !== 0 ) {
         // todo, since we can't seem to get this one to trigger
         // might as well put it back to display:none before release to production
