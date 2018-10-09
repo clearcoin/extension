@@ -1187,8 +1187,6 @@
           "                      'style=\"" + 
           // "background: black;" +  // debugging
           //   "color: white;" +     // debugging
-          "width:' + x.scrollWidth + 'px;" + // make it the same dimensions as the parent element
-          "height:' + x.scrollHeight + 'px" +
           "\">" +
           // "AD REPLACE ' + x.scrollWidth + ' x ' + x.scrollHeight + '" + // dummy text
           "</div>';" +
