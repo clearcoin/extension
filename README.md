@@ -1,6 +1,6 @@
 # ClearCoin Browser Extension
 
-Get paid to browse the web.
+Earn ClearCoin (XCLR) while you browse the web.
 
 ## ClearCoin Support
 
