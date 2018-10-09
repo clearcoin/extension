@@ -1180,43 +1180,31 @@
           "  x.innerHTML = '<div class=\"cca ' +                                " + // every ad has 'cca' class
           "                              element_width + '-' + element_height + " +
           "                            '\" ' +                                  " +
-          "                      'id=\"' + (String.fromCharCode(Date.now() % 26 + 97) + " +
+          "                      'id=\"' + (String.fromCharCode(Date.now() % 26 + 97) + " + // generate random element id
           "                                 Math.floor(Math.random() * 982451653 +      " +
           "                                            982451653).toString(36)) +       " +
           "                          '\" ' +                                            " +
           "                      'style=\"" + 
           // "background: black;" +  // debugging
-          //   "color: white;" +     // debugging
-          "\">" +
-          // "AD REPLACE ' + x.scrollWidth + ' x ' + x.scrollHeight + '" + // dummy text
-          "</div>';" +
-          "x.style.visibility = 'visible';" +
+          "width:' + element_width + 'px;" + // make it the same dimensions as the parent element
+          "height:' + element_height + 'px;" + // when ad is loaded, dimensions will be reset to 'auto' for better fit
+          "\"></div>';" +
           "});";
       
       /* Phase 2 - populate ad slot HTML elements */
       vAPI.tabs.injectScript(request.tabId, {
         code: ad_slot_code,
         frameId: request.frameId,
-        runAt: 'document_end' // to ensure DOM is loaded
+        runAt: 'document_end'
       }, (function(request){ // callback after above script is injected
         /* Phase 3 - run replace-ad.js to convert ad slot placeholder divs into real ads */
         return function() {
           vAPI.tabs.injectScript(request.tabId, {
             file: '/blocker/js/replace-ad.js',
             frameId: request.frameId,
-            runAt: 'document_end' // to ensure DOM is loaded
+            runAt: 'document_end'
           })};
       })(request));
-      
-      /***** this version can be used if a delay is needed to allow
-             phase 2 script injection to finish ******/
-      // setTimeout((function(request){
-      //   return function() {
-      //     vAPI.tabs.injectScript(request.tabId, {
-      //       file: '/blocker/js/replace-ad.js',
-      //       frameId: request.frameId,
-      //       runAt: 'document_end' // to ensure DOM is loaded
-      //     })}})(request), 500);
     }
 
     // Important: always clear used registers before leaving.
