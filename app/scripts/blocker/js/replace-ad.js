@@ -16,7 +16,7 @@ for (var i = 0; i < cca.length; i++) {
     console.log("SHOULD HAVE CALLED IT");
     chrome.runtime.sendMessage(msgParams, function(response){
       console.log('MESSAGE RECIEVED, AND REPLIED');
-      console.log(response.signed);
+      console.log(response.rawsign);
     });
   }
 }

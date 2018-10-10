@@ -62,6 +62,7 @@ const openMetamaskTabsIDs = {}
 const diskStore = new LocalStorageStore({ storageKey: STORAGE_KEY })
 const localStore = new LocalStore()
 let versionedData
+let adData
 
 // initialization flow
 initialize().catch(log.error)
@@ -328,11 +329,14 @@ function setupController (initState, initLangCode) {
   // Sign ad impression
   //
   extension.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    let sign_it = convertIDToHex(request.impression_id)
-    sendResponse({signed: sign_it})
-    //global.metamaskController.newUnsignedPersonalMessage(encodedData, sendResponse)
-    //global.metamaskController.signPersonalMessage(adData)
-    //return true
+    let imp_id = convertIDToHex(request.impression_id)
+    let addr = global.metamaskController.preferencesController.getSelectedAddress()
+    let msgParams = {
+      'from': addr,
+      'data': imp_id
+    }
+    global.metamaskController.signImpressionID(msgParams, sendResponse)
+    return true
   })
 
   function convertIDToHex(impressionID){

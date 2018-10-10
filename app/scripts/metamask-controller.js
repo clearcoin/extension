@@ -934,6 +934,13 @@ module.exports = class MetamaskController extends EventEmitter {
     })
   }
 
+  signImpressionID (msgParams, cb) {
+    log.info('Sign Impression ID')    
+    return this.keyringController.signPersonalMessage(msgParams).then((rawsig) => {
+        return cb({rawsign: rawsig})
+    })
+  }
+
   /**
    * Used to cancel a personal_sign type message.
    * @param {string} msgId - The ID of the message to cancel.
