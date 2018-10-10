@@ -322,12 +322,27 @@ function setupController (initState, initLangCode) {
   //
   extension.runtime.onConnect.addListener(connectRemote)
   extension.runtime.onConnectExternal.addListener(connectExternal)
-  extension.runtime.onMessage.addListener(function(msg, sendResponse) {
-    global.metamaskController.newUnsignedPersonalMessage(msg, sendResponse)
-    global.metamaskController.signPersonalMessage(msg)
-    return true
+
+
+  //
+  // Sign ad impression
+  //
+  extension.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    let sign_it = convertIDToHex(request.impression_id)
+    sendResponse({signed: sign_it})
+    //global.metamaskController.newUnsignedPersonalMessage(encodedData, sendResponse)
+    //global.metamaskController.signPersonalMessage(adData)
+    //return true
   })
 
+  function convertIDToHex(impressionID){
+    let imp_arr = []
+    for (let i = 0; i < impressionID.length; i++){
+      let hex = Number(impressionID.charCodeAt(i)).toString(16)
+      imp_arr.push(hex)
+    }
+    return imp_arr.join('')
+  }
 
   const metamaskInternalProcessHash = {
     [ENVIRONMENT_TYPE_POPUP]: true,
