@@ -30,7 +30,7 @@
     "message": "Add Tokens"
   },
   "addAcquiredTokens": {
-    "message": "Add the tokens you've acquired using MetaMask"
+    "message": "Add the tokens you've acquired using ClearCoin"
   },
   "amount": {
     "message": "Amount"
@@ -39,7 +39,7 @@
     "message": "Amount + Gas"
   },
   "appDescription": {
-    "message": "Get paid for every ad you see.",
+    "message": "Earn ClearCoin (XCLR) while you browse the web.",
     "description": "The description of the application"
   },
   "appName": {
@@ -90,7 +90,7 @@
   "message": "Your Browser is not supported..."
   },
   "builtInCalifornia": {
-    "message": "ClearCoin is a California based company."
+    "message": "ClearCoin is based in Los Angeles, CA."
   },
   "buy": {
     "message": "Buy"
@@ -150,7 +150,7 @@
     "message": "Connect to Trezor"
   },
   "connectToTrezorHelp": {
-    "message": "MetaMask is able to access your TREZOR Ethereum accounts. First make sure your device is connected and unlocked."
+    "message": "ClearCoin is able to access your TREZOR Ethereum accounts. First make sure your device is connected and unlocked."
   },
   "connectToTrezorTrouble": {
     "message": "If you are having trouble, please make sure you are using the latest version of the TREZOR firmware."
@@ -238,7 +238,7 @@
     "message": "The default network for Ether transactions is Main Net."
   },
   "denExplainer": {
-    "message": "Your DEN is your password-encrypted storage within MetaMask."
+    "message": "Your DEN is your password-encrypted storage within ClearCoin."
   },
   "deposit": {
     "message": "Deposit"
@@ -266,7 +266,7 @@
     "message": "Deposit with ShapeShift"
   },
   "depositShapeShiftExplainer": {
-    "message": "If you own other cryptocurrencies, you can trade and deposit Ether directly into your MetaMask wallet. No Account Needed."
+    "message": "If you own other cryptocurrencies, you can trade and deposit Ether directly into your ClearCoin wallet. No Account Needed."
   },
   "details": {
     "message": "Details"
@@ -430,7 +430,7 @@
     "message": "Hardware Support"
   },
   "hardwareSupportMsg": {
-    "message": "You can now view your Hardware accounts in MetaMask!  Scroll down and read how it works."
+    "message": "You can now view your Hardware accounts in ClearCoin!  Scroll down and read how it works."
   },
   "havingTroubleConnecting": {
     "message": "Having trouble connecting?"
@@ -468,7 +468,7 @@
     "message": "Import Account"
   },
   "importAccountMsg": {
-    "message":" Imported accounts will not be associated with your originally created MetaMask account seedphrase. Learn more about imported accounts "
+    "message":" Imported accounts will not be associated with your originally created ClearCoin account seedphrase. Learn more about imported accounts "
   },
   "importAnAccount": {
     "message": "Import an account"
@@ -585,7 +585,7 @@
     "message": "Get paid for every ad you see."
   },
   "metamaskSeedWords": {
-    "message": "MetaMask Seed Words"
+    "message": "ClearCoin Seed Words"
   },
   "min": {
     "message": "Minimum"
@@ -920,7 +920,7 @@
     "message": "Select an Account"
   },
   "selectAnAccountHelp": {
-    "message": "These are the accounts available in your hardware wallet. Select the one you’d like to use in MetaMask."
+    "message": "These are the accounts available in your hardware wallet. Select the one you’d like to use in ClearCoin."
   },
   "sendTokensAnywhere": {
     "message": "Send Tokens to anyone with an Ethereum account"
@@ -1044,7 +1044,7 @@
     "message": "Token Symbol"
   },
   "tokenWarning1": {
-    "message": "Keep track of the tokens you’ve bought with your MetaMask account. If you bought tokens using a different account, those tokens will not appear here."
+    "message": "Keep track of the tokens you’ve bought with your ClearCoin account. If you bought tokens using a different account, those tokens will not appear here."
   },
   "total": {
     "message": "Total"
@@ -1078,7 +1078,7 @@
     "message": "Try again"
   },
   "twelveWords": {
-    "message": "These 12 words are the only way to restore your MetaMask accounts.\nSave them somewhere safe and secret."
+    "message": "These 12 words are the only way to restore your ClearCoin account.\nSave them somewhere safe and secret."
   },
   "typePassword": {
     "message": "Type Your Password"
@@ -1087,7 +1087,7 @@
     "message": "Welcome to the New UI (Beta)"
   },
   "uiWelcomeMessage": {
-    "message": "You are now using the new MetaMask UI."
+    "message": "You are now using the new ClearCoin UI."
   },
   "unapproved": {
     "message": "Unapproved"
