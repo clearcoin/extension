@@ -22,7 +22,7 @@ function MetamaskInpageProvider (connectionStream) {
   )
 
   // subscribe to metamask public config (one-way)
-  self.publicConfigStore = new LocalStorageStore({ storageKey: 'MetaMask-Config' })
+  self.publicConfigStore = new LocalStorageStore({ storageKey: 'ClearCoin-Config' })
 
   pump(
     mux.createStream('publicConfig'),
