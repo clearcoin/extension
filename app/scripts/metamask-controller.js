@@ -429,6 +429,9 @@ module.exports = class MetamaskController extends EventEmitter {
       signTypedMessage: nodeify(this.signTypedMessage, this),
       cancelTypedMessage: this.cancelTypedMessage.bind(this),
 
+      // AuthManager
+      signAuth: nodeify(this.signAuth, this),
+
       // notices
       checkNotices: noticeController.updateNoticesList.bind(noticeController),
       markNoticeRead: noticeController.markNoticeRead.bind(noticeController),
@@ -934,12 +937,6 @@ module.exports = class MetamaskController extends EventEmitter {
     })
   }
 
-  signImpressionID (msgParams, cb) {
-    log.info('Sign Impression ID')    
-    return this.keyringController.signPersonalMessage(msgParams).then((rawsig) => {
-        return cb({rawsign: rawsig})
-    })
-  }
 
   /**
    * Used to cancel a personal_sign type message.
@@ -953,6 +950,39 @@ module.exports = class MetamaskController extends EventEmitter {
       cb(null, this.getState())
     }
   }
+
+
+  /**
+   * Signs a personal_sign message without going through the queue.
+   * Immediately triggers signing, and the callback function from
+   * the background script.
+   *
+   * @param {Object} msgParams - Account and impression id to be signed.
+   * @returns {string} rawsig - Signed impression id.
+   */
+  signImpressionID (msgParams, cb) {
+    log.info('Sign Impression ID')
+    return this.keyringController.signPersonalMessage(msgParams).then((rawsig) => {
+        return cb({rawsign: rawsig})
+    })
+  }
+
+
+  /**
+   * Signs a personal_sign message without going through the queue.
+   * Immediately triggers signing, and the callback function from
+   * the background script.
+   *
+   * @param {Object} msgParams - Account and impression id to be signed.
+   * @returns {String} rawsig - Signed impression id.
+   */
+  signAuth (msgParams, cb) {
+    log.info('Sign Auth')
+    return this.keyringController.signPersonalMessage(msgParams).then((rawsig) => {
+        return cb({rawsign: rawsig})
+    })
+  }
+
 
   // eth_signTypedData methods
 
