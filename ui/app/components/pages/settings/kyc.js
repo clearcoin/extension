@@ -100,6 +100,21 @@ class Kyc extends Component {
     </div>
     )}
 
+  renderKYCInfo() {
+    return (
+      <div className="settings__field-title">
+        KYC Registration
+      </div>
+      <div className="settings__field-subtitle">
+        Thank you for beginning your KYC application. An email from Onfido will
+        arrive in your inbox shortly detailing steps on how to continue. Upon
+        completion, please allow 3-4 business days for your application to be processed.
+        Please note that if you already have an approved application on file, you will be
+        automatically approved. 
+      </div>
+    )
+  }
+
   render () {
     return (
       h('div.settings__content', [
