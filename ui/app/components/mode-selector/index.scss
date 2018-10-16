@@ -1,0 +1,94 @@
+.mode-selector {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+
+    &__name {
+        max-width: 200px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        text-align: center;
+    }
+
+    &__address {
+        font-size: .75rem;
+        color: $silver-chalice;
+    }
+
+    &__clickable {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #e8e6e8;
+        }
+
+        &:active {
+            background-color: #d9d7da;
+        }
+    }
+
+    .toggle-wrapper {
+        margin: 0.5em auto;
+    }
+
+    .toggle-wrapper label {
+        padding: 0.3em;
+        font-size: 17px;
+        display: block;
+    }
+
+    .toggleContainer {
+        position: relative;
+        background: #b2d3ff;
+        border: 2px solid #b2d3ff;
+        border-radius: 4px;
+    }
+
+    .toggleContainer .toggleOption {
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        height: 20px;
+        line-height: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        color: #ffffff;
+        font-size: 12px;
+        text-transform: uppercase;
+        padding: 0px 12px;
+    }
+
+    .toggleContainer .toggleOption:first-child {
+        padding-left: 10px;
+    }
+
+    .toggleContainer .toggleOption.selected {
+        color: #ffffff;
+        cursor: default;
+    }
+
+    .toggleContainer .toggle {
+        position: absolute;
+        height: 100%;
+        bottom: 0;
+        left: 0;
+        transition: all 0.4s ease-in-out;
+        background: #58A2FC;
+        border-radius: 3px;
+    }
+
+    .optionDisabled {
+        background: #e6e6e6;
+        cursor: no-drop !important;
+    }
+}

@@ -12,7 +12,7 @@ function Tooltip () {
 
 Tooltip.prototype.render = function () {
   const props = this.props
-  const { position, title, children, wrapperClassName, containerClassName, onHidden } = props
+  const { position, title, html, children, wrapperClassName, containerClassName, onHidden } = props
 
   return h('div', {
       className: wrapperClassName,
@@ -20,6 +20,7 @@ Tooltip.prototype.render = function () {
 
     h(ReactTippy, {
       title,
+      html: html,
       position: position || 'left',
       trigger: 'mouseenter',
       hideOnClick: false,

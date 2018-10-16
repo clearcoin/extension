@@ -13,7 +13,7 @@ const { checksumAddress: toChecksumAddress } = require('../util')
 const BalanceComponent = require('./balance-component')
 const Tooltip = require('./tooltip')
 const TxList = require('./tx-list')
-const SelectedAccount = require('./selected-account')
+const ModeSelector = require('./mode-selector')
 
 module.exports = compose(
   withRouter,
@@ -136,7 +136,7 @@ TxView.prototype.render = function () {
         }),
       ]),
 
-      h(SelectedAccount),
+      h(ModeSelector),
 
       !isMascara && h(Tooltip, {
         title: t('openInTab'),

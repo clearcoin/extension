@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import SelectedAccount from './selected-account.component'
+import ModeSelector from './mode-selector.component'
 
 const selectors = require('../../selectors')
 
@@ -10,4 +10,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(SelectedAccount)
+export default connect(mapStateToProps)(ModeSelector)

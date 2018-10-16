@@ -134,12 +134,12 @@ class App extends Component {
         this.renderSidebar(),
 
         // network dropdown
-        h(NetworkDropdown, {
-          provider,
-          frequentRpcList,
-        }, []),
+        // h(NetworkDropdown, {
+        //   provider,
+        //   frequentRpcList,
+        // }, []),
 
-        h(AccountMenu),
+        // h(AccountMenu),
 
         (isLoading || isLoadingNetwork) && h(Loading, {
           loadingMessage: loadMessage,

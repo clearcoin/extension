@@ -153,6 +153,7 @@
     "react-simple-file-input": "^2.0.0",
     "react-tippy": "^1.2.2",
     "react-toggle-button": "^2.2.0",
+    "react-multi-toggle": "^1.1.0",
     "react-tooltip-component": "^0.3.0",
     "react-transition-group": "^2.2.1",
     "react-trigger-change": "^1.0.2",
