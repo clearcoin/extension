@@ -1119,14 +1119,14 @@
     // Cache and inject (if user stylesheets supported) looked-up low generic
     // cosmetic filters.
     if ( typeof request.hostname === 'string' && request.hostname !== '' ) {
-      console.log('add this to cache: ', {
-        cost: request.surveyCost || 0,
-        hostname: request.hostname,
-        injectedHideFilters: '',
-        selectors: out.simple.concat(out.complex),
-        type: 'cosmetic'
-      });
-      // todo - turn caching back on
+      // console.log('add this to cache: ', {
+      //   cost: request.surveyCost || 0,
+      //   hostname: request.hostname,
+      //   injectedHideFilters: '',
+      //   selectors: out.simple.concat(out.complex),
+      //   type: 'cosmetic'
+      // });
+      // todo - turn caching back on (or dont... if it's better to just do the replace always here)
       /*
       this.addToSelectorCache({
         cost: request.surveyCost || 0,
@@ -1155,7 +1155,8 @@
       }
       out.injected = injected.join(',\n');
       
-      console.log(out.injected);
+      // console.log(out.injected); // for debugging
+
       // todo: consider modify actual selector'd element rather than populating
       // its innerHTML with new element
 

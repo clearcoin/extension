@@ -39,8 +39,6 @@ const Modal = require('./components/modals/index').Modal
 // Global Alert
 const Alert = require('./components/alert')
 
-const AppHeader = require('./components/app-header')
-
 import UnlockPage from './components/pages/unlock-page'
 
 // Routes
@@ -131,8 +129,6 @@ class App extends Component {
 
         // global alert
         h(Alert, {visible: this.props.alertOpen, msg: alertMessage}),
-
-        // h(AppHeader),
 
         // sidebar
         this.renderSidebar(),
