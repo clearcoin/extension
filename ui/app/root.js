@@ -13,13 +13,6 @@ class Root extends Component {
 
     return (
       h(Provider, { store }, [
-
-        // h(HashRouter, {
-        //   hashType: 'noslash',
-        // }, [
-        //   h(I18nProvider, [ h(App) ]),
-        // ])
-        
         h(SelectedApp),
       ])
     )

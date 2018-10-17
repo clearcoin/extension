@@ -62,6 +62,26 @@ class PreferencesController {
   }
 
   /**
+   * Setter for the `mode` property
+   *
+   * @param {string} val Mode is earn, hide, or off
+   *
+   */
+  setMode (val) {
+    this.store.updateState({ mode: val })
+  }
+
+  /**
+   * Getter for the `mode` property
+   *
+   * @returns {string} this.store.mode
+   *
+   */
+  getMode () {
+    return this.store.getState().mode
+  }
+
+  /**
    * Setter for the `currentLocale` property
    *
    * @param {string} key he preferred language locale key

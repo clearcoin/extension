@@ -6,6 +6,7 @@ const {
 } = require('./conversion-util')
 
 const selectors = {
+  getMode,
   getSelectedAddress,
   getSelectedIdentity,
   getSelectedAccount,
@@ -31,6 +32,10 @@ const selectors = {
 }
 
 module.exports = selectors
+
+function getMode (state) {
+  return state.metamask.mode
+}
 
 function getSelectedAddress (state) {
   const selectedAddress = state.metamask.selectedAddress || Object.keys(state.metamask.accounts)[0]

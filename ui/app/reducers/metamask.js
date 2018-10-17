@@ -18,6 +18,7 @@ function reduceMetamask (state, action) {
     isMascara: window.platform instanceof MetamascaraPlatform,
     isPopup: getEnvironmentType(window.location.href) === ENVIRONMENT_TYPE_POPUP,
     rpcTarget: 'https://rawtestrpc.metamask.io/',
+    mode: 'earn',
     identities: {},
     unapprovedTxs: {},
     noActiveNotices: true,
@@ -106,6 +107,11 @@ function reduceMetamask (state, action) {
         provider: {
           type: action.value,
         },
+      })
+
+    case actions.SET_MODE:
+      return extend(metamaskState, {
+        mode: action.value,
       })
 
     case actions.COMPLETED_TX:

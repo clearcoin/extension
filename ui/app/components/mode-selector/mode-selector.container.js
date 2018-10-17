@@ -2,12 +2,18 @@ import { connect } from 'react-redux'
 import ModeSelector from './mode-selector.component'
 
 const selectors = require('../../selectors')
+const actions = require('../../actions')
 
 const mapStateToProps = state => {
   return {
-    selectedAddress: selectors.getSelectedAddress(state),
-    selectedIdentity: selectors.getSelectedIdentity(state),
+    mode: selectors.getMode(state),
   }
 }
 
-export default connect(mapStateToProps)(ModeSelector)
+const mapDispatchToProps = dispatch => {
+  return {
+    setMode: value => dispatch(actions.setMode(value)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModeSelector)

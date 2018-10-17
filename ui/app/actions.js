@@ -280,6 +280,9 @@ var actions = {
   SET_USE_BLOCKIE: 'SET_USE_BLOCKIE',
   setUseBlockie,
 
+  SET_MODE: 'SET_MODE',
+  setMode,
+
   // locale
   SET_CURRENT_LOCALE: 'SET_CURRENT_LOCALE',
   SET_LOCALE_MESSAGES: 'SET_LOCALE_MESSAGES',
@@ -2147,6 +2150,23 @@ function setUseBlockie (val) {
     })
     dispatch({
       type: actions.SET_USE_BLOCKIE,
+      value: val,
+    })
+  }
+}
+
+function setMode (val) {
+  return (dispatch) => {
+    dispatch(actions.showLoadingIndication())
+    log.debug(`background.setMode`)
+    background.setMode(val, (err) => {
+      dispatch(actions.hideLoadingIndication())
+      if (err) {
+        return dispatch(actions.displayWarning(err.message))
+      }
+    })
+    dispatch({
+      type: actions.SET_MODE,
       value: val,
     })
   }
