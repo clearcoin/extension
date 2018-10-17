@@ -102,15 +102,24 @@ class Kyc extends Component {
 
   renderKYCInfo() {
     return (
-      <div className="settings__field-title">
-        KYC Registration
-      </div>
-      <div className="settings__field-subtitle">
-        Thank you for beginning your KYC application. An email from Onfido will
-        arrive in your inbox shortly detailing steps on how to continue. Upon
-        completion, please allow 3-4 business days for your application to be processed.
-        Please note that if you already have an approved application on file, you will be
-        automatically approved. 
+      <div className="settings__kyc-container">
+        <div className="settings__field-title">
+          KYC Registration
+        </div>
+        <div className="settings__field-subtitle">
+          <p className="settings__field-subtitle">
+            Thank you for beginning your KYC application. An email from Onfido will
+            arrive in your inbox shortly detailing steps on how to continue.
+          </p>
+          <p className="settings__field-subtitle">
+            Upon completion, please allow 3-4 business days for your application to be processed.
+            Please note that if you already have an approved application on file, you will be
+            automatically approved.
+          </p>
+          <p className="settings__field-subtitle">
+            Current Status: Pending
+          </p>
+        </div>
       </div>
     )
   }
@@ -118,18 +127,15 @@ class Kyc extends Component {
   render () {
     return (
       h('div.settings__content', [
-        this.renderKYCInput(),
+        //this.renderKYCInput(),
+        this.renderKYCInfo(),
       ])
     )}
 }
 
 Kyc.propTypes = {
-  tab: PropTypes.string,
   metamask: PropTypes.object,
-  setCurrentCurrency: PropTypes.func,
-  setRpcTarget: PropTypes.func,
   displayWarning: PropTypes.func,
-  revealSeedConfirmation: PropTypes.func,
   warning: PropTypes.string,
   location: PropTypes.object,
   history: PropTypes.object,

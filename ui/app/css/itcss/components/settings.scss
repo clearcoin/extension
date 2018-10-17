@@ -42,9 +42,17 @@
   line-height: 20px;
   margin-top: 6px;
   margin-bottom: 24px;
+  text-align: justify;
   @media screen and (max-width: 575px) {
     width: initial !important;
   }
+}
+
+p.settings__field-subtitle {
+  color: #758CA3;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: justify;
 }
 
 .settings__kyc-container{
