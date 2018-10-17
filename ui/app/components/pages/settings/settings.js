@@ -302,7 +302,7 @@ class Settings extends Component {
       h('div.settings__content', [
         warning && h('div.settings__error', warning),
         this.renderCurrentConversion(),
-        this.renderCurrentLocale(),
+        // this.renderCurrentLocale(), // hide this until we have at least two language options
         // this.renderCurrentProvider(),
         // this.renderNewRpcUrl(),
         // this.renderStateLogs(),
