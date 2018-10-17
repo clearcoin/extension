@@ -41,7 +41,7 @@ class ModeSelector extends Component {
               <div>
                 EARN - see ads and earn XCLR
                 <br />HIDE - block all ads
-                <br />OFF - turn off completely
+                <br />OFF - show regular ads
               </div>
             )}>
             <MultiToggle

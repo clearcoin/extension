@@ -1,6 +1,7 @@
 const { Component } = require('react')
 const PropTypes = require('prop-types')
 const h = require('react-hyperscript')
+const ClearyBot = require('../../clearybot')
 
 class Info extends Component {
   constructor (props) {
@@ -9,14 +10,6 @@ class Info extends Component {
     this.state = {
       version: global.platform.getVersion(),
     }
-  }
-
-  renderLogo () {
-    return (
-      h('div.settings__info-logo-wrapper', [
-        h('img.settings__info-logo', { src: 'images/icon-64.png' }),
-      ])
-    )
   }
 
   renderInfoLinks () {
@@ -65,9 +58,9 @@ class Info extends Component {
       h('div.settings__content', [
         h('div.settings__content-row', [
           h('div.settings__content-item.settings__content-item--without-height', [
-            this.renderLogo(),
+            h(ClearyBot),
             h('div.settings__info-item', [
-              h('div.settings__info-version-header', 'Version'),
+              h('div.settings__info-version-header', 'ClearCoin Version'),
               h('div.settings__info-version-number', this.state.version),
             ]),
             h('div.settings__info-item', [

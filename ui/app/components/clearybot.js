@@ -2,14 +2,14 @@ const Component = require('react').Component
 const h = require('react-hyperscript')
 const inherits = require('util').inherits
 
-module.exports = ClearyComponent
+module.exports = ClearyBot
 
-inherits(ClearyComponent, Component)
-function ClearyComponent () {
+inherits(ClearyBot, Component)
+function ClearyBot () {
   Component.call(this)
 }
 
-ClearyComponent.prototype.render = function () {
+ClearyBot.prototype.render = function () {
   return (
     h('img.app-header__metafox', {
       src: './images/clearybot.svg',
