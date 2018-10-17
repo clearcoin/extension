@@ -2157,10 +2157,10 @@ function setUseBlockie (val) {
 
 function setMode (val) {
   return (dispatch) => {
-    dispatch(actions.showLoadingIndication())
+    // dispatch(actions.showLoadingIndication())
     log.debug(`background.setMode`)
     background.setMode(val, (err) => {
-      dispatch(actions.hideLoadingIndication())
+      // dispatch(actions.hideLoadingIndication())
       if (err) {
         return dispatch(actions.displayWarning(err.message))
       }

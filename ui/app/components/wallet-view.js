@@ -146,32 +146,43 @@ WalletView.prototype.render = function () {
       h('div.flex-column.flex-center.wallet-view__name-container',
         { style: { margin: '0 auto' } },
         [
-          h('img.app-header__metafox', {
-              src: "/images/icon.svg",
-              height: 64,
-              width: 64
+          h('img', {
+            src: "/images/logo-text.png",
+            style: {
+              margin: '-14px 0 21px 0',
+              width: '133px'
             }
-          ),
+          }),
 
-          // TODO: Cleary Bot here?
-          // h(Identicon, {
-          //   diameter: 54,
-          //   address: checksummedAddress,
-          // }),
-
-          h('span.account-name', {
-            style: {},
+          h(Tooltip, {
+            position: 'bottom',
+            title: this.state.hasCopied ? this.context.t('copiedExclamation') : this.context.t('copyToClipboard'),
           }, [
-            identities[selectedAddress].name,
+            h('button.wallet-view__address', {
+              className: classnames({
+                'wallet-view__address__pressed': this.state.copyToClipboardPressed,
+              }),
+              onClick: () => {
+                copyToClipboard(checksummedAddress)
+                this.setState({ hasCopied: true })
+                setTimeout(() => this.setState({ hasCopied: false }), 3000)
+              },
+              onMouseDown: () => {
+                this.setState({ copyToClipboardPressed: true })
+              },
+              onMouseUp: () => {
+                this.setState({ copyToClipboardPressed: false })
+              },
+            }, [
+              `${checksummedAddress.slice(0, 6)}...${checksummedAddress.slice(-4)}`,
+              h('i.fa.fa-clipboard', { style: { marginLeft: '8px' } }),
+            ]),
           ]),
-
-          h('div.flex-row.flex-center',
+          
+          h('div.flex-row.flex-center', { style: { margin: '18px 0 18px 0' } },
             [
-              // h('button.btn-clear.wallet-view__details-button.allcaps',
-              //   { onClick: showAccountDetailModal },
-              //   this.context.t('details')),
               h('button.btn-clear.wallet-view__details-button.allcaps',
-                { style: { margin: '0 8px' },
+                { style: { margin: '0 8px 0 0' },
                   onClick: () => {
                     history.push(SETTINGS_ROUTE);
                     sidebarOpen && hideSidebar();
@@ -185,32 +196,6 @@ WalletView.prototype.render = function () {
                 }
               }, this.context.t('logout')),]),
         ]),
-    ]),
-
-    h(Tooltip, {
-      position: 'bottom',
-      title: this.state.hasCopied ? this.context.t('copiedExclamation') : this.context.t('copyToClipboard'),
-      wrapperClassName: 'wallet-view__tooltip',
-    }, [
-      h('button.wallet-view__address', {
-        className: classnames({
-          'wallet-view__address__pressed': this.state.copyToClipboardPressed,
-        }),
-        onClick: () => {
-          copyToClipboard(checksummedAddress)
-          this.setState({ hasCopied: true })
-          setTimeout(() => this.setState({ hasCopied: false }), 3000)
-        },
-        onMouseDown: () => {
-          this.setState({ copyToClipboardPressed: true })
-        },
-        onMouseUp: () => {
-          this.setState({ copyToClipboardPressed: false })
-        },
-      }, [
-        `${checksummedAddress.slice(0, 6)}...${checksummedAddress.slice(-4)}`,
-        h('i.fa.fa-clipboard', { style: { marginLeft: '8px' } }),
-      ]),
     ]),
 
     h(TokenList),
