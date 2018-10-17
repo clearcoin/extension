@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+const { connect } = require('react-redux')
+const { withRouter } = require('react-router-dom')
+const { compose } = require('recompose')
 const PropTypes = require('prop-types')
 const h = require('react-hyperscript')
 
@@ -7,12 +10,12 @@ import TextField from '../../text-field'
 class Kyc extends Component {
   constructor (props) {
     super(props)
-  }
 
-  state = {
-    firstname: '',
-    lastname: '',
-    email: ''
+    this.state = {
+      firstname: '',
+      lastname: '',
+      email: '',
+    }
   }
 
   handleFirstNameChange(firstname){
@@ -94,13 +97,27 @@ class Kyc extends Component {
         <button
           className="settings__kyc--button"
           disabled={!this.isValid()}
-          onClick={submitKYCForm}>
+          onClick={this.submitKYCForm}>
             Submit
         </button>
     </div>
     )}
 
   renderKYCInfo() {
+    const { isKYCApproved, isKYCUnapproved } = this.props
+
+    let statusMsg
+
+    if (!isKYCApproved && !isKYCUnapproved) {
+      statusMsg = <p className="settings__field-subtitle">Current Status: Pending</p>
+    }
+    else if (isKYCApproved) {
+      statusMsg = <p className="settings__field-subtitle">Current Status: Approved</p>
+    }
+    else if (isKYCUnapproved) {
+      statusMsg = <p className="settings__field-subtitle">Current Status: Unapproved</p>
+    }
+
     return (
       <div className="settings__kyc-container">
         <div className="settings__field-title">
@@ -116,34 +133,44 @@ class Kyc extends Component {
             Please note that if you already have an approved application on file, you will be
             automatically approved.
           </p>
-          <p className="settings__field-subtitle">
-            Current Status: Pending
-          </p>
+          {statusMsg}
         </div>
       </div>
     )
   }
 
   render () {
-    return (
-      h('div.settings__content', [
-        //this.renderKYCInput(),
-        this.renderKYCInfo(),
-      ])
-    )}
+    const { isKYCSubmitted, isKYCApproved, isKYCUnapproved } = this.props
+    if (isKYCSubmitted) {
+      return (
+        h('div.settings__content', [
+          this.renderKYCInfo()
+        ])
+      )
+    }
+    else {
+      return (
+        h('div.settings__content', [
+          this.renderKYCInput()
+        ])
+      )
+    }
+  }
 }
 
-Kyc.propTypes = {
-  metamask: PropTypes.object,
-  displayWarning: PropTypes.func,
-  warning: PropTypes.string,
-  location: PropTypes.object,
-  history: PropTypes.object,
-  t: PropTypes.func,
+const mapStateToProps = state => {
+  return {
+    isKYCSubmitted: state.metamask.isKYCSubmitted,
+    isKYCApproved: state.metamask.isKYCApproved,
+    isKYCUnapproved: state.metamask.isKYCUnapproved, 
+  }
 }
 
 Kyc.contextTypes = {
   t: PropTypes.func,
 }
 
-module.exports = Kyc 
+module.exports = compose(
+  withRouter,
+  connect(mapStateToProps)
+)(Kyc)

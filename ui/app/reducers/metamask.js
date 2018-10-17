@@ -14,7 +14,8 @@ function reduceMetamask (state, action) {
   var metamaskState = extend({
     isInitialized: false,
     isUnlocked: false,
-    isKYCApproved: false,
+    isKYCSubmitted: true,
+    isKYCApproved: true,
     isKYCUnapproved: false,
     isAccountMenuOpen: false,
     isMascara: window.platform instanceof MetamascaraPlatform,
