@@ -6,8 +6,9 @@ import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 import {closeWelcomeScreen} from './actions'
-import Mascot from './components/mascot'
 import { INITIALIZE_CREATE_PASSWORD_ROUTE } from './routes'
+
+const ClearyBot = require('./components/clearybot')
 
 class WelcomeScreen extends Component {
   static propTypes = {
@@ -42,17 +43,19 @@ class WelcomeScreen extends Component {
   render () {
     return h('div.welcome-screen', [
 
-        h('div.welcome-screen__info', [
+      h('div.welcome-screen__info', [
 
-          h('div.welcome-screen__info__header', this.context.t('welcomeBeta')),
+        h(ClearyBot),
 
-          h('div.welcome-screen__info__copy', this.context.t('welcomeSubtext')),
+        h('div.welcome-screen__info__header', this.context.t('welcomeBeta')),
 
-          h('button.welcome-screen__button', {
-            onClick: this.initiateAccountCreation,
-          }, this.context.t('continue')),
+        h('div.welcome-screen__info__copy', this.context.t('welcomeSubtext')),
 
-        ]),
+        h('button.welcome-screen__button', {
+          onClick: this.initiateAccountCreation,
+        }, this.context.t('continue')),
+
+      ]),
 
     ])
   }
