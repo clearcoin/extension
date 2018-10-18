@@ -69,7 +69,7 @@ class BackupPhraseScreen extends Component {
   exportSeedWords = () => {
     const { seedWords } = this.props
 
-    exportAsFile('MetaMask Secret Backup Phrase', seedWords, 'text/plain')
+    exportAsFile('ClearCoin Secret Backup Phrase', seedWords, 'text/plain')
   }
 
   renderSecretWordsContainer () {
@@ -111,15 +111,12 @@ class BackupPhraseScreen extends Component {
             Your secret backup phrase makes it easy to back up and restore your account.
           </div>
           <div className="backup-phrase__body-text">
-            WARNING: Never disclose your backup phrase. Anyone with this phrase can take your Ether forever.
+            WARNING: Never disclose your backup phrase. Anyone with this phrase can take your XCLR or ETH forever.
           </div>
           {this.renderSecretWordsContainer()}
         </div>
         <div className="backup-phrase__tips">
           <div className="backup-phrase__tips-text">Tips:</div>
-          <div className="backup-phrase__tips-text">
-            Store this phrase in a password manager like 1Password.
-          </div>
           <div className="backup-phrase__tips-text">
             Write this phrase on a piece of paper and store in a secure location. If you want even more security, write it down on multiple pieces of paper and store each in 2 - 3 different locations.
           </div>
