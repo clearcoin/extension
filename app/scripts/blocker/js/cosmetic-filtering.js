@@ -1160,52 +1160,65 @@
       // todo: consider modify actual selector'd element rather than populating
       // its innerHTML with new element
 
-      /* Phase 1 - hide existing ad DOM elements */
-      vAPI.insertCSS(request.tabId, {
-        // code: out.injected + '\n{background:red!important;opacity:0.3!important;}', // debugging
-        code: out.injected + '\n{visibility:hidden;display:block!important;background:transparent!important}', // prod
-        cssOrigin: 'user',
-        frameId: request.frameId,
-        runAt: 'document_start'
-      });
 
-      /* TODO
-       * - make the #\5f regex match any octal and add in the x prefix
-       */
-      var ad_slot_code = "" +
-          "document.querySelectorAll('" + // select all of the cosmetic-filtered elements
-          out.injected.replace(/\n/g, "").replace(/#\\5f/g, "#\\x5f") + 
-          "').forEach(function (x) {" + // function to run on each selected element
-          "  var element_width = x.scrollWidth,    " + // get the best fit dimensions
-          "      element_height = x.scrollHeight;  " +
-          "  x.innerHTML = '<div class=\"cca ' +                                " + // every ad has 'cca' class
-          "                              element_width + '-' + element_height + " +
-          "                            '\" ' +                                  " +
-          "                      'id=\"' + (String.fromCharCode(Date.now() % 26 + 97) + " + // generate random element id
-          "                                 Math.floor(Math.random() * 982451653 +      " +
-          "                                            982451653).toString(36)) +       " +
-          "                          '\" ' +                                            " +
-          "                      'style=\"" + 
-          // "background: black;" +  // debugging
-          "width:' + element_width + 'px;" + // make it the same dimensions as the parent element
-          "height:' + element_height + 'px;" + // when ad is loaded, dimensions will be reset to 'auto' for better fit
-          "\"></div>';" +
-          "});";
-      
-      /* Phase 2 - populate ad slot HTML elements */
-      vAPI.tabs.injectScript(request.tabId, {
-        code: ad_slot_code,
-        frameId: request.frameId,
-        runAt: 'document_end'
-      }, (function(request){ // callback after above script is injected
-        /* Phase 3 - run replace-ad.js to convert ad slot placeholder divs into real ads */
-        return function() {
-          vAPI.tabs.injectScript(request.tabId, {
-            file: '/blocker/js/replace-ad.js',
-            frameId: request.frameId,
-            runAt: 'document_end'
-          })};
-      })(request));
+      // current mode: earn, hide, or off
+      var mode = window.metamaskController.preferencesController.getMode();
+
+      if (mode === 'earn') {
+        /* Phase 1 - hide existing ad DOM elements */
+        vAPI.insertCSS(request.tabId, {
+          // code: out.injected + '\n{background:red!important;opacity:0.3!important;}', // debugging
+          code: out.injected + '\n{visibility:hidden;display:block!important;background:transparent!important}', // prod
+          cssOrigin: 'user',
+          frameId: request.frameId,
+          runAt: 'document_start'
+        });
+
+        /* TODO
+         * - make the #\5f regex match any octal and add in the x prefix
+         */
+        var ad_slot_code = "" +
+            "document.querySelectorAll('" + // select all of the cosmetic-filtered elements
+            out.injected.replace(/\n/g, "").replace(/#\\5f/g, "#\\x5f") + 
+            "').forEach(function (x) {" + // function to run on each selected element
+            "  var element_width = x.scrollWidth,    " + // get the best fit dimensions
+            "      element_height = x.scrollHeight;  " +
+            "  x.innerHTML = '<div class=\"cca ' +                                " + // every ad has 'cca' class
+            "                              element_width + '-' + element_height + " +
+            "                            '\" ' +                                  " +
+            "                      'id=\"' + (String.fromCharCode(Date.now() % 26 + 97) + " + // generate random element id
+            "                                 Math.floor(Math.random() * 982451653 +      " +
+            "                                            982451653).toString(36)) +       " +
+            "                          '\" ' +                                            " +
+            "                      'style=\"" + 
+            // "background: black;" +  // debugging
+            "width:' + element_width + 'px;" + // make it the same dimensions as the parent element
+            "height:' + element_height + 'px;" + // when ad is loaded, dimensions will be reset to 'auto' for better fit
+            "\"></div>';" +
+            "});";
+        
+        /* Phase 2 - populate ad slot HTML elements */
+        vAPI.tabs.injectScript(request.tabId, {
+          code: ad_slot_code,
+          frameId: request.frameId,
+          runAt: 'document_end'
+        }, (function(request){ // callback after above script is injected
+          /* Phase 3 - run replace-ad.js to convert ad slot placeholder divs into real ads */
+          return function() {
+            vAPI.tabs.injectScript(request.tabId, {
+              file: '/blocker/js/replace-ad.js',
+              frameId: request.frameId,
+              runAt: 'document_end'
+            })};
+        })(request));
+      } else if (mode === 'hide') { // hide mode, just hide everything like a normal ad blocker
+        vAPI.insertCSS(request.tabId, {
+          code: out.injected + '\n{display:none!important;}',
+          cssOrigin: 'user',
+          frameId: request.frameId,
+          runAt: 'document_start'
+        });
+      }
       
     }
 
@@ -1446,18 +1459,33 @@
       
       if ( out.injectedHideFilters.length !== 0 ) {
         //console.log('from cache: ', out.injectedHideFilters);
-        vAPI.insertCSS(request.tabId, {
-          code: out.injectedHideFilters + '\n{visibility:hidden;background:transparent!important}',
-          cssOrigin: 'user',
-          frameId: request.frameId,
-          runAt: 'document_start'
-        });
-        vAPI.insertCSS(request.tabId, {
-          code: out.injectedHideFilters + '\n{display:none;}',
-          cssOrigin: 'user',
-          frameId: request.frameId,
-          runAt: 'document_idle'
-        });
+
+        // current mode: earn, hide, or off
+        var mode = window.metamaskController.preferencesController.getMode();
+
+        if (mode === 'earn') {
+          // work in tandem with the non-cached CSS selectors, to replace ads
+          vAPI.insertCSS(request.tabId, {
+            code: out.injectedHideFilters + '\n{visibility:hidden;background:transparent!important}',
+            cssOrigin: 'user',
+            frameId: request.frameId,
+            runAt: 'document_start'
+          });
+          vAPI.insertCSS(request.tabId, {
+            code: out.injectedHideFilters + '\n{display:none;}',
+            cssOrigin: 'user',
+            frameId: request.frameId,
+            runAt: 'document_idle'
+          });
+        } else if (mode === 'hide') {
+          // act as a normal ad blocker
+          vAPI.insertCSS(request.tabId, {
+            code: out.injectedHideFilters + '\n{display:none!important}',
+            cssOrigin: 'user',
+            frameId: request.frameId,
+            runAt: 'document_start'
+          });
+        }
         
       }
       

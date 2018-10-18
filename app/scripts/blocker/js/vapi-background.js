@@ -1110,6 +1110,11 @@
   // the web pages before uBlock was ready.
 
   vAPI.onLoadAllCompleted = function() {
+
+
+    return; // celwell: bypassing this for now to avoid possible issues and to not replace ads where they won't be seen
+
+    
     // http://code.google.com/p/chromium/issues/detail?id=410868#c11
     // Need to be sure to access `vAPI.lastError()` to prevent
     // spurious warnings in the console.

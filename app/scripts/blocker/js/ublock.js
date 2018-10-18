@@ -77,7 +77,18 @@ var matchBucket = function(url, hostname, bucket, start) {
 
 /******************************************************************************/
 
-µBlock.getNetFilteringSwitch = function(url) {
+  µBlock.getNetFilteringSwitch = function(url) {
+
+    // celwell: short circuit if in 'off' mode
+    if (window.metamaskController) {
+       console.log('netfilteringswitch says mode is: ', window.metamaskController.preferencesController.getMode());  
+       if (window.metamaskController.preferencesController.getMode() === 'off') {
+         console.log('turn off net filtering for this page...');
+         return false;
+       }
+    }
+
+    
     var targetHostname = this.URI.hostnameFromURI(url),
         key = targetHostname,
         pos;

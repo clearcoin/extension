@@ -244,6 +244,16 @@ class PreferencesController {
   }
 
   /**
+   * Getter for the `mode` property
+   *
+   * @returns {string} The current mode
+   *
+   */
+  getMode () {
+    return this.store.getState().mode
+  }
+
+  /**
    * Contains data about tokens users add to their account.
    * @typedef {Object} AddedToken
    * @property {string} address - The hex address for the token contract. Will be all lower cased and hex-prefixed.
