@@ -355,6 +355,7 @@ module.exports = class MetamaskController extends EventEmitter {
       setCurrentCurrency: this.setCurrentCurrency.bind(this),
       setUseBlockie: this.setUseBlockie.bind(this),
       setMode: this.setMode.bind(this),
+      setKYCSubmitted: this.setKYCSubmitted.bind(this),
       setCurrentLocale: this.setCurrentLocale.bind(this),
       markAccountsFound: this.markAccountsFound.bind(this),
       markPasswordForgotten: this.markPasswordForgotten.bind(this),
@@ -1484,6 +1485,18 @@ module.exports = class MetamaskController extends EventEmitter {
   setMode (val, cb) {
     try {
       this.preferencesController.setMode(val)
+      cb(null)
+    } catch (err) {
+      cb(err)
+    }
+
+  /**
+   * Indicates that the KYC process has been initiated 
+   * @param {Function} cb - A callback function called when complete.
+   */
+  setKYCSubmitted (cb) {
+    try {
+      this.preferencesController.setKYCSubmitted()
       cb(null)
     } catch (err) {
       cb(err)

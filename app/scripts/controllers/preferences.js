@@ -28,6 +28,7 @@ class PreferencesController {
       currentAccountTab: 'history',
       accountTokens: {},
       tokens: [],
+      isKYCSubmitted: false,
       useBlockie: false,
       mode: 'off',
       featureFlags: {},
@@ -61,6 +62,25 @@ class PreferencesController {
    */
   getUseBlockie () {
     return this.store.getState().useBlockie
+  }
+
+
+  /**
+   * Setter for the 'isKYCSubmitted' property
+   *
+   */ 
+  setKYCSubmitted () {
+    this.store.updateState({ isKYCSubmitted: true })
+  }
+
+
+  /**
+   * Getter for the 'isKYCSubmitted' property
+   *
+   * @returns {boolean} this.store.isKYCSubmitted
+   */
+  getKYCSubmitted () {
+    return this.store.getState().isKYCSubmitted
   }
 
   /**

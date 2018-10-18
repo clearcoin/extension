@@ -114,6 +114,13 @@ var actions = {
   tryUnlockMetamask: tryUnlockMetamask,
   lockMetamask: lockMetamask,
   unlockInProgress: unlockInProgress,
+  // kyc screen
+  KYC_SUBMITTED: 'KYC_SUBMITTED',
+  KYC_APPROVED: 'KYC_APPROVED',
+  KYC_UNAPPROVED: 'KYC_UNAPPROVED',
+  submitKYC: submitKYC,
+  approveKYC: approveKYC,
+  unapproveKYC: unapproveKYC,
   // error handling
   displayWarning: displayWarning,
   DISPLAY_WARNING: 'DISPLAY_WARNING',
@@ -1421,6 +1428,34 @@ function unlockMetamask (account) {
   return {
     type: actions.UNLOCK_METAMASK,
     value: account,
+  }
+}
+
+function submitKYC () {
+  return (dispatch) => {
+    //dispatch(actions.showLoadingIndication())
+    log.debug(`background.submitKYC`)
+    background.setKYCSubmitted((err) => {
+      //dispatch(actions.hideLoadingIndication())
+      if (err) {
+        return dispatch(actions.displayWarning(err.message))
+      }
+    })
+    dispatch({
+      type: actions.KYC_SUBMITTED,
+    })
+  }
+}
+
+function approveKYC () {
+  return {
+    type: actions.KYC_APPROVED,
+  }
+}
+
+function unapproveKYC () {
+  return {
+    type: actions.KYC_UNAPPROVED,
   }
 }
 

@@ -14,8 +14,8 @@ function reduceMetamask (state, action) {
   var metamaskState = extend({
     isInitialized: false,
     isUnlocked: false,
-    isKYCSubmitted: true,
-    isKYCApproved: true,
+    isKYCSubmitted: false,
+    isKYCApproved: false, 
     isKYCUnapproved: false,
     isAccountMenuOpen: false,
     isMascara: window.platform instanceof MetamascaraPlatform,
@@ -87,9 +87,25 @@ function reduceMetamask (state, action) {
         selectedAddress: action.value,
       })
 
-    case actions.LOCK_METAMASK:
+    case actions.KYC_SUBMITTED:
       return extend(metamaskState, {
-        isUnlocked: false,
+        isKYCSubmitted: true,
+        isKYCApproved: false,
+        isKYCUnApproved: false,
+      })
+
+    case actions.KYC_APPROVED:
+      return extend(metamaskState, {
+        isKYCSubmitted: true,
+        isKYCApproved: true,
+        isKYCUnApproved: false,
+      })
+
+    case actions.KYC_UNAPPROVED:
+      return extend(metamaskState, {
+        isKYCSubmitted: true,
+        isKYCApproved: false,
+        isKYCUnApproved: true,
       })
 
     case actions.SET_RPC_LIST:

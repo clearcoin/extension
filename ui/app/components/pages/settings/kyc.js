@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 const { connect } = require('react-redux')
 const { withRouter } = require('react-router-dom')
 const { compose } = require('recompose')
+const actions = require('../../../actions')
 const PropTypes = require('prop-types')
 const h = require('react-hyperscript')
 
@@ -42,15 +43,14 @@ class Kyc extends Component {
 
 
   submitKYCForm(){
-    let firstNameField = document.getElementById('firstname-field')
-    let firstname = firstNameField.value
+    const { submitKYC } = this.props
+    let firstname = this.state.firstname
+    let lastname = this.state.lastname
+    let email = this.state.email
 
-    let lastNameField = document.getElementById('lastname-field')
-    let lastname = lastNameField.value
-
-    let emailField = document.getElementById('email-field')
-    let email = emailField.value
+    submitKYC()
   }
+
 
   renderKYCInput(){
     return(
@@ -78,7 +78,7 @@ class Kyc extends Component {
           type="text"
           className="settings__field-input"
           value={this.state.lastname}
-          onChange={event => this. handleLastNameChange(event.target.value)}
+          onChange={event => this.handleLastNameChange(event.target.value)}
           margin="normal"
           fullWidth
           largeLabel
@@ -97,7 +97,7 @@ class Kyc extends Component {
         <button
           className="settings__kyc--button"
           disabled={!this.isValid()}
-          onClick={this.submitKYCForm}>
+          onClick={event => this.submitKYCForm()}>
             Submit
         </button>
     </div>
@@ -158,6 +158,23 @@ class Kyc extends Component {
   }
 }
 
+Kyc.propTypes = {
+  updateMetamaskState: PropTypes.func,
+  isKYCApproved: PropTypes.bool,
+  isKYCUnapproved: PropTypes.bool,
+  isKYCSubmitted: PropTypes.bool,
+  t: PropTypes.func,
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    submitKYC: () => dispatch(actions.submitKYC()),
+    approveKYC: () => dispatch(actions.approveKYC()),
+    unapproveKYC: () => dispatch(actions.unapproveKYC()),
+  }
+}
+
+
 const mapStateToProps = state => {
   return {
     isKYCSubmitted: state.metamask.isKYCSubmitted,
@@ -172,5 +189,5 @@ Kyc.contextTypes = {
 
 module.exports = compose(
   withRouter,
-  connect(mapStateToProps)
+  connect(mapStateToProps, mapDispatchToProps)
 )(Kyc)
