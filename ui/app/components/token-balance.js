@@ -34,8 +34,8 @@ TokenBalance.prototype.render = function () {
   return isLoading
     ? h('span', '')
     : h('span.token-balance', [
-      h('span.hide-text-overflow.token-balance__amount', string),
-      !balanceOnly && h('span.token-balance__symbol', symbol),
+      h('span.hide-text-overflow.token-balance__amount',
+        string + " " + symbol),
     ])
 }
 

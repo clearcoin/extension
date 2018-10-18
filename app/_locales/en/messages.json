@@ -895,7 +895,7 @@
     "message": "Send ETH"
   },
   "sendTokens": {
-    "message": "Send Tokens"
+    "message": "Send XCLR"
   },
   "separateEachWord": {
     "message": "Separate each word with a single space"
