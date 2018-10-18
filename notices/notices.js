@@ -10,14 +10,6 @@ module.exports = [
     title: 'Terms of Use',
     body: fs.readFileSync(path.join(__dirname, '/archive', 'notice_0.md'), 'utf8'),
   },
- {
-    id: 1,
-    read: false,
-    date: 'Tue Nov 28 2017',
-    title: 'Seed Phrase Alert',
-    firstVersion: '<=3.12.0',
-    body: fs.readFileSync(path.join(__dirname, '/archive', 'notice_1.md'), 'utf8'),
-  },
   {
     id: 2,
     read: false,
