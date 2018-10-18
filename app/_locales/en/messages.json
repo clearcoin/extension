@@ -582,7 +582,7 @@
     "message": "Message"
   },
   "welcomeSubtext": {
-    "message": "Get paid for every ad you see."
+    "message": "Earn ClearCoin (XCLR) while you browse the web."
   },
   "metamaskSeedWords": {
     "message": "ClearCoin Seed Words"
@@ -1120,7 +1120,7 @@
     "message": "Unlock"
   },
   "unlockMessage": {
-    "message": "Get paid for every ad you see"
+    "message": "Earn ClearCoin (XCLR) while you browse the web."
   },
   "uriErrorMsg": {
     "message": "URIs require the appropriate HTTP/HTTPS prefix."
