@@ -794,7 +794,7 @@
     "message": "DO NOT share this phrase with anyone!"
   },
   "revealSeedWordsWarning": {
-    "message": "These words can be used to steal all your accounts."
+    "message": "These words can be used to steal your account."
   },
   "revert": {
     "message": "Revert"
