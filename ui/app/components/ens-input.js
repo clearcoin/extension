@@ -55,7 +55,8 @@ EnsInput.prototype.render = function () {
   const opts = extend(props, {
     list: 'addresses',
     onChange: this.onChange.bind(this),
-    qrScanner: true,
+    // qrScanner: true,
+    qrScanner: false, // celwell: since the qr scanner seems to be broken, just remove it for MVP
   })
   return h('div', {
     style: { width: '100%', position: 'relative' },
