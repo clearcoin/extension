@@ -87,6 +87,11 @@ function reduceMetamask (state, action) {
         selectedAddress: action.value,
       })
 
+    case actions.LOCK_METAMASK:
+      return extend(metamaskState, {
+        isUnlocked: false,
+      })
+
     case actions.KYC_SUBMITTED:
       return extend(metamaskState, {
         isKYCSubmitted: true,
