@@ -107,7 +107,6 @@ class Kyc extends Component {
     const { isKYCApproved, isKYCUnapproved } = this.props
 
     let statusMsg
-
     let styleSheet
 
     if (!isKYCApproved && !isKYCUnapproved) {
