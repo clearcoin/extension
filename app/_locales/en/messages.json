@@ -416,6 +416,9 @@
   "getHelp": {
     "message": "Get Help."
   },
+  "getStarted": {
+    "message": "Get Started"
+  },
   "greaterThanMin": {
     "message": "must be greater than or equal to $1.",
     "description": "helper for inputting hex as decimal input"
