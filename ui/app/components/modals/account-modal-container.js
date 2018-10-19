@@ -51,11 +51,11 @@ AccountModalContainer.prototype.render = function () {
       h('div', [
 
         // Needs a border; requires changes to svg
-        h(Identicon, {
-          address: selectedIdentity.address,
-          diameter: 64,
-          style: {},
-        }),
+        // h(Identicon, {
+        //   address: selectedIdentity.address,
+        //   diameter: 64,
+        //   style: {},
+        // }),
 
       ]),
 

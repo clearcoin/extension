@@ -54,11 +54,11 @@ AccountDetailsModal.prototype.render = function () {
   const { name, address } = selectedIdentity
 
   return h(AccountModalContainer, {}, [
-      h(EditableLabel, {
-        className: 'account-modal__name',
-        defaultValue: name,
-        onSubmit: label => setAccountLabel(address, label),
-      }),
+      // h(EditableLabel, {
+      //   className: 'account-modal__name',
+      //   defaultValue: name,
+      //   onSubmit: label => setAccountLabel(address, label),
+      // }),
 
       h(QrView, {
         Qr: {
