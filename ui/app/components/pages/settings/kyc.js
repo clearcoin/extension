@@ -108,14 +108,32 @@ class Kyc extends Component {
 
     let statusMsg
 
+    let styleSheet
+
     if (!isKYCApproved && !isKYCUnapproved) {
       statusMsg = <p className="settings__field-subtitle">Current Status: Pending</p>
     }
     else if (isKYCApproved) {
-      statusMsg = <p className="settings__field-subtitle">Current Status: Approved</p>
+      styleSheet = { color: '#00e639' }
+      statusMsg = <tr>
+        <td>
+          <p className="settings__field-subtitle">Current Status:&#160;</p>
+        </td>
+        <td>
+          <div  className="settings__field-subtitle" style={styleSheet}>Approved</div>
+        </td>
+      </tr>
     }
     else if (isKYCUnapproved) {
-      statusMsg = <p className="settings__field-subtitle">Current Status: Unapproved</p>
+      styleSheet = { color: '#e60000' }
+      statusMsg = <tr>
+        <td>
+          <p className="settings__field-subtitle">Current Status:&#160;</p>
+        </td>
+        <td>
+          <div  className="settings__field-subtitle" style={styleSheet}>Unapproved</div>
+        </td>
+      </tr>
     }
 
     return (
@@ -133,7 +151,9 @@ class Kyc extends Component {
             Please note that if you already have an approved application on file, you will be
             automatically approved.
           </p>
-          {statusMsg}
+          <table>
+            {statusMsg}
+          </table>
         </div>
       </div>
     )

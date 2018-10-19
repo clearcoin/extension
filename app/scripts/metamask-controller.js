@@ -1489,6 +1489,7 @@ module.exports = class MetamaskController extends EventEmitter {
     } catch (err) {
       cb(err)
     }
+  }
 
   /**
    * Indicates that the KYC process has been initiated 
