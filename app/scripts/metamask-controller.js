@@ -7,6 +7,7 @@
 const EventEmitter = require('events')
 const pump = require('pump')
 const Dnode = require('dnode')
+const ethUtil = require('ethereumjs-util')
 const ObservableStore = require('obs-store')
 const ComposableObservableStore = require('./lib/ComposableObservableStore')
 const asStream = require('obs-store/lib/asStream')
@@ -1491,21 +1492,60 @@ module.exports = class MetamaskController extends EventEmitter {
     }
   }
 
+  sendKYCInfo (kycInfo, selectedAddress, kycSig, cb) {
+      let post_data = {
+        payload: {
+          'first-name': kycInfo.firstname,
+          'last-name': kycInfo.lastname,
+          email: kycInfo.email,
+          country: kycInfo.country,
+          'wallet-address': selectedAddress},
+        signature: kycSig.rawsign
+      }
+
+      cb({message: post_data})
+
+      request({
+          method: 'POST',
+          url:'http://bidder-staging.clearcoin.co/extension/initialize-checks',
+          json: true,
+          body: post_data
+        },
+        function (error, response, body) {
+          log.info('ERROR: ' + response.statusCode)
+          cb({message: body})
+      })
+      this.preferencesController.setKYCSubmitted()
+  }
+
   /**
    * Indicates that the KYC process has been initiated 
    * @param {Function} cb - A callback function called when complete.
    */
-  setKYCSubmitted (firstname, lastname, country, cb) {
+  setKYCSubmitted (kycInfo, cb) {
     try {
       const selectedAddress = this.preferencesController.getSelectedAddress()
       let post_data = JSON.stringify({
-        firstname: firstname,
-        lastname: lastname,
-        country: country,
-        wallet_addr: selectedAddress
+        payload: {
+          'first-name': kycInfo.firstname,
+          'last-name': kycInfo.lastname,
+          country: kycInfo.country,
+          email: kycInfo.email,
+          'wallet-address': selectedAddress
+        }
       })
-      this.preferencesController.setKYCSubmitted()
-      cb(null)
+
+      let buffPayload = ethUtil.toBuffer(post_data)
+      buffPayload = ethUtil.bufferToHex(buffPayload)
+
+      let msgParams = {
+        'from': selectedAddress,
+        'data': buffPayload 
+      }
+
+      const signedPayload = this.keyringController.signPersonalMessage(msgParams).then((rawsig) => {
+        return this.sendKYCInfo(kycInfo, selectedAddress, {rawsign: rawsig}, cb)
+      })
     } catch (err) {
       cb(err)
     }

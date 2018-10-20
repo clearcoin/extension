@@ -44,11 +44,14 @@ class Kyc extends Component {
 
   submitKYCForm(){
     const { submitKYC } = this.props
-    let firstname = this.state.firstname
-    let lastname = this.state.lastname
-    let email = this.state.email
+    const kycInfo = {
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      email: this.state.email,
+      country: 'USA'
+    }
 
-    submitKYC()
+    submitKYC(kycInfo)
   }
 
 
@@ -110,13 +113,17 @@ class Kyc extends Component {
     let styleSheet
 
     if (!isKYCApproved && !isKYCUnapproved) {
-      statusMsg = <p className="settings__field-subtitle">Current Status: Pending</p>
+      statusMsg = <tr>
+        <td>
+          <div className="settings__field-subtitle">Current Status: Pending</div>
+        </td>
+      </tr> 
     }
     else if (isKYCApproved) {
       styleSheet = { color: '#00e639' }
       statusMsg = <tr>
         <td>
-          <p className="settings__field-subtitle">Current Status:&#160;</p>
+          <div className="settings__field-subtitle">Current Status:&#160;</div>
         </td>
         <td>
           <div  className="settings__field-subtitle" style={styleSheet}>Approved</div>
@@ -127,7 +134,7 @@ class Kyc extends Component {
       styleSheet = { color: '#e60000' }
       statusMsg = <tr>
         <td>
-          <p className="settings__field-subtitle">Current Status:&#160;</p>
+          <div className="settings__field-subtitle">Current Status:&#160;</div>
         </td>
         <td>
           <div  className="settings__field-subtitle" style={styleSheet}>Unapproved</div>
@@ -187,7 +194,7 @@ Kyc.propTypes = {
 
 const mapDispatchToProps = dispatch => {
   return {
-    submitKYC: () => dispatch(actions.submitKYC()),
+    submitKYC: kycInfo => dispatch(actions.submitKYC(kycInfo)),
     approveKYC: () => dispatch(actions.approveKYC()),
     unapproveKYC: () => dispatch(actions.unapproveKYC()),
   }

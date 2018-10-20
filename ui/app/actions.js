@@ -1431,11 +1431,11 @@ function unlockMetamask (account) {
   }
 }
 
-function submitKYC () {
+function submitKYC (kycInfo) {
   return (dispatch) => {
     //dispatch(actions.showLoadingIndication())
     log.debug(`background.submitKYC`)
-    background.setKYCSubmitted((err) => {
+    background.setKYCSubmitted(kycInfo, (err) => {
       //dispatch(actions.hideLoadingIndication())
       if (err) {
         return dispatch(actions.displayWarning(err.message))
