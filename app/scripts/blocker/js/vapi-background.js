@@ -775,13 +775,6 @@
     };
   })();
 
-  chrome.browserAction.onClicked.addListener(function(tab) {
-    vAPI.tabs.open({
-      select: true,
-      url: 'popup.html?tabId=' + tab.id + '&responsive=1'
-    });
-  });
-
   /******************************************************************************/
   /******************************************************************************/
 
