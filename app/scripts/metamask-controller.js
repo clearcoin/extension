@@ -1495,8 +1495,15 @@ module.exports = class MetamaskController extends EventEmitter {
    * Indicates that the KYC process has been initiated 
    * @param {Function} cb - A callback function called when complete.
    */
-  setKYCSubmitted (cb) {
+  setKYCSubmitted (firstname, lastname, country, cb) {
     try {
+      const selectedAddress = this.preferencesController.getSelectedAddress()
+      let post_data = JSON.stringify({
+        firstname: firstname,
+        lastname: lastname,
+        country: country,
+        wallet_addr: selectedAddress
+      })
       this.preferencesController.setKYCSubmitted()
       cb(null)
     } catch (err) {
