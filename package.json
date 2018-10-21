@@ -200,6 +200,7 @@
     "react-simple-file-input": "^2.0.0",
     "react-tippy": "^1.2.2",
     "react-toggle-button": "^2.2.0",
+    "react-multi-toggle": "^1.1.0",
     "react-tooltip-component": "^0.3.0",
     "react-transition-group": "^2.2.1",
     "react-trigger-change": "^1.0.2",
@@ -222,6 +223,7 @@
     "valid-url": "^1.0.9",
     "vreme": "^3.0.2",
     "web3": "^0.20.1",
+    "web3-provider-engine": "^14.0.5",
     "web3-stream-provider": "^3.0.1",
     "webrtc-adapter": "^6.3.0",
     "xtend": "^4.0.1"
