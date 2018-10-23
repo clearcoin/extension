@@ -4,6 +4,8 @@ import Identicon from '../identicon'
 import Tooltip from '../tooltip-v2'
 import copyToClipboard from 'copy-to-clipboard'
 
+const { addressSlicer } = require('../../util')
+
 export default class SenderToRecipient extends Component {
   static propTypes = {
     senderName: PropTypes.string,
@@ -73,12 +75,6 @@ export default class SenderToRecipient extends Component {
             copyToClipboard(senderAddress)
           }}
         >
-          <div className="sender-to-recipient__sender-icon">
-            <Identicon
-              address={senderAddress}
-              diameter={24}
-            />
-          </div>
           <Tooltip
               position="bottom"
               title={this.state.senderAddressCopied ? t('copiedExclamation') : t('copyAddress')}
@@ -87,7 +83,7 @@ export default class SenderToRecipient extends Component {
               onHidden={() => this.setState({ senderAddressCopied: false })}
             >
             <div className="sender-to-recipient__name sender-to-recipient__sender-name">
-              { senderName }
+              { addressSlicer(senderAddress) }
             </div>
           </Tooltip>
         </div>
