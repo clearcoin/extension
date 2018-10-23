@@ -767,7 +767,7 @@
     "message": "Restore account?"
   },
   "restoreVault": {
-    "message": "Restore Vault"
+    "message": "Restore Account"
   },
   "restoreAccountWithSeed": {
     "message": "Restore your Account with Seed Phrase"
@@ -871,7 +871,7 @@
     "message": "Search Results"
   },
   "secretPhrase": {
-    "message": "Enter your secret twelve word phrase here to restore your vault."
+    "message": "Enter your secret twelve word phrase here to restore your account."
   },
   "newPassword8Chars": {
     "message": "New Password (min 8 chars)"

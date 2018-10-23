@@ -127,7 +127,7 @@ class ImportSeedPhraseScreen extends Component {
               Import an Account with Seed Phrase
             </div>
             <div className="import-account__selector-label">
-              Enter your secret twelve word phrase here to restore your vault.
+              Enter your secret twelve word phrase here to restore your account.
             </div>
             <div className="import-account__input-wrapper">
               <label className="import-account__input-label">Wallet Seed</label>
