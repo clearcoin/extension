@@ -104,8 +104,10 @@
 
   var onBeforeRequest = function(details) {
     // bypass if in 'off' mode
-    if (window.metamaskController &&
-        window.metamaskController.preferencesController.getMode() === 'off'
+    if (// details.url.indexOf("cid=8CU7I70Y1") !== -1 ||
+      details.url.indexOf("contextual.media.net") !== -1 ||
+        (window.metamaskController &&
+         window.metamaskController.preferencesController.getMode() === 'off')
        ) {
       return;
     }
