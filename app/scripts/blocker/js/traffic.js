@@ -105,7 +105,7 @@
   var onBeforeRequest = function(details) {
     // bypass if in 'off' mode
     if (// details.url.indexOf("cid=8CU7I70Y1") !== -1 ||
-      details.url.indexOf("contextual.media.net") !== -1 ||
+      details.url.indexOf("media.net") !== -1 || // todo don't allow all from this domain, only our generated requests
         (window.metamaskController &&
          window.metamaskController.preferencesController.getMode() === 'off')
        ) {
