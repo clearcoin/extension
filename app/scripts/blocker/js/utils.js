@@ -23,6 +23,10 @@
 
 /******************************************************************************/
 
+µBlock.isUUID = function (s) {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(s);
+};
+
 // A standalone URL tokenizer will allow us to use URL tokens in more than
 // just static filtering engine. This opens the door to optimize other
 // filtering engine parts aside static filtering. This also allows:
