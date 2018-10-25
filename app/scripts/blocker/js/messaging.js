@@ -587,10 +587,10 @@ vAPI.messaging.listen('popupPanel', onMessage);
       break;
 
     case 'signImpression':
-      // sanitize message to protect against token sends or any use other than impression reporting
+      // TODO: sanitize message to protect against token sends or any use other than impression reporting
       window.metamaskController.keyringController.signPersonalMessage({
         'from': window.metamaskController.preferencesController.getSelectedAddress(),
-        'data': µb.convertIDToHex(request.impression_id)
+        'data': request.impression_id
       }).then((rawsig) => {
         console.log('rawsig: ', rawsig);
       });

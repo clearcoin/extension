@@ -23,15 +23,6 @@
 
 /******************************************************************************/
 
-µBlock.convertIDToHex = function (impressionID) {
-  let imp_arr = []
-  for (let i = 0; i < impressionID.length; i++){
-    let hex = Number(impressionID.charCodeAt(i)).toString(16)
-    imp_arr.push(hex)
-  }
-  return imp_arr.join('')
-};
-
 // A standalone URL tokenizer will allow us to use URL tokens in more than
 // just static filtering engine. This opens the door to optimize other
 // filtering engine parts aside static filtering. This also allows:
