@@ -494,7 +494,7 @@ vAPI.messaging.listen('popupPanel', onMessage);
 
 /******************************************************************************/
 
-var onMessage = function(request, sender, callback) {
+  var onMessage = function(request, sender, callback) {
     // Async
     switch ( request.what ) {
     default:
@@ -584,7 +584,18 @@ var onMessage = function(request, sender, callback) {
                           .retrieveGenericSelectors(request)
             };
         }
-        break;
+      break;
+
+    case 'signImpression':
+      // sanitize message to protect against token sends or any use other than impression reporting
+      window.metamaskController.keyringController.signPersonalMessage({
+        'from': window.metamaskController.preferencesController.getSelectedAddress(),
+        'data': µb.convertIDToHex(request.impression_id)
+      }).then((rawsig) => {
+        console.log('rawsig: ', rawsig);
+      });
+      response = { success: true };
+      break;
 
     default:
         return vAPI.messaging.UNHANDLED;
