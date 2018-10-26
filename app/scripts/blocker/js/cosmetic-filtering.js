@@ -1489,19 +1489,16 @@
         
       }
       
-      let details = {
-        code: '',
-        cssOrigin: 'user',
-        frameId: request.frameId,
-        runAt: 'document_idle' // start or end ??? todo
-      };
-      if ( out.networkFilters.length !== 0 ) {
-        // todo, since we can't seem to get this one to trigger
-        // might as well put it back to display:none before release to production
-        details.code = out.networkFilters + '\n{background:yellow!important;}';
-        vAPI.insertCSS(request.tabId, details);
+      if ( out.networkFilters.length !== 0 ) { // celwell: can't seem to get this one to trigger
+        vAPI.insertCSS(request.tabId, {
+          code: out.networkFilters + '\n{display:none!important;}',
+          cssOrigin: 'user',
+          frameId: request.frameId,
+          runAt: 'document_start'
+        });
         out.networkFilters = '';
       }
+      
     }
 
     //console.timeEnd('cosmeticFilteringEngine.retrieveSpecificSelectors');

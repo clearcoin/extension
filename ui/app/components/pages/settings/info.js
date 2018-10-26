@@ -44,7 +44,7 @@ class Info extends Component {
         h('div.settings__info-link-item', [
           h('a', {
             target: '_blank',
-            href: 'mailto:help@clearcoin.co?subject=Feedback',
+            href: 'mailto:help@clearcoin.co?subject=Extension Feedback',
           }, [
             h('span.settings__info-link', this.context.t('emailUs')),
           ]),

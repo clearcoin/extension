@@ -149,28 +149,19 @@ DepositEtherModal.prototype.render = function () {
           onButtonClick: () => this.goToAccountDetailsModal(),
         }),
 
-        this.renderRow({
-          logo: h('i.fa.fa-tint.fa-2x'),
-          title: FAUCET_ROW_TITLE,
-          text: this.facuetRowText(networkName),
-          buttonLabel: this.context.t('getEther'),
-          onButtonClick: () => toFaucet(network),
-          hide: !isTestNetwork,
-        }),
-
-        this.renderRow({
-          logo: h('div.deposit-ether-modal__logo', {
-            style: {
-              backgroundImage: 'url(\'./images/coinbase logo.png\')',
-              height: '40px',
-            },
-          }),
-          title: COINBASE_ROW_TITLE,
-          text: COINBASE_ROW_TEXT,
-          buttonLabel: this.context.t('continueToCoinbase'),
-          onButtonClick: () => toCoinbase(address),
-          hide: isTestNetwork,
-        }),
+        // this.renderRow({
+        //   logo: h('div.deposit-ether-modal__logo', {
+        //     style: {
+        //       backgroundImage: 'url(\'./images/coinbase logo.png\')',
+        //       height: '40px',
+        //     },
+        //   }),
+        //   title: COINBASE_ROW_TITLE,
+        //   text: COINBASE_ROW_TEXT,
+        //   buttonLabel: this.context.t('continueToCoinbase'),
+        //   onButtonClick: () => toCoinbase(address),
+        //   hide: isTestNetwork,
+        // }),
       ]),
 
     ]),

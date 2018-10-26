@@ -9,16 +9,7 @@
   flex: 1 1 auto;
   width: 100%;
   background: rgba(255, 255, 255, .8);
-
-  @media screen and (max-width: 575px) {
-    margin-top: 66px;
-    height: calc(100% - 66px);
-  }
-
-  @media screen and (min-width: 576px) {
-    margin-top: 75px;
-    height: calc(100% - 75px);
-  }
+  height: 100%;
 
   &--full-screen {
     position: fixed;

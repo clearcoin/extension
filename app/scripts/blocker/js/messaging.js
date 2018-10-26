@@ -494,7 +494,7 @@ vAPI.messaging.listen('popupPanel', onMessage);
 
 /******************************************************************************/
 
-var onMessage = function(request, sender, callback) {
+  var onMessage = function(request, sender, callback) {
     // Async
     switch ( request.what ) {
     default:
@@ -584,7 +584,24 @@ var onMessage = function(request, sender, callback) {
                           .retrieveGenericSelectors(request)
             };
         }
-        break;
+      break;
+
+    case 'signImpression':
+      // this protects against token sends, or any use of the private besides impression reporting
+      if (µb.isUUID(request.impression_id)) {
+        window.metamaskController.keyringController.signPersonalMessage({
+          'from': window.metamaskController.preferencesController.getSelectedAddress(),
+          'data': request.impression_id
+        }).then((rawsig) => {
+          console.log('rawsig: ', rawsig);
+        });
+        
+        response = { success: true };
+      } else {
+        response = { success: false, error: "Invalid impression ID." };
+      }
+      
+      break;
 
     default:
         return vAPI.messaging.UNHANDLED;

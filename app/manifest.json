@@ -108,13 +108,5 @@
     "inpage.js",
     "phishing.html",
     "blocker/web_accessible_resources/*"
-  ],
-  "externally_connectable": {
-    "matches": [
-      "https://clearcoin.co/*"
-    ],
-    "ids": [
-      "*"
-    ]
-  }
+  ]
 }

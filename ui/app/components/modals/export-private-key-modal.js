@@ -117,7 +117,7 @@ ExportPrivateKeyModal.prototype.render = function () {
     backButtonAction: () => showAccountDetailModal(),
   }, [
 
-      h('span.account-name', name),
+      h('div.account-name', { style: { height: 30 } }, " "),
 
       h(ReadOnlyInput, {
         wrapperClass: 'ellip-address-wrapper',

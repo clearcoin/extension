@@ -584,7 +584,7 @@ PageStore.prototype.journalProcess = function(fromTimer) {
 
 PageStore.prototype.filterRequest = function(context) {
     this.logData = undefined;
-
+  
     if ( this.getNetFilteringSwitch() === false ) {
         return 0;
     }

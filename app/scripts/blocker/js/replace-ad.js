@@ -18,3 +18,21 @@ cc.src = 'http://localhost:3000/ad/display-by-dims/' + btoa(unescape(encodeURICo
 // todo: ...so this will only work if there is already a script tag somewhere on page?
 var s = document.getElementsByTagName('script')[0];
 s.parentNode.insertBefore(cc, s);
+
+
+// relay to background script
+window.addEventListener("message", function(event) {
+  var origin = event.origin;
+  var data = event.data;
+  if(event.data.source === "page") {
+    vAPI.messaging.send('contentscript', {
+      what: 'signImpression',
+      impression_id: data.impression_id
+    }, function(response){
+      console.log(response);
+    });  
+  }
+}, false);
+
+
+

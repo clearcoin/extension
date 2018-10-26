@@ -8,8 +8,6 @@ import { compose } from 'recompose'
 import {closeWelcomeScreen} from './actions'
 import { INITIALIZE_CREATE_PASSWORD_ROUTE } from './routes'
 
-const ClearyBot = require('./components/clearybot')
-
 class WelcomeScreen extends Component {
   static propTypes = {
     closeWelcomeScreen: PropTypes.func.isRequired,
@@ -45,7 +43,13 @@ class WelcomeScreen extends Component {
 
       h('div.welcome-screen__info', [
 
-        h(ClearyBot),
+        h('img.app-header__metafox', {
+          src: './images/clearybot.svg',
+          style: {
+            height: 200,
+            marginBottom: 25,
+          },
+        }),
 
         h('div.welcome-screen__info__header', this.context.t('welcomeBeta')),
 
@@ -53,7 +57,7 @@ class WelcomeScreen extends Component {
 
         h('button.welcome-screen__button', {
           onClick: this.initiateAccountCreation,
-        }, this.context.t('continue')),
+        }, this.context.t('getStarted')),
 
       ]),
 
