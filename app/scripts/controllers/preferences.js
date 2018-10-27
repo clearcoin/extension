@@ -29,6 +29,7 @@ class PreferencesController {
       accountTokens: {},
       tokens: [],
       useBlockie: false,
+      mode: 'earn',
       featureFlags: {},
       currentLocale: opts.initLangCode,
       identities: {},
