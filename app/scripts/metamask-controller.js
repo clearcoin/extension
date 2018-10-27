@@ -47,6 +47,7 @@ const GWEI_BN = new BN('1000000000')
 const percentile = require('percentile')
 const seedPhraseVerifier = require('./lib/seed-phrase-verifier')
 const cleanErrorStack = require('./lib/cleanErrorStack')
+const request = require('request')
 const log = require('loglevel')
 const TrezorKeyring = require('eth-trezor-keyring')
 
@@ -1012,6 +1013,38 @@ module.exports = class MetamaskController extends EventEmitter {
     if (cb && typeof cb === 'function') {
       cb(null, this.getState())
     }
+  }
+
+  // make sure the impression_id is actually an impression_id, for security reasons
+  // e.g., use: µb.isUUID(impression_id)
+  // other values should be sanitized too
+  signAndReportImpression (impression_id, origin, timestamp) {
+    var wallet_address = this.preferencesController.getSelectedAddress();
+    var payload = JSON.stringify({
+      "impression-id": impression_id,
+      origin: origin,
+      timestamp: timestamp,
+      "wallet-address": wallet_address
+    });
+    this.keyringController.signPersonalMessage({
+      'from': wallet_address,
+      'data': payload
+    }).then((rawsig) => {
+      request({
+        method: 'POST',
+        url:'http://localhost:3000/extension/track-impression',
+        json: true,
+        body: {
+          payload: payload,
+          signature: rawsig
+        }
+      }, function (error, response, body) {
+        if (response.statusCode !== 200) {
+          log.info('ERROR: ' + response.statusCode);
+        }
+        // currently we just fail silently, but there should be some sort of storage locally and then subsequent attempts to report impressions
+      })
+    });
   }
 
   // ---------------------------------------------------------------------------

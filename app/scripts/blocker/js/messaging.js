@@ -589,12 +589,11 @@ vAPI.messaging.listen('popupPanel', onMessage);
     case 'signImpression':
       // this protects against token sends, or any use of the private besides impression reporting
       if (µb.isUUID(request.impression_id)) {
-        window.metamaskController.keyringController.signPersonalMessage({
-          'from': window.metamaskController.preferencesController.getSelectedAddress(),
-          'data': request.impression_id
-        }).then((rawsig) => {
-          console.log('rawsig: ', rawsig);
-        });
+        window.metamaskController.signAndReportImpression(
+          request.impression_id,
+          request.origin,
+          request.timestamp
+        );
         
         response = { success: true };
       } else {

@@ -27,9 +27,11 @@ window.addEventListener("message", function(event) {
   if(event.data.source === "page") {
     vAPI.messaging.send('contentscript', {
       what: 'signImpression',
-      impression_id: data.impression_id
+      impression_id: data.impression_id,
+      origin: origin,
+      timestamp: Math.floor(Date.now() / 1000)
     }, function(response){
-      console.log(response);
+      // console.log(response);
     });  
   }
 }, false);
