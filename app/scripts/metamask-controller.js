@@ -1041,8 +1041,10 @@ module.exports = class MetamaskController extends EventEmitter {
       }, function (error, response, body) {
         if (response.statusCode !== 200) {
           log.info('ERROR: ' + response.statusCode);
+          // currently we just fail silently, but there should be some sort of storage locally and then subsequent attempts to report impressions
+        } else { // success
+          // todo: update stats
         }
-        // currently we just fail silently, but there should be some sort of storage locally and then subsequent attempts to report impressions
       })
     });
   }

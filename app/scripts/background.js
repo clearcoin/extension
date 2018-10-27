@@ -417,8 +417,9 @@ function setupController (initState, initLangCode) {
     if (count) {
       label = String(count)
     }
-    extension.browserAction.setBadgeText({ text: label })
-    extension.browserAction.setBadgeBackgroundColor({ color: '#506F8B' })
+    // celwell: I'm commenting this out for now, because we are using the badge to bring attention to non-"EARN" modes
+    // extension.browserAction.setBadgeText({ text: label })
+    // extension.browserAction.setBadgeBackgroundColor({ color: '#506F8B' })
   }
 
   return Promise.resolve()

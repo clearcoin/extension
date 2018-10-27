@@ -2,6 +2,7 @@ const ObservableStore = require('obs-store')
 const normalizeAddress = require('eth-sig-util').normalize
 const extend = require('xtend')
 const config = require('../../config')
+const extension = require('extensionizer')
 
 class PreferencesController {
 
@@ -68,6 +69,12 @@ class PreferencesController {
    *
    */
   setMode (val) {
+    if (val === "hide" || val === "off") {
+      extension.browserAction.setBadgeText({ text: val.toUpperCase() })
+      extension.browserAction.setBadgeBackgroundColor({ color: '#D7052B' })
+    } else {
+      extension.browserAction.setBadgeText({ text: "" }); // hide the badge if it's EARN mode
+    }
     this.store.updateState({ mode: val })
   }
 
