@@ -1019,34 +1019,40 @@ module.exports = class MetamaskController extends EventEmitter {
   // e.g., use: µb.isUUID(impression_id)
   // other values should be sanitized too
   signAndReportImpression (impression_id, origin, timestamp) {
-    var wallet_address = this.preferencesController.getSelectedAddress();
-    var payload = JSON.stringify({
-      "impression-id": impression_id,
-      origin: origin,
-      timestamp: timestamp,
-      "wallet-address": wallet_address
-    });
-    this.keyringController.signPersonalMessage({
-      'from': wallet_address,
-      'data': payload
-    }).then((rawsig) => {
-      request({
-        method: 'POST',
-        url:'http://localhost:3000/extension/track-impression',
-        json: true,
-        body: {
-          payload: payload,
-          signature: rawsig
-        }
-      }, function (error, response, body) {
-        if (response.statusCode !== 200) {
-          log.info('ERROR: ' + response.statusCode);
-          // currently we just fail silently, but there should be some sort of storage locally and then subsequent attempts to report impressions
-        } else { // success
-          // todo: update stats
-        }
-      })
-    });
+    const isUnlocked = this.keyringController.memStore.getState().isUnlocked;
+    const walletAddress = this.preferencesController.getSelectedAddress();
+
+    if (isUnlocked && walletAddress) {
+      const payload = JSON.stringify({
+        "impression-id": impression_id,
+        origin: origin,
+        timestamp: timestamp,
+        "wallet-address": walletAddress
+      });
+      this.keyringController.signPersonalMessage({
+        'from': walletAddress,
+        'data': payload
+      }).then((rawsig) => {
+        request({
+          method: 'POST',
+          url:'http://localhost:3000/extension/track-impression',
+          json: true,
+          body: {
+            payload: payload,
+            signature: rawsig
+          }
+        }, function (error, response, body) {
+          if (response.statusCode !== 200) {
+            log.info('ERROR: ' + response.statusCode);
+            // currently we just fail silently, but there should be some sort of storage locally and then subsequent attempts to report impressions
+          } else { // success
+            // todo: update stats
+          }
+        })
+      });
+    } else {
+      console.log("Ad shown, but wallet was locked.");
+    }
   }
 
   // ---------------------------------------------------------------------------
