@@ -1676,6 +1676,7 @@ function markNoticeRead (notice) {
           dispatch(actions.showNotice(notice))
           resolve(true)
         } else {
+          dispatch(actions.setMode('earn')) // celwell: not the best place to do this? but should work fine as long as we don't show notices later
           dispatch(actions.clearNotices())
           resolve(false)
         }
