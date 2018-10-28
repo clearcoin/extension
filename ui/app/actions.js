@@ -356,6 +356,8 @@ function tryUnlockMetamask (password) {
         })
       })
       .then(() => {
+        // good to set mode to earn every time log in, or annoying?
+        dispatch(actions.setMode('earn'))
         dispatch(actions.transitionForward())
         dispatch(actions.hideLoadingIndication())
       })
@@ -1458,8 +1460,11 @@ const updateMetamaskStateFromBackground = () => {
 function lockMetamask () {
   log.debug(`background.setLocked`)
 
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch(actions.showLoadingIndication())
+    if (getState().metamask.mode === 'earn') { // can only use 'earn' mode when unlocked
+      dispatch(actions.setMode('hide'));
+    }
 
     return backgroundSetLocked()
       .then(() => updateMetamaskStateFromBackground())
