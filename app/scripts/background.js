@@ -62,7 +62,6 @@ const openMetamaskTabsIDs = {}
 const diskStore = new LocalStorageStore({ storageKey: STORAGE_KEY })
 const localStore = new LocalStore()
 let versionedData
-let adData
 
 // initialization flow
 initialize().catch(log.error)
