@@ -356,25 +356,29 @@ class Kyc extends Component {
     return(
       <div className="settings__kyc-container">
         <div className="settings__field-title">
-          KYC Registration 
+          Start Your KYC
         </div>
-        <div className="settings__field-subtitle">
+        <div className="settings__field-intro-text">
+          To comply with regulations, all users are required to complete a KYC application before XCLR can be sent to them. You can still earn XCLR on your account, but we can't send it to you until we receive your application. We will never use data submitted in your KYC application for ad targeting purposes without your permission.
+        </div>
+        <div className="settings__field-standout-text">
           Please fill out the following form to begin the KYC process.
         </div>
         <TextField
           id="firstname-field"
-          label={'Firstname:'}
+          label={'First Name:'}
           type="text"
           className="settings__field-input"
           value={this.state.firstname}
           onChange={event => this.handleFirstNameChange(event.target.value)}
           margin="normal"
+          autoFocus
           fullWidth
           largeLabel
         />
         <TextField
           id="lastname-field"
-          label={'Lastname:'}
+          label={'Last Name:'}
           type="text"
           className="settings__field-input"
           value={this.state.lastname}
@@ -392,7 +396,6 @@ class Kyc extends Component {
           onChange={event => this.handleEmailChange(event.target.value)}
           margin="normal"
           error={this.state.emailError}
-          autoFocus
           fullWidth
           largeLabel
         />
@@ -467,15 +470,12 @@ class Kyc extends Component {
 
     return (
       <div className="settings__kyc-container">
-        <div className="settings__field-title">
-          KYC Registration
-        </div>
-        <div className="settings__field-subtitle">
-          <p className="settings__field-subtitle">
+        <div className="settings__field-intro-text">
+          <p>
             Thank you for beginning your KYC application. An email from Onfido will
             arrive in your inbox shortly detailing steps on how to continue.
           </p>
-          <p className="settings__field-subtitle">
+          <p>
             Upon completion, please allow 3-4 business days for your application to be processed.
             Please note that if you already have an approved application on file, you will be
             automatically approved.

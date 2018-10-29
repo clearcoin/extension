@@ -36,6 +36,36 @@
   }   
 }
 
+.settings__field-standout-text {
+  color: #555;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 20px;
+  margin-top: 6px;
+  margin-bottom: 24px;
+  text-align: justify;
+  @media screen and (max-width: 575px) {
+    width: initial !important;
+  }
+}
+
+.settings__field-intro-text {
+  color: #555;
+  font-size: 15px;
+  line-height: 20px;
+  margin-top: 6px;
+  margin-bottom: 24px;
+  text-align: justify;
+  @media screen and (max-width: 575px) {
+    width: initial !important;
+  }
+}
+
+.settings__field-intro-text p:not(:first-child):not(:last-child) {
+    margin: 15px 0px;
+}
+
 .settings__field-subtitle {
   color: #758CA3;
   font-size: 16px;

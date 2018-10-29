@@ -961,22 +961,6 @@ module.exports = class MetamaskController extends EventEmitter {
    * the background script.
    *
    * @param {Object} msgParams - Account and impression id to be signed.
-   * @returns {string} rawsig - Signed impression id.
-   */
-  signImpressionID (msgParams, cb) {
-    log.info('Sign Impression ID')
-    return this.keyringController.signPersonalMessage(msgParams).then((rawsig) => {
-        return cb({rawsign: rawsig})
-    })
-  }
-
-
-  /**
-   * Signs a personal_sign message without going through the queue.
-   * Immediately triggers signing, and the callback function from
-   * the background script.
-   *
-   * @param {Object} msgParams - Account and impression id to be signed.
    * @returns {String} rawsig - Signed impression id.
    */
   signAuth (msgParams, cb) {

@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    font-size: 14px;
     flex: 1;
     
     > div {
@@ -15,7 +16,8 @@
         .count-label {
             text-transform: uppercase;
             color: #aaa;
-            font-size: 11px;
+            font-size: 10px;
+            font-weight: 300;
         }
         
     }
