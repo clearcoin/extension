@@ -7,6 +7,7 @@
 const EventEmitter = require('events')
 const pump = require('pump')
 const Dnode = require('dnode')
+const ethUtil = require('ethereumjs-util')
 const ObservableStore = require('obs-store')
 const ComposableObservableStore = require('./lib/ComposableObservableStore')
 const asStream = require('obs-store/lib/asStream')
@@ -355,6 +356,8 @@ module.exports = class MetamaskController extends EventEmitter {
       setCurrentCurrency: this.setCurrentCurrency.bind(this),
       setUseBlockie: this.setUseBlockie.bind(this),
       setMode: this.setMode.bind(this),
+      setKYCSubmitted: this.setKYCSubmitted.bind(this),
+      checkKYCStatus: this.checkKYCStatus.bind(this),
       setCurrentLocale: this.setCurrentLocale.bind(this),
       markAccountsFound: this.markAccountsFound.bind(this),
       markPasswordForgotten: this.markPasswordForgotten.bind(this),
@@ -428,6 +431,9 @@ module.exports = class MetamaskController extends EventEmitter {
       // personalMessageManager
       signTypedMessage: nodeify(this.signTypedMessage, this),
       cancelTypedMessage: this.cancelTypedMessage.bind(this),
+
+      // AuthManager
+      signAuth: nodeify(this.signAuth, this),
 
       // notices
       checkNotices: noticeController.updateNoticesList.bind(noticeController),
@@ -934,6 +940,7 @@ module.exports = class MetamaskController extends EventEmitter {
     })
   }
 
+
   /**
    * Used to cancel a personal_sign type message.
    * @param {string} msgId - The ID of the message to cancel.
@@ -946,6 +953,39 @@ module.exports = class MetamaskController extends EventEmitter {
       cb(null, this.getState())
     }
   }
+
+
+  /**
+   * Signs a personal_sign message without going through the queue.
+   * Immediately triggers signing, and the callback function from
+   * the background script.
+   *
+   * @param {Object} msgParams - Account and impression id to be signed.
+   * @returns {string} rawsig - Signed impression id.
+   */
+  signImpressionID (msgParams, cb) {
+    log.info('Sign Impression ID')
+    return this.keyringController.signPersonalMessage(msgParams).then((rawsig) => {
+        return cb({rawsign: rawsig})
+    })
+  }
+
+
+  /**
+   * Signs a personal_sign message without going through the queue.
+   * Immediately triggers signing, and the callback function from
+   * the background script.
+   *
+   * @param {Object} msgParams - Account and impression id to be signed.
+   * @returns {String} rawsig - Signed impression id.
+   */
+  signAuth (msgParams, cb) {
+    log.info('Sign Auth')
+    return this.keyringController.signPersonalMessage(msgParams).then((rawsig) => {
+        return cb({rawsign: rawsig})
+    })
+  }
+
 
   // eth_signTypedData methods
 
@@ -1448,6 +1488,111 @@ module.exports = class MetamaskController extends EventEmitter {
     try {
       this.preferencesController.setMode(val)
       cb(null)
+    } catch (err) {
+      cb(err)
+    }
+  }
+
+  sendKYCInfo (payload_body, kycSig, cb) {
+      let post_data = {
+        payload: payload_body,
+        signature: kycSig.rawsign
+      }
+
+      request({
+          method: 'POST',
+          url:'http://bidder-staging.clearcoin.co/extension/initialize-check',
+          json: true,
+          body: post_data
+        },
+        function (error, response, body) {
+      })
+      this.preferencesController.setKYCSubmitted()
+  }
+
+  /**
+   * Indicates that the KYC process has been initiated 
+   * @param {Function} cb - A callback function called when complete.
+   */
+  setKYCSubmitted (kycInfo, cb) {
+    try {
+      const selectedAddress = this.preferencesController.getSelectedAddress()
+      let payload_body = JSON.stringify({
+          'first-name': kycInfo.firstname,
+          'last-name': kycInfo.lastname,
+          country: kycInfo.country,
+          email: kycInfo.email,
+          'wallet-address': selectedAddress
+      })
+
+      let msgParams = {
+        'from': selectedAddress,
+        'data': payload_body
+      }
+
+      const signedPayload = this.keyringController.signPersonalMessage(msgParams).then((rawsig) => {
+        return this.sendKYCInfo(payload_body, {rawsign: rawsig}, cb)
+      })
+    } catch (err) {
+      cb(err)
+    }
+  }
+
+  requestKYCStatus(payload_body, kycSig, cb){
+      let post_data = {
+        payload: payload_body,
+        signature: kycSig.rawsign
+      }
+
+      request({
+          method: 'POST',
+          url:'http://bidder-staging.clearcoin.co/extension/check-applicant',
+          json: true,
+          body: post_data
+        },
+        function (error, response, body) {
+          if(body.status == "complete" || body.status == "consider") {
+            if(!cb.getKYCSubmitted()) {
+              cb.setKYCSubmitted()
+            }
+            cb.setKYCApproved()
+          }
+          else if(body.status == "withdrawn" || body.status == "cancelled"){
+            if(!cb.getKYCSubmitted()) {
+              cb.setKYCSubmitted()
+            }
+            cb.setKYCUnapproved()
+          }
+          else if(body.status == "awaiting_data" ||
+              body.status == "awaiting_approval" || body.status == "paused"){
+            if(!cb.getKYCSubmitted()) {
+              cb.setKYCSubmitted()
+            }
+            cb.setKYCPending()
+          }
+          else if(body.status == "awaiting_applicant"){
+            if(!cb.getKYCSubmitted()) {
+              cb.setKYCSubmitted()
+            }
+          }
+      })
+  }
+
+  checkKYCStatus (cb) {
+    try {
+      const selectedAddress = this.preferencesController.getSelectedAddress()
+      let payload_body = JSON.stringify({
+          'wallet-address': selectedAddress
+      })
+
+      let msgParams = {
+        'from': selectedAddress,
+        'data': payload_body
+      }
+
+      const signedPayload = this.keyringController.signPersonalMessage(msgParams).then((rawsig) => {
+        return this.requestKYCStatus(payload_body, {rawsign: rawsig}, this.preferencesController)
+      })
     } catch (err) {
       cb(err)
     }

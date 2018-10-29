@@ -28,6 +28,10 @@ class PreferencesController {
       currentAccountTab: 'history',
       accountTokens: {},
       tokens: [],
+      isKYCSubmitted: false,
+      isKYCApproved: false,
+      isKYCUnapproved: false,
+      isKYCPending: false,
       useBlockie: false,
       mode: 'off',
       featureFlags: {},
@@ -61,6 +65,53 @@ class PreferencesController {
    */
   getUseBlockie () {
     return this.store.getState().useBlockie
+  }
+
+
+  /**
+   * Setter for the 'isKYCSubmitted' property
+   *
+   */ 
+  setKYCSubmitted () {
+    this.store.updateState({ isKYCSubmitted: true })
+  }
+
+  /**
+   * Getter for the 'isKYCSubmitted' property
+   *
+   */
+  getKYCSubmitted () {
+    return this.store.getState().isKYCSubmitted
+  }
+
+  /**
+   * Setter for the 'isKYCSubmitted' property
+   *
+   */
+  setKYCPending () {
+    this.store.updateState({ isKYCPending: true })
+    this.store.updateState({ isKYCApproved: false })
+    this.store.updateState({ isKYCUnapproved: false })
+  }
+
+  /**
+   * Setter for the 'isKYCApproved' property
+   *
+   */
+  setKYCApproved () {
+    this.store.updateState({ isKYCPending: false })
+    this.store.updateState({ isKYCApproved: true })
+    this.store.updateState({ isKYCUnapproved: false })
+  }
+
+  /**
+   * Setter for the 'isKYCUnapproved' property
+   *
+   */
+  setKYCUnapproved () {
+    this.store.updateState({ isKYCPending: false })
+    this.store.updateState({ isKYCApproved: false })
+    this.store.updateState({ isKYCUnapproved: true })
   }
 
   /**

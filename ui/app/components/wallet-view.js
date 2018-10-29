@@ -47,6 +47,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
+    checkKYC: () => dispatch(actions.checkKYC()),
     showSendPage: () => dispatch(actions.showSendPage()),
     hideSidebar: () => dispatch(actions.hideSidebar()),
     unsetSelectedToken: () => dispatch(actions.setSelectedToken()),
@@ -69,6 +70,12 @@ function WalletView () {
     hasCopied: false,
     copyToClipboardPressed: false,
   }
+}
+
+WalletView.prototype.componentWillMount = function() {
+  const { checkKYC } = this.props
+  // Always must check KYC for rejection
+  checkKYC()
 }
 
 WalletView.prototype.renderWalletBalance = function () {
@@ -108,6 +115,7 @@ WalletView.prototype.render = function () {
     responsiveDisplayClassname,
     selectedAddress,
     keyrings,
+    checkKYC,
     showAccountDetailModal,
     lockMetamask,
     sidebarOpen,

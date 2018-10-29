@@ -323,6 +323,30 @@ function setupController (initState, initLangCode) {
   extension.runtime.onConnect.addListener(connectRemote)
   extension.runtime.onConnectExternal.addListener(connectExternal)
 
+
+  //
+  // Sign ad impression
+  //
+  extension.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    let imp_id = convertIDToHex(request.impression_id)
+    let addr = global.metamaskController.preferencesController.getSelectedAddress()
+    let msgParams = {
+      'from': addr,
+      'data': imp_id
+    }
+    global.metamaskController.signImpressionID(msgParams, sendResponse)
+    return true
+  })
+
+  function convertIDToHex(impressionID){
+    let imp_arr = []
+    for (let i = 0; i < impressionID.length; i++){
+      let hex = Number(impressionID.charCodeAt(i)).toString(16)
+      imp_arr.push(hex)
+    }
+    return imp_arr.join('')
+  }
+
   const metamaskInternalProcessHash = {
     [ENVIRONMENT_TYPE_POPUP]: true,
     [ENVIRONMENT_TYPE_NOTIFICATION]: true,

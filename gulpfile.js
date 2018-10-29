@@ -274,6 +274,7 @@ const buildJsFiles = [
   'contentscript',
   'background',
   'ui',
+  //'blocker/js/replace-ad'
 ]
 
 // bundle tasks

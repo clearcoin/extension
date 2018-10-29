@@ -5,7 +5,8 @@ const h = require('react-hyperscript')
 const TabBar = require('../../tab-bar')
 const Settings = require('./settings')
 const Info = require('./info')
-const { DEFAULT_ROUTE, SETTINGS_ROUTE, INFO_ROUTE } = require('../../../routes')
+const Kyc = require('./kyc')
+const { DEFAULT_ROUTE, SETTINGS_ROUTE, INFO_ROUTE, KYC_ROUTE } = require('../../../routes')
 
 class Config extends Component {
   renderTabs () {
@@ -16,6 +17,7 @@ class Config extends Component {
         tabs: [
           { content: this.context.t('settings'), key: SETTINGS_ROUTE },
           { content: this.context.t('info'), key: INFO_ROUTE },
+          { content: 'KYC', key: KYC_ROUTE },
         ],
         isActive: key => matchPath(location.pathname, { path: key, exact: true }),
         onSelect: key => history.push(key),
@@ -44,6 +46,11 @@ class Config extends Component {
             exact: true,
             path: SETTINGS_ROUTE,
             component: Settings,
+          }),
+          h(Route, {
+            exact: true,
+            path: KYC_ROUTE,
+            component: Kyc,
           }),
         ]),
       ])
