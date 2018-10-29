@@ -391,7 +391,7 @@ class Kyc extends Component {
           value={this.state.email}
           onChange={event => this.handleEmailChange(event.target.value)}
           margin="normal"
-          error={this.state.emailConfError}
+          error={this.state.emailError}
           autoFocus
           fullWidth
           largeLabel
@@ -404,7 +404,7 @@ class Kyc extends Component {
           value={this.state.emailConf}
           onChange={event => this.handleEmailConfChange(event.target.value)}
           margin="normal"
-          error={this.state.emailError}
+          error={this.state.emailConfError}
           fullWidth
           largeLabel
         />
@@ -480,9 +480,7 @@ class Kyc extends Component {
             Please note that if you already have an approved application on file, you will be
             automatically approved.
           </p>
-          <table>
-            {statusMsg}
-          </table>
+          <table><tbody>{statusMsg}</tbody></table>
         </div>
       </div>
     )
