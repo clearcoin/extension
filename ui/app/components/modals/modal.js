@@ -9,6 +9,7 @@ const { getEnvironmentType } = require('../../../../app/scripts/lib/util')
 const { ENVIRONMENT_TYPE_POPUP } = require('../../../../app/scripts/lib/enums')
 
 // Modal Components
+const HowToKycModal = require('./how-to-kyc-modal.js')
 const BuyOptions = require('./buy-options-modal')
 const DepositEtherModal = require('./deposit-ether-modal')
 const AccountDetailsModal = require('./account-details-modal')
@@ -77,6 +78,41 @@ const accountModalStyle = {
 }
 
 const MODALS = {
+  HOW_TO_KYC: {
+    contents: [
+      h(HowToKycModal, {}, []),
+    ],
+    onHide: (props) => props.hideWarning(),
+    mobileModalStyle: {
+      width: '100%',
+      height: '100%',
+      transform: 'none',
+      left: '0',
+      right: '0',
+      margin: '0 auto',
+      boxShadow: '0 0 7px 0 rgba(0,0,0,0.08)',
+      top: '0',
+      display: 'flex',
+    },
+    laptopModalStyle: {
+      width: '850px',
+      top: 'calc(10% + 10px)',
+      left: '0',
+      right: '0',
+      margin: '0 auto',
+      boxShadow: '0 0 6px 0 rgba(0,0,0,0.3)',
+      borderRadius: '7px',
+      transform: 'none',
+      height: 'calc(80% - 20px)',
+      overflowY: 'hidden',
+    },
+    contentStyle: {
+      borderRadius: '7px',
+      height: '100%',
+    },
+  },
+
+  
   BUY: {
     contents: [
       h(BuyOptions, {}, []),

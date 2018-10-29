@@ -463,6 +463,15 @@
   "holdEther": {
     "message": "-"
   },
+  "howToKycTitle": {
+    "message": "How to Earn XCLR"
+  },
+  "describeNeedToKyc": {
+    "message": "To comply with regulations, all users are required to complete a KYC application before XCLR can be sent to them. You can still earn XCLR on your account, but we can't send it to you until we receive your application. We will never use data submitted in your KYC application for ad targeting purposes."
+  },
+  "howToEarnXCLR": {
+    "message": "The ClearCoin Extension is a wallet and ad blocker/replacer. Normal ads are blocked and replaced with ClearCoin ads that reward you with XCLR tokens. The ClearCoin Extension was built to let internet users share in the value of the digital media economy."
+  },
   "import": {
     "message": "Import",
     "description": "Button to import an account from a selected file"
