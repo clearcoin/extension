@@ -357,6 +357,7 @@ module.exports = class MetamaskController extends EventEmitter {
       setUseBlockie: this.setUseBlockie.bind(this),
       setMode: this.setMode.bind(this),
       setKYCSubmitted: this.setKYCSubmitted.bind(this),
+      checkKYCStatus: this.checkKYCStatus.bind(this),
       setCurrentLocale: this.setCurrentLocale.bind(this),
       markAccountsFound: this.markAccountsFound.bind(this),
       markPasswordForgotten: this.markPasswordForgotten.bind(this),
@@ -1492,14 +1493,9 @@ module.exports = class MetamaskController extends EventEmitter {
     }
   }
 
-  sendKYCInfo (kycInfo, selectedAddress, kycSig, cb) {
+  sendKYCInfo (payload_body, kycSig, cb) {
       let post_data = {
-        payload: {
-          'first-name': kycInfo.firstname,
-          'last-name': kycInfo.lastname,
-          email: kycInfo.email,
-          country: kycInfo.country,
-          'wallet-address': selectedAddress},
+        payload: payload_body, 
         signature: kycSig.rawsign
       }
 
@@ -1507,13 +1503,11 @@ module.exports = class MetamaskController extends EventEmitter {
 
       request({
           method: 'POST',
-          url:'http://bidder-staging.clearcoin.co/extension/initialize-checks',
+          url:'http://bidder-staging.clearcoin.co/extension/initialize-check',
           json: true,
           body: post_data
         },
         function (error, response, body) {
-          log.info('ERROR: ' + response.statusCode)
-          cb({message: body})
       })
       this.preferencesController.setKYCSubmitted()
   }
@@ -1525,26 +1519,67 @@ module.exports = class MetamaskController extends EventEmitter {
   setKYCSubmitted (kycInfo, cb) {
     try {
       const selectedAddress = this.preferencesController.getSelectedAddress()
-      let post_data = JSON.stringify({
-        payload: {
+      let payload_body = JSON.stringify({
           'first-name': kycInfo.firstname,
           'last-name': kycInfo.lastname,
           country: kycInfo.country,
           email: kycInfo.email,
           'wallet-address': selectedAddress
-        }
       })
-
-      let buffPayload = ethUtil.toBuffer(post_data)
-      buffPayload = ethUtil.bufferToHex(buffPayload)
 
       let msgParams = {
         'from': selectedAddress,
-        'data': post_data//buffPayload 
+        'data': payload_body
       }
 
       const signedPayload = this.keyringController.signPersonalMessage(msgParams).then((rawsig) => {
-        return this.sendKYCInfo(kycInfo, selectedAddress, {rawsign: rawsig}, cb)
+        return this.sendKYCInfo(payload_body, {rawsign: rawsig}, cb)
+      })
+    } catch (err) {
+      cb(err)
+    }
+  }
+
+  requestKYCStatus(payload_body, kycSig, cb){
+      let post_data = {
+        payload: payload_body, 
+        signature: kycSig.rawsign
+      }
+
+      request({
+          method: 'POST',
+          url:'http://bidder-staging.clearcoin.co/extension/check-applicant',
+          json: true,
+          body: post_data
+        },
+        function (error, response, body) {
+          if(body.status == "complete" || body.status == "consider") {
+            cb.setKYCApproved()
+          }
+          else if(body.status == "withdrawn" || body.status == "cancelled"){
+            cb.setKYCUnapproved()
+          }
+          else if(body.status == "awaiting_data" ||
+              body.status == "awaiting_approval" || body.status == "paused"){
+            cb.setKYCPending()
+          }
+      })
+  }
+
+  checkKYCStatus (cb) {
+    try {
+      const selectedAddress = this.preferencesController.getSelectedAddress()
+      let payload_body = JSON.stringify({
+          'wallet-address': selectedAddress
+      })
+
+      let msgParams = {
+        'from': selectedAddress,
+        'data': payload_body
+      }
+
+      const signedPayload = this.keyringController.signPersonalMessage(msgParams).then((rawsig) => {
+        return this.requestKYCStatus(payload_body, {rawsign: rawsig}, this.preferencesController)
       })
     } catch (err) {
       cb(err)

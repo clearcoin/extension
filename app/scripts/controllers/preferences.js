@@ -29,6 +29,9 @@ class PreferencesController {
       accountTokens: {},
       tokens: [],
       isKYCSubmitted: false,
+      isKYCApproved: false,
+      isKYCUnapproved: false,
+      isKYCPending: false,
       useBlockie: false,
       mode: 'off',
       featureFlags: {},
@@ -73,14 +76,34 @@ class PreferencesController {
     this.store.updateState({ isKYCSubmitted: true })
   }
 
+  /**
+   * Setter for the 'isKYCSubmitted' property
+   *
+   */
+  setKYCPending () {
+    this.store.updateState({ isKYCPending: true })
+    this.store.updateState({ isKYCApproved: false })
+    this.store.updateState({ isKYCUnapproved: false })
+  }
 
   /**
-   * Getter for the 'isKYCSubmitted' property
+   * Setter for the 'isKYCApproved' property
    *
-   * @returns {boolean} this.store.isKYCSubmitted
    */
-  getKYCSubmitted () {
-    return this.store.getState().isKYCSubmitted
+  setKYCApproved () {
+    this.store.updateState({ isKYCPending: false })
+    this.store.updateState({ isKYCApproved: true })
+    this.store.updateState({ isKYCUnapproved: false })
+  }
+
+  /**
+   * Setter for the 'isKYCUnapproved' property
+   *
+   */
+  setKYCUnapproved () {
+    this.store.updateState({ isKYCPending: false })
+    this.store.updateState({ isKYCApproved: false })
+    this.store.updateState({ isKYCUnapproved: true })
   }
 
   /**

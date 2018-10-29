@@ -15,8 +15,6 @@ function reduceMetamask (state, action) {
     isInitialized: false,
     isUnlocked: false,
     isKYCSubmitted: false,
-    isKYCApproved: false, 
-    isKYCUnapproved: false,
     isAccountMenuOpen: false,
     isMascara: window.platform instanceof MetamascaraPlatform,
     isPopup: getEnvironmentType(window.location.href) === ENVIRONMENT_TYPE_POPUP,
@@ -97,20 +95,6 @@ function reduceMetamask (state, action) {
         isKYCSubmitted: true,
         isKYCApproved: false,
         isKYCUnApproved: false,
-      })
-
-    case actions.KYC_APPROVED:
-      return extend(metamaskState, {
-        isKYCSubmitted: true,
-        isKYCApproved: true,
-        isKYCUnApproved: false,
-      })
-
-    case actions.KYC_UNAPPROVED:
-      return extend(metamaskState, {
-        isKYCSubmitted: true,
-        isKYCApproved: false,
-        isKYCUnApproved: true,
       })
 
     case actions.SET_RPC_LIST:

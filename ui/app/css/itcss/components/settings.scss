@@ -180,6 +180,39 @@ p.settings__field-subtitle {
   cursor: pointer;
 }
 
+.settings__kyc--drop {
+   background: transparent;
+   padding-left: 10px;
+   font-size: 14px;
+   height: 50px;
+   border: 1px solid $alto;
+   overflow: hidden;
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+   margin-top: 5px;
+   max-width: 350px;
+   @media screen and (max-width: 575px) {
+     width: 100%;
+   }
+}
+
+.settings__kyc--drop select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px;
+   width: 378px;
+}
+
+.settings_kyc--label {
+  color: #5b5b5b; 
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: 5px;
+}
+
 .settings__kyc--button {
   height: 54px;
   width: 198px;

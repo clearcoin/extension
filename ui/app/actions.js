@@ -116,11 +116,9 @@ var actions = {
   unlockInProgress: unlockInProgress,
   // kyc screen
   KYC_SUBMITTED: 'KYC_SUBMITTED',
-  KYC_APPROVED: 'KYC_APPROVED',
-  KYC_UNAPPROVED: 'KYC_UNAPPROVED',
+  KYC_CHECK: 'KYC_CHECK',
   submitKYC: submitKYC,
-  approveKYC: approveKYC,
-  unapproveKYC: unapproveKYC,
+  checkKYC: checkKYC,
   // error handling
   displayWarning: displayWarning,
   DISPLAY_WARNING: 'DISPLAY_WARNING',
@@ -1447,15 +1445,19 @@ function submitKYC (kycInfo) {
   }
 }
 
-function approveKYC () {
-  return {
-    type: actions.KYC_APPROVED,
-  }
-}
-
-function unapproveKYC () {
-  return {
-    type: actions.KYC_UNAPPROVED,
+function checkKYC () {
+  return (dispatch) => {
+    //dispatch(actions.showLoadingIndication())
+    log.debug(`background.checkKYC`)
+    background.checkKYCStatus((err) => {
+      //dispatch(actions.hideLoadingIndication())
+      if (err) {
+        return dispatch(actions.displayWarning(err.message))
+      }
+    })
+    dispatch({
+      type: actions.KYC_CHECK,
+    })
   }
 }
 
