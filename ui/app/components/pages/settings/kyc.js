@@ -18,6 +18,9 @@ class Kyc extends Component {
       firstname: '',
       lastname: '',
       email: '',
+      emailConf: '',
+      emailError: null,
+      emailConfError: null,
       country: ''
     }
   }
@@ -31,7 +34,25 @@ class Kyc extends Component {
   }
 
   handleEmailChange(email){
-    this.setState({ email })
+    const { emailConf } = this.state
+    let emailConfError = null
+
+    if (emailConf && email !== emailConf){
+      emailConfError = "Emails don't match"
+    }
+
+    this.setState({ email, emailConfError })
+  }
+
+  handleEmailConfChange(emailConf){
+    const { email } = this.state
+    let emailError = null
+
+    if (email && emailConf !== email){
+      emailError = "Emails don't match"
+    }
+
+    this.setState({ emailConf, emailError })
   }
 
   handleCountryChange(country){
@@ -39,8 +60,12 @@ class Kyc extends Component {
   }
 
   isValid () {
-    const { firstname, lastname, email } = this.state
+    const { firstname, lastname, email, emailConf } = this.state
     if (!firstname || !lastname || !email) {
+      return false
+    }
+
+    if (!(email == emailConf)) {
       return false
     }
 
@@ -366,6 +391,20 @@ class Kyc extends Component {
           value={this.state.email}
           onChange={event => this.handleEmailChange(event.target.value)}
           margin="normal"
+          error={this.state.emailConfError}
+          autoFocus
+          fullWidth
+          largeLabel
+        />
+        <TextField
+          id="email-field"
+          label={'Confirm Email:'}
+          type="text"
+          className="settings__field-input"
+          value={this.state.emailConf}
+          onChange={event => this.handleEmailConfChange(event.target.value)}
+          margin="normal"
+          error={this.state.emailError}
           fullWidth
           largeLabel
         />
