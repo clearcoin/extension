@@ -14,6 +14,7 @@ const BalanceComponent = require('./balance-component')
 const Tooltip = require('./tooltip')
 const TxList = require('./tx-list')
 const ModeSelector = require('./mode-selector')
+const Stats = require('./stats')
 
 module.exports = compose(
   withRouter,
@@ -110,13 +111,12 @@ TxView.prototype.render = function () {
   return h('div.tx-view.flex-column', {
     style: {},
   }, [
-
+    
     h('div.flex-row.phone-visible', {
       style: {
         justifyContent: 'center',
         alignItems: 'center',
         flex: '0 0 auto',
-        marginBottom: '16px',
         padding: '5px',
         borderBottom: '1px solid #e5e5e5',
       },
@@ -148,6 +148,17 @@ TxView.prototype.render = function () {
       ]),
     ]),
 
+    h('div.flex-row.phone-visible', {
+      style: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: '0 0 auto',
+        marginBottom: '16px',
+        padding: '0px 0px',
+        borderBottom: '1px solid #e5e5e5',
+      },
+    }, [ h(Stats) ]),
+    
     this.renderHeroBalance(),
 
     h(TxList),

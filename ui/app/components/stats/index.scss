@@ -1,0 +1,27 @@
+.stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    
+    > div {
+        flex: 1;
+        text-align: center;
+        border-right: 1px solid #e5e5e5;
+        padding: 8px 4px 8px 4px;
+        color: #555;
+
+        .count-label {
+            text-transform: uppercase;
+            color: #aaa;
+            font-size: 11px;
+        }
+        
+    }
+
+    div:last-child {
+        border-right: none;
+    }
+    
+}
