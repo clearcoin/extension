@@ -1439,9 +1439,6 @@ function submitKYC (kycInfo) {
         return dispatch(actions.displayWarning(err.message))
       }
     })
-    dispatch({
-      type: actions.KYC_SUBMITTED,
-    })
   }
 }
 
@@ -1454,9 +1451,6 @@ function checkKYC () {
       if (err) {
         return dispatch(actions.displayWarning(err.message))
       }
-    })
-    dispatch({
-      type: actions.KYC_CHECK,
     })
   }
 }

@@ -1540,7 +1540,7 @@ module.exports = class MetamaskController extends EventEmitter {
     }
   }
 
-  requestKYCStatus(payload_body, kycSig, cb){
+  requestKYCStatus(payload_body, kycSig, cb, logger){
       let post_data = {
         payload: payload_body, 
         signature: kycSig.rawsign
@@ -1553,15 +1553,30 @@ module.exports = class MetamaskController extends EventEmitter {
           body: post_data
         },
         function (error, response, body) {
+          logger({message: body})
           if(body.status == "complete" || body.status == "consider") {
+            if(!cb.getKYCSubmitted()) {
+              cb.setKYCSubmitted()
+            }
             cb.setKYCApproved()
           }
           else if(body.status == "withdrawn" || body.status == "cancelled"){
+            if(!cb.getKYCSubmitted()) {
+              cb.setKYCSubmitted()
+            }
             cb.setKYCUnapproved()
           }
           else if(body.status == "awaiting_data" ||
               body.status == "awaiting_approval" || body.status == "paused"){
+            if(!cb.getKYCSubmitted()) {
+              cb.setKYCSubmitted()
+            }
             cb.setKYCPending()
+          }
+          else if(body.status == "awaiting_applicant"){
+            if(!cb.getKYCSubmitted()) {
+              cb.setKYCSubmitted()
+            }
           }
       })
   }
@@ -1579,7 +1594,7 @@ module.exports = class MetamaskController extends EventEmitter {
       }
 
       const signedPayload = this.keyringController.signPersonalMessage(msgParams).then((rawsig) => {
-        return this.requestKYCStatus(payload_body, {rawsign: rawsig}, this.preferencesController)
+        return this.requestKYCStatus(payload_body, {rawsign: rawsig}, this.preferencesController, cb)
       })
     } catch (err) {
       cb(err)

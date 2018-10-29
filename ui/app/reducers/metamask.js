@@ -14,7 +14,6 @@ function reduceMetamask (state, action) {
   var metamaskState = extend({
     isInitialized: false,
     isUnlocked: false,
-    isKYCSubmitted: false,
     isAccountMenuOpen: false,
     isMascara: window.platform instanceof MetamascaraPlatform,
     isPopup: getEnvironmentType(window.location.href) === ENVIRONMENT_TYPE_POPUP,
@@ -88,13 +87,6 @@ function reduceMetamask (state, action) {
     case actions.LOCK_METAMASK:
       return extend(metamaskState, {
         isUnlocked: false,
-      })
-
-    case actions.KYC_SUBMITTED:
-      return extend(metamaskState, {
-        isKYCSubmitted: true,
-        isKYCApproved: false,
-        isKYCUnApproved: false,
       })
 
     case actions.SET_RPC_LIST:
