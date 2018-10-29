@@ -1495,11 +1495,9 @@ module.exports = class MetamaskController extends EventEmitter {
 
   sendKYCInfo (payload_body, kycSig, cb) {
       let post_data = {
-        payload: payload_body, 
+        payload: payload_body,
         signature: kycSig.rawsign
       }
-
-      cb({message: post_data})
 
       request({
           method: 'POST',
@@ -1540,9 +1538,9 @@ module.exports = class MetamaskController extends EventEmitter {
     }
   }
 
-  requestKYCStatus(payload_body, kycSig, cb, logger){
+  requestKYCStatus(payload_body, kycSig, cb){
       let post_data = {
-        payload: payload_body, 
+        payload: payload_body,
         signature: kycSig.rawsign
       }
 
@@ -1553,7 +1551,6 @@ module.exports = class MetamaskController extends EventEmitter {
           body: post_data
         },
         function (error, response, body) {
-          logger({message: body})
           if(body.status == "complete" || body.status == "consider") {
             if(!cb.getKYCSubmitted()) {
               cb.setKYCSubmitted()
@@ -1594,7 +1591,7 @@ module.exports = class MetamaskController extends EventEmitter {
       }
 
       const signedPayload = this.keyringController.signPersonalMessage(msgParams).then((rawsig) => {
-        return this.requestKYCStatus(payload_body, {rawsign: rawsig}, this.preferencesController, cb)
+        return this.requestKYCStatus(payload_body, {rawsign: rawsig}, this.preferencesController)
       })
     } catch (err) {
       cb(err)
