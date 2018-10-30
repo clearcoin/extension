@@ -1,10 +1,14 @@
 const Component = require('react').Component
+const { Switch, Route, matchPath } = require('react-router-dom')
 const PropTypes = require('prop-types')
 const h = require('react-hyperscript')
 const inherits = require('util').inherits
 const connect = require('react-redux').connect
 const actions = require('../../actions')
 const { getNetworkDisplayName } = require('../../../../app/scripts/controllers/network/util')
+const {
+  KYC_ROUTE
+} = require('../../routes')
 
 function mapStateToProps (state) {
   return { }
@@ -17,9 +21,6 @@ function mapDispatchToProps (dispatch) {
     },
     hideWarning: () => {
       dispatch(actions.hideWarning())
-    },
-    showAccountDetailModal: () => {
-      dispatch(actions.showModal({ name: 'ACCOUNT_DETAILS' }))
     },
   }
 }
@@ -117,7 +118,7 @@ HowToKycModal.prototype.render = function () {
           title: "Start Your KYC",
           text: this.context.t('describeNeedToKyc'),
           buttonLabel: "Start Your KYC",
-          onButtonClick: () => this.goToAccountDetailsModal(),
+          onButtonClick: () => this.goToKycSettingsPage(),
         }),
         
       ]),
@@ -126,8 +127,8 @@ HowToKycModal.prototype.render = function () {
   ])
 }
 
-HowToKycModal.prototype.goToAccountDetailsModal = function () {
+HowToKycModal.prototype.goToKycSettingsPage = function () {
   this.props.hideWarning()
   this.props.hideModal()
-  this.props.showAccountDetailModal()
+  this.props.history.push(KYC_ROUTE)
 }
