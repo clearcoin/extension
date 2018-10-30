@@ -84,9 +84,6 @@
       "all_frames": true
     }
   ],
-  "optional_permissions": [
-    "file:///*"
-  ],
   "permissions": [
     "storage",
     "unlimitedStorage",
