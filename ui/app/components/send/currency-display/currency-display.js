@@ -80,6 +80,10 @@ CurrencyDisplay.prototype.getValueToRender = function ({ selectedToken, conversi
 CurrencyDisplay.prototype.getConvertedValueToRender = function (nonFormattedValue) {
   const { primaryCurrency, convertedCurrency, conversionRate } = this.props
 
+  if (primaryCurrency === 'XCLR') {
+    return null
+  }
+
   if (conversionRate === 0 || conversionRate === null || conversionRate === undefined) {
     if (nonFormattedValue !== 0) {
       return null
