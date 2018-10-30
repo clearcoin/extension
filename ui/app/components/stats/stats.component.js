@@ -38,7 +38,7 @@ class Stats extends Component {
             position="bottom"
             html={(
                 <div>
-                  Earned XCLR will be sent to your wallet on the 15th & 30th of every month. Your KYC needs to be completed to receive earned XCLR. Contact help@clearcoin.co for support.
+                Earned XCLR will be sent to your wallet twice a month by the 15th and 30th. Your KYC needs to be completed to receive earned XCLR. Contact help@clearcoin.co for support.
                 </div>
               )}>
               <CountTo to={stats.total.xclr_earned} speed={1000}>{countDisplay}</CountTo> XCLR
