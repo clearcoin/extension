@@ -468,18 +468,28 @@ class Kyc extends Component {
       </tr>
     }
 
-    return (
-      <div className="settings__kyc-container">
-        <div className="settings__field-intro-text">
-          <p>
+    let introText = ""
+    if ( isKYCApproved ) {
+      introText = <p>
+            Thank you for completing your KYC application. XCLR that you earn will be sent to your wallet periodically. We batch token send-outs due to gas costs.
+            <br /><br />
+          </p>
+    } else {
+      introText = <p>
             Thank you for beginning your KYC application. An email from Onfido will
             arrive in your inbox shortly detailing steps on how to continue.
-          </p>
-          <p>
+            <br /><br />
             Upon completion, please allow 3-4 business days for your application to be processed.
             Please note that if you already have an approved application on file, you will be
             automatically approved.
+            <br /><br />
           </p>
+    }
+    
+    return (
+      <div className="settings__kyc-container">
+        <div className="settings__field-intro-text">
+          {introText}
           <table><tbody>{statusMsg}</tbody></table>
         </div>
       </div>
