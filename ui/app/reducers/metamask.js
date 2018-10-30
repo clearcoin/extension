@@ -19,6 +19,10 @@ function reduceMetamask (state, action) {
     isPopup: getEnvironmentType(window.location.href) === ENVIRONMENT_TYPE_POPUP,
     rpcTarget: 'https://rawtestrpc.metamask.io/',
     mode: 'earn',
+    stats: {today: {ads_seen: 0,
+                    xclr_earned: 0},
+            total: {ads_seen: 0,
+                    xclr_earned: 0}},
     identities: {},
     unapprovedTxs: {},
     noActiveNotices: true,
@@ -112,6 +116,11 @@ function reduceMetamask (state, action) {
     case actions.SET_MODE:
       return extend(metamaskState, {
         mode: action.value,
+      })
+
+    case actions.SET_STATS:
+      return extend(metamaskState, {
+        stats: action.value,
       })
 
     case actions.COMPLETED_TX:

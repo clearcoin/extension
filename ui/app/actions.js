@@ -288,6 +288,9 @@ var actions = {
   SET_MODE: 'SET_MODE',
   setMode,
 
+  SET_STATS: 'SET_STATS',
+  setStats,
+
   // locale
   SET_CURRENT_LOCALE: 'SET_CURRENT_LOCALE',
   SET_LOCALE_MESSAGES: 'SET_LOCALE_MESSAGES',
@@ -2204,6 +2207,21 @@ function setMode (val) {
     })
     dispatch({
       type: actions.SET_MODE,
+      value: val,
+    })
+  }
+}
+
+function setStats (val) {
+  return (dispatch) => {
+    log.debug(`background.setStats`)
+    background.setStats(val, (err) => {
+      if (err) {
+        return dispatch(actions.displayWarning(err.message))
+      }
+    })
+    dispatch({
+      type: actions.SET_STATS,
       value: val,
     })
   }

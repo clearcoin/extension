@@ -7,6 +7,7 @@ const {
 
 const selectors = {
   getMode,
+  getStats,
   getSelectedAddress,
   getSelectedIdentity,
   getSelectedAccount,
@@ -35,6 +36,10 @@ module.exports = selectors
 
 function getMode (state) {
   return state.metamask.mode
+}
+
+function getStats (state) {
+  return state.metamask.stats
 }
 
 function getSelectedAddress (state) {

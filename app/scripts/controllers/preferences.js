@@ -34,6 +34,10 @@ class PreferencesController {
       isKYCPending: false,
       useBlockie: false,
       mode: 'off',
+      stats: {today: {ads_seen: 0,
+                      xclr_earned: 0},
+              total: {ads_seen: 0,
+                      xclr_earned: 0}},
       featureFlags: {},
       currentLocale: opts.initLangCode,
       identities: {},
@@ -132,12 +136,31 @@ class PreferencesController {
 
   /**
    * Getter for the `mode` property
+   * Get the current mode: earn, hide, off
    *
    * @returns {string} this.store.mode
    *
    */
   getMode () {
     return this.store.getState().mode
+  }
+
+  /**
+   * Setter for the `stats` property
+   *
+   */
+  setStats (val) {
+    this.store.updateState({ stats: val })
+  }
+
+  /**
+   * Getter for the `stats` property
+   *
+   * @returns {string} this.store.stats
+   *
+   */
+  getStats () {
+    return this.store.getState().stats
   }
 
   /**
@@ -300,16 +323,6 @@ class PreferencesController {
    */
   getSelectedAddress () {
     return this.store.getState().selectedAddress
-  }
-
-  /**
-   * Getter for the `mode` property
-   *
-   * @returns {string} The current mode
-   *
-   */
-  getMode () {
-    return this.store.getState().mode
   }
 
   /**

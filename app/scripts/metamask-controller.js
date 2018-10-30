@@ -356,6 +356,7 @@ module.exports = class MetamaskController extends EventEmitter {
       setCurrentCurrency: this.setCurrentCurrency.bind(this),
       setUseBlockie: this.setUseBlockie.bind(this),
       setMode: this.setMode.bind(this),
+      setStats: this.setStats.bind(this),
       setKYCSubmitted: this.setKYCSubmitted.bind(this),
       checkKYCStatus: this.checkKYCStatus.bind(this),
       setCurrentLocale: this.setCurrentLocale.bind(this),
@@ -1043,6 +1044,7 @@ module.exports = class MetamaskController extends EventEmitter {
   // e.g., use: µb.isUUID(impression_id)
   // other values should be sanitized too
   signAndReportImpression (impression_id, origin, timestamp) {
+    let metamaskController = this;
     const isUnlocked = this.keyringController.memStore.getState().isUnlocked;
     const walletAddress = this.preferencesController.getSelectedAddress();
 
@@ -1063,14 +1065,19 @@ module.exports = class MetamaskController extends EventEmitter {
           json: true,
           body: {
             payload: payload,
-            signature: rawsig
+            signature: rawsig,
+            "timezone-offset": (-1 * (new Date()).getTimezoneOffset() / 60)
           }
         }, function (error, response, body) {
           if (response.statusCode !== 200) {
             log.info('ERROR: ' + response.statusCode);
             // currently we just fail silently, but there should be some sort of storage locally and then subsequent attempts to report impressions
           } else { // success
-            // todo: update stats
+            let current_stats = metamaskController.preferencesController.getStats();
+            // this conditional helps resolve race conditions when multiple ads on a page
+            if (current_stats.total.ads_seen < body.stats.total.ads_seen || body.force_update) {
+              metamaskController.setStats(body.stats, function(){});
+            }
           }
         })
       });
@@ -1471,6 +1478,20 @@ module.exports = class MetamaskController extends EventEmitter {
   setMode (val, cb) {
     try {
       this.preferencesController.setMode(val)
+      cb(null)
+    } catch (err) {
+      cb(err)
+    }
+  }
+
+  /**
+   * Sets stats
+   * @param {string} val - stats object (return from impression reporting)
+   * @param {Function} cb - A callback function called when complete.
+   */
+  setStats (val, cb) {
+    try {
+      this.preferencesController.setStats(val)
       cb(null)
     } catch (err) {
       cb(err)
