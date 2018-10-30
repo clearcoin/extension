@@ -16,7 +16,7 @@ class Config extends Component {
       h(TabBar, {
         tabs: [
           { content: this.context.t('settings'), key: SETTINGS_ROUTE },
-          { content: 'KYC', key: KYC_ROUTE },
+          { content: this.context.t('kyc'), key: KYC_ROUTE },
           { content: this.context.t('info'), key: INFO_ROUTE },
         ],
         isActive: key => matchPath(location.pathname, { path: key, exact: true }),

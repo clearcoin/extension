@@ -304,6 +304,9 @@
   "editingTransaction": {
     "message": "Make changes to your transaction"
   },
+  "emailsDontMatch" : {
+    "message": "Emails Don't Match" 
+  },
   "emailUs": {
     "message": "Email us!"
   },
@@ -537,6 +540,9 @@
   },
   "keepTrackTokens": {
     "message": "Keep track of the tokens you’ve bought with your MetaMask account."
+  },
+  "kyc": {
+    "message": "KYC"
   },
   "kovan": {
     "message": "Kovan Test Network"
@@ -959,7 +965,7 @@
     "message": "Use your hardware account like you would with any Ethereum account. Log in to dApps, send Eth, buy and store ERC20 tokens and Non-Fungible tokens like CryptoKitties."
   },
   "info": {
-  "message": "Info"
+    "message": "Info"
   },
   "scanInstructions": {
     "message": "Place the QR code in front of your camera"

@@ -1,17 +1,16 @@
 const Component = require('react').Component
-const { Switch, Route, matchPath } = require('react-router-dom')
+const { Switch, Route, matchPath, withRouter } = require('react-router-dom')
+const { compose } = require('recompose')
 const PropTypes = require('prop-types')
 const h = require('react-hyperscript')
 const inherits = require('util').inherits
 const connect = require('react-redux').connect
 const actions = require('../../actions')
 const { getNetworkDisplayName } = require('../../../../app/scripts/controllers/network/util')
-const {
-  KYC_ROUTE
-} = require('../../routes')
+const { KYC_ROUTE } = require('../../routes')
 
 function mapStateToProps (state) {
-  return { }
+  return {}
 }
 
 function mapDispatchToProps (dispatch) {
@@ -34,7 +33,9 @@ HowToKycModal.contextTypes = {
   t: PropTypes.func,
 }
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(HowToKycModal)
+module.exports = compose(withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(HowToKycModal)
 
 HowToKycModal.prototype.renderRow = function ({
   logo,

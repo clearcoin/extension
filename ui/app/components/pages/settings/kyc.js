@@ -38,7 +38,7 @@ class Kyc extends Component {
     let emailConfError = null
 
     if (emailConf && email !== emailConf){
-      emailConfError = "Emails don't match"
+      emailConfError = this.context.t('emailsDontMatch') 
     }
 
     this.setState({ email, emailConfError })
@@ -49,7 +49,7 @@ class Kyc extends Component {
     let emailError = null
 
     if (email && emailConf !== email){
-      emailError = "Emails don't match"
+      emailError = this.context.t('emailsDontMatch')
     }
 
     this.setState({ emailConf, emailError })
