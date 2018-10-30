@@ -72,10 +72,11 @@ AccountDetailsModal.prototype.render = function () {
         onClick: () => global.platform.openWindow({ url: genAccountLink(address, network) }),
       }, this.context.t('etherscanView')),
 
-      // Holding on redesign for Export Private Key functionality
-      h('button.btn-primary.account-modal__button', {
-        onClick: () => showExportPrivateKeyModal(),
-      }, this.context.t('exportPrivateKey')),
+      // hiding this for now because of issue #110
+      // - Bug that freezes extension requiring hard restart: Export private key from deposit modal
+      // h('button.btn-primary.account-modal__button', {
+      //   onClick: () => showExportPrivateKeyModal(),
+      // }, this.context.t('exportPrivateKey')),
 
   ])
 }
