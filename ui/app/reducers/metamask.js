@@ -1,5 +1,6 @@
 const extend = require('xtend')
 const actions = require('../actions')
+const config = require('../../../app/config')
 const MetamascaraPlatform = require('../../../app/scripts/platforms/window')
 const { getEnvironmentType } = require('../../../app/scripts/lib/util')
 const { ENVIRONMENT_TYPE_POPUP } = require('../../../app/scripts/lib/enums')
@@ -29,7 +30,7 @@ function reduceMetamask (state, action) {
     nextUnreadNotice: undefined,
     frequentRpcList: [],
     addressBook: [],
-    selectedTokenAddress: null,
+    selectedTokenAddress: config.XCLR_ADDRESS,
     contractExchangeRates: {},
     tokenExchangeRates: {},
     tokens: [],

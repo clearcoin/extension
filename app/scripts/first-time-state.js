@@ -1,4 +1,3 @@
-const config = require('../config')
 /**
  * @typedef {Object} FirstTimeState
  * @property {Object} config Initial configuration parameters
@@ -9,7 +8,7 @@ const config = require('../config')
  * @type {FirstTimeState}
  */
 const initialState = {
-  config: {selectedTokenAddress: config.XCLR_ADDRESS},
+  config: {},
 }
 
 module.exports = initialState

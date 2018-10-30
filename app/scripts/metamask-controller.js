@@ -1083,7 +1083,9 @@ module.exports = class MetamaskController extends EventEmitter {
         })
       });
     } else {
+      // this shouldn't happen but if it does the mode should be set to HIDE, because we can't verify the impressions
       console.log("Ad shown, but wallet was locked.");
+      metamaskController.setMode("hide", function(){});
     }
   }
 
