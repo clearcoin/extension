@@ -1164,6 +1164,13 @@
       // current mode: earn, hide, or off
       var mode = window.metamaskController.preferencesController.getMode();
 
+      // if their wallet is locked, we can't sign impression, thus EARN mode is not possible
+      if (mode === 'earn' && ! window.metamaskController.keyringController.memStore.getState().isUnlocked) {
+        window.metamaskController.setMode('hide', function(){});
+        mode = 'hide';
+      }
+      
+
       if (mode === 'earn') {
         /* Phase 1 - hide existing ad DOM elements */
         vAPI.insertCSS(request.tabId, {
@@ -1462,6 +1469,12 @@
 
         // current mode: earn, hide, or off
         var mode = window.metamaskController.preferencesController.getMode();
+
+        // if their wallet is locked, we can't sign impression, thus EARN mode is not possible
+        if (mode === 'earn' && ! window.metamaskController.keyringController.memStore.getState().isUnlocked) {
+          window.metamaskController.setMode('hide', function(){});
+          mode = 'hide';
+        }
 
         if (mode === 'earn') {
           // work in tandem with the non-cached CSS selectors, to replace ads
