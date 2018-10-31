@@ -23,15 +23,15 @@ class Stats extends Component {
     return (
         <div className="stats">
           <div>
-            <CountTo to={stats.today.ads_seen} speed={1000}>{countDisplay}</CountTo> ads
+            <CountTo to={stats.today.ads_seen} speed={1100} delay={15}>{countDisplay}</CountTo> ads
             <div className="count-label">seen today</div>
           </div>
           <div>
-            <CountTo to={stats.total.ads_seen} speed={1000}>{countDisplay}</CountTo> ads
+            <CountTo to={stats.total.ads_seen} speed={1100} delay={15}>{countDisplay}</CountTo> ads
             <div className="count-label">seen total</div>
           </div>
           <div>
-            <CountTo to={stats.today.xclr_earned} speed={1000}>{countDisplay}</CountTo> XCLR
+            <CountTo to={stats.today.xclr_earned} speed={1100} delay={15}>{countDisplay}</CountTo> XCLR
             <div className="count-label">earned today</div>
           </div>
           <Tooltip
@@ -41,7 +41,7 @@ class Stats extends Component {
                 Earned XCLR will be sent to your wallet twice a month by the 15th and 30th. Your KYC needs to be completed to receive earned XCLR. Contact help@clearcoin.co for support.
                 </div>
               )}>
-              <CountTo to={stats.total.xclr_earned} speed={1000}>{countDisplay}</CountTo> XCLR
+              <CountTo to={stats.total.xclr_earned} speed={1100} delay={15}>{countDisplay}</CountTo> XCLR
               <div className="count-label">earned total</div>
           </Tooltip>
         </div>
