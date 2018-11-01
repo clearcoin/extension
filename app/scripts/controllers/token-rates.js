@@ -40,7 +40,7 @@ class TokenRatesController {
    */
   async fetchExchangeRate (address) {
     try {
-      const response = await fetch(`https://metamask.balanc3.net/prices?from=${address}&to=ETH&autoConversion=false&summaryOnly=true`)
+      const response = await fetch(`https://exchanges.balanc3.net/prices?from=${address}&to=ETH&autoConversion=false&summaryOnly=true`)
       const json = await response.json()
       return json && json.length ? json[0].averagePrice : 0
     } catch (error) {
