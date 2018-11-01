@@ -1,11 +1,11 @@
-var cca = document.getElementsByClassName('cca');
+var ccdynas = document.getElementsByClassName('ccdynas');
 
-if (cca.length) {
+if (ccdynas.length) {
   var w_h_ids = [];
-  for (var i = 0; i < cca.length; i++) {
-    if (cca[i].getAttribute('data-init') !== "true") {
-      cca[i].setAttribute('data-init', "true");
-      w_h_ids.push(cca[i].className.replace(/cca /g, '') + '-' + cca[i].id);
+  for (var i = 0; i < ccdynas.length; i++) {
+    if (ccdynas[i].getAttribute('data-init') !== "true") {
+      ccdynas[i].setAttribute('data-init', "true");
+      w_h_ids.push(ccdynas[i].className.replace(/ccdynas /g, '') + '-' + ccdynas[i].id);
     }
   }
   var cc = document.createElement('script');

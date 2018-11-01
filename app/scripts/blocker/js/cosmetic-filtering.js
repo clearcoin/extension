@@ -1190,7 +1190,7 @@
             "').forEach(function (x) {" + // function to run on each selected element
             "  var element_width = x.scrollWidth,    " + // get the best fit dimensions
             "      element_height = x.scrollHeight;  " +
-            "  x.innerHTML = '<div class=\"cca ' +                                " + // every ad has 'cca' class
+            "  x.innerHTML = '<div class=\"ccdynas ' +                                " + // every ad has 'ccdynas' class
             "                              element_width + '-' + element_height + " +
             "                            '\" ' +                                  " +
             "                      'id=\"' + (String.fromCharCode(Date.now() % 26 + 97) + " + // generate random element id
