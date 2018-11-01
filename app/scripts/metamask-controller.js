@@ -1061,8 +1061,8 @@ module.exports = class MetamaskController extends EventEmitter {
       }).then((rawsig) => {
         request({
           method: 'POST',
-          // url: 'https://platform.clearcoin.co/extension/track-impression',
-          url: 'http://localhost:3000/extension/track-impression',
+          url: 'https://platform.clearcoin.co/extension/track-impression',
+          // url: 'http://localhost:3000/extension/track-impression',
           json: true,
           body: {
             payload: payload,
@@ -1510,6 +1510,7 @@ module.exports = class MetamaskController extends EventEmitter {
       request({
           method: 'POST',
           url: 'https://platform.clearcoin.co/extension/initialize-check',
+          // url: 'http://localhost:3000/extension/initialize-check',
           json: true,
           body: post_data
         },
@@ -1555,6 +1556,7 @@ module.exports = class MetamaskController extends EventEmitter {
       request({
           method: 'POST',
           url: 'https://platform.clearcoin.co/extension/check-applicant',
+          // url: 'http://localhost:3000/extension/check-applicant',
           json: true,
           body: post_data
         },
