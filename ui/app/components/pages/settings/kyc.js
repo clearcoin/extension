@@ -480,8 +480,7 @@ class Kyc extends Component {
             arrive in your inbox shortly detailing steps on how to continue.
             <br /><br />
             Upon completion, please allow 3-4 business days for your application to be processed.
-            Please note that if you already have an approved application on file, you will be
-            automatically approved.
+            Please note that if you already have an approved application on file, you will instead receive an email from ClearCoin with a link to verify your account update.
             <br /><br />
           </p>
     }
