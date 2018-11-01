@@ -30,15 +30,21 @@ class Stats extends Component {
             <CountTo to={stats.total.ads_seen} speed={1100} delay={15}>{countDisplay}</CountTo> ads
             <div className="count-label">seen total</div>
           </div>
-          <div>
-            <CountTo to={stats.today.xclr_earned} speed={1100} delay={15}>{countDisplay}</CountTo> XCLR
-            <div className="count-label">earned today</div>
-          </div>
           <Tooltip
             position="bottom"
             html={(
                 <div>
-                Earned XCLR will be sent to your wallet twice a month by the 15th and 30th. Your KYC needs to be completed to receive earned XCLR. Contact help@clearcoin.co for support.
+                Due to frequency caps from advertisers, you are only able to earn XCLR for up to 100 ads per hour.
+                </div>
+              )}>
+            <CountTo to={stats.today.xclr_earned} speed={1100} delay={15}>{countDisplay}</CountTo> XCLR
+            <div className="count-label">earned today</div>
+          </Tooltip>
+          <Tooltip
+            position="bottom"
+            html={(
+                <div>
+                Earned XCLR will be sent to your wallet twice a month by the 15th and 30th. Your KYC needs to be completed to receive any earned XCLR. Users that have not yet completed their KYC can accrue a maximum of 1,000 XCLR on their account. Contact help@clearcoin.co for support.
                 </div>
               )}>
               <CountTo to={stats.total.xclr_earned} speed={1100} delay={15}>{countDisplay}</CountTo> XCLR
