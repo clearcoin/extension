@@ -120,7 +120,7 @@
     "message": "Close"
   },
   "chromeRequiredForTrezor":{
-    "message": "You need to use MetaMask on Google Chrome in order to connect to your TREZOR device."
+    "message": "You need to use ClearCoin on Google Chrome in order to connect to your TREZOR device."
   },
   "confirm": {
     "message": "Confirm"
@@ -539,7 +539,7 @@
     "description": "format for importing an account"
   },
   "keepTrackTokens": {
-    "message": "Keep track of the tokens you’ve bought with your MetaMask account."
+    "message": "Keep track of the tokens you’ve bought with your ClearCoin account."
   },
   "kyc": {
     "message": "KYC"
