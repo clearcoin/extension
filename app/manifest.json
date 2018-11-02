@@ -1,6 +1,6 @@
 {
-  "name": "__MSG_appName__",
-  "short_name": "__MSG_appName__",
+  "name": "ClearCoin: The Ad Blocker That Rewards You",
+  "short_name": "ClearCoin",
   "version": "0.0.1",
   "manifest_version": 2,
   "author": "https://clearcoin.co",
