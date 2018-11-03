@@ -102,7 +102,6 @@
     "<all_urls>"
   ],
   "web_accessible_resources": [
-    "inpage.js",
     "phishing.html",
     "blocker/web_accessible_resources/*"
   ]
