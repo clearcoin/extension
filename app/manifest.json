@@ -75,7 +75,6 @@
         "https://*/*"
       ],
       "js": [
-        "contentscript.js",
         "blocker/js/vapi.js",
         "blocker/js/vapi-client.js",
         "blocker/js/contentscript.js"

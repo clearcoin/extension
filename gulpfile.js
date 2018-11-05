@@ -291,7 +291,7 @@ function createTasksForBuildJsExtension ({ buildJsFiles, taskPrefix, devMode, bu
   const buildPhase2 = nonInpageFiles
   const destinations = browserPlatforms.map(platform => `./dist/${platform}`)
   bundleTaskOpts = Object.assign({
-    buildSourceMaps: true,
+    buildSourceMaps: devMode, //true,
     sourceMapDir: devMode ? './' : '../sourcemaps',
     minifyBuild: !devMode,
     buildWithFullPaths: devMode,
@@ -307,7 +307,7 @@ function createTasksForBuildJsMascara ({ taskPrefix, devMode, bundleTaskOpts = {
   const buildPhase1 = ['ui', 'proxy', 'background', 'metamascara']
   const destinations = ['./dist/mascara']
   bundleTaskOpts = Object.assign({
-    buildSourceMaps: true,
+    buildSourceMaps: devMode, //true,
     sourceMapDir: './',
     minifyBuild: !devMode,
     buildWithFullPaths: devMode,
