@@ -107,7 +107,7 @@ BalanceComponent.prototype.renderFiatAmount = function (fiatDisplayNumber, fiatS
 }
 
 BalanceComponent.prototype.getTokenBalance = function (formattedBalance, shorten) {
-  const balanceObj = generateBalanceObject(formattedBalance, 0) //shorten ? 1 : 3)
+  const balanceObj = generateBalanceObject(formattedBalance, shorten ? 1 : 3)
 
   const balanceValue = shorten ? balanceObj.shortBalance : balanceObj.balance
   const label = balanceObj.label
