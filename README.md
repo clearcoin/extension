@@ -2,7 +2,7 @@
 
 Earn ClearCoin (XCLR) while you browse the web.
 
-ClearCoin is in private beta mode. If you want to be included in our beta test, email us at [help@clearcoin.co](mailto:help@clearcoin.co).
+[Click here to view/install the ClearCoin extension on the Chrome Web Store](https://chrome.google.com/webstore/detail/clearcoin-the-ad-blocker/benncgglohdbeapbakcebdobkdbkdcba).
 
 ## ClearCoin Support
 
