@@ -102,10 +102,10 @@ TokenBalance.prototype.updateBalance = function (tokens = []) {
     return
   }
 
-  const [{ string, symbol }] = tokens
+  const [{ balance, string, symbol, decimals }] = tokens
 
   this.setState({
-    string,
+    string: ("" + (balance / (decimals !== 0 ? 10 ** decimals : 1))),
     symbol,
     isLoading: false,
   })

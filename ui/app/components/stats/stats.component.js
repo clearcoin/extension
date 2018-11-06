@@ -10,7 +10,7 @@ class Stats extends Component {
   }
 
   static propTypes = {
-    stats: PropTypes.string,
+    stats: PropTypes.object,
   }
   
   render () {
