@@ -9,7 +9,7 @@
 .first-time-flow {
   width: 100vw;
   background-color: #fff;
-  overflow: auto;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   flex: 1 0 auto;
@@ -172,8 +172,8 @@
 
   .tou__body {
     margin: 0 !important;
-    padding: 16px 20px !important;
-    height: 30vh !important;
+    padding: 12px !important;
+    height: 59vh !important;
   }
 
   .backup-phrase__content-wrapper {
@@ -203,7 +203,7 @@
   .import-account__secret-phrase {
     width: initial !important;
     height: initial !important;
-    min-height: 190px;
+    min-height: 306px;
   }
 
   .backup-phrase__confirm-seed-options {
@@ -221,10 +221,9 @@
 .import-account__title,
 .buy-ether__title {
   color: #1B344D;
-  font-size: 40px;
-  line-height: 51px;
-  margin-top: 6px;
-  margin-bottom: 24px;
+  font-size: 35px;
+  line-height: 40px;
+  margin-bottom: 30px;
 }
 
 .import-account__title {
@@ -242,12 +241,6 @@
 
 .create-password__import-link {
   margin-bottom: 54px;
-}
-
-.tou__title,
-.backup-phrase__title,
-.buy-ether__title {
-  margin-top: 24px;
 }
 
 .backup-phrase__body-text,
@@ -286,6 +279,30 @@
   line-height: 15px;
   text-align: justify;
   padding: 22px 30px;
+}
+
+.markdown {
+    overflow-x: hidden;
+}
+
+.markdown h1, .markdown h2, .markdown h3 {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.markdown strong {
+    font-weight: bold;
+}
+.markdown em {
+    font-style: italic;
+}
+
+.markdown p {
+    margin: 10px 0;
+}
+
+.markdown a {
+    /* color: #df6b0e; */
 }
 
 .backup-phrase__content-wrapper {
@@ -692,7 +709,8 @@ button.backup-phrase__confirm-seed-option:hover {
   text-transform: uppercase;
   margin: 35px 0 14px;
   transition: 200ms ease-in-out;
-  background-color: rgba(29, 138, 247, 0.9);
+  background-color: rgba(82, 159, 252, .9);
+  border-radius: 4px;
 }
 
 button.first-time-flow__button[disabled] {

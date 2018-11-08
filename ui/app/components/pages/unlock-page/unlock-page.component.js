@@ -117,8 +117,8 @@ export default class UnlockPage extends Component {
           <div className="unlock-page__mascot-container">
             <img
               src="/images/clearybot.svg"
-              width="120"
-              height="180"
+              width="175"
+              height="175"
             />
           </div>
           <h1 className="unlock-page__title">

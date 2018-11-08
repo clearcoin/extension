@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom'
 import classnames from 'classnames'
 import shuffle from 'lodash.shuffle'
 import { compose } from 'recompose'
-import ClearyBot from '../../../../ui/app/components/clearybot'
 import { confirmSeedWords, showModal } from '../../../../ui/app/actions'
 import Breadcrumbs from './breadcrumbs'
 import LoadingScreen from './loading-screen'
@@ -76,11 +75,10 @@ class ConfirmSeedScreen extends Component {
                   >
                     {`< Back`}
                   </a>
-                  <ClearyBot />
                   <div className="backup-phrase__content-wrapper">
                     <div>
                       <div className="backup-phrase__title">
-                        Confirm your Secret Backup Phrase
+                        Confirm Backup Phrase
                       </div>
                       <div className="backup-phrase__body-text">
                         Please select each phrase in order to make sure it is correct.

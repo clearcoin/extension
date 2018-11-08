@@ -46,18 +46,35 @@ class WelcomeScreen extends Component {
         h('img.app-header__metafox', {
           src: './images/clearybot.svg',
           style: {
-            height: 200,
-            marginBottom: 25,
+            height: 230,
+            marginLeft: -7, // because the SVG is off-center
           },
         }),
 
-        h('div.welcome-screen__info__header', this.context.t('welcomeBeta')),
+        h('img', {
+          src: "/images/logo-text.png",
+          style: {
+            width: 185,
+            marginTop: 10,
+            marginBottom: 30,
+          }
+        }),
 
         h('div.welcome-screen__info__copy', this.context.t('welcomeSubtext')),
 
         h('button.welcome-screen__button', {
           onClick: this.initiateAccountCreation,
-        }, this.context.t('getStarted')),
+        }, [
+          this.context.t('getStarted'),
+          h('span',
+            {style: {
+              fontSize: "0.65em",
+              position: "relative",
+              top: -2,
+              left: 10}},
+            "►"
+           )
+        ]),
 
       ]),
 

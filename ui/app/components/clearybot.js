@@ -14,8 +14,8 @@ ClearyBot.prototype.render = function () {
     h('img.app-header__metafox', {
       src: './images/clearybot.svg',
       style: {
-        height: 124,
-        width: 144,
+        height: 175,
+        width: 175,
       },
     })
   )

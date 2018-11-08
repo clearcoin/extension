@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 import debounce from 'lodash.debounce'
 import { markNoticeRead } from '../../../../ui/app/actions'
-import ClearyBot from '../../../../ui/app/components/clearybot'
 import Breadcrumbs from './breadcrumbs'
 import { INITIALIZE_BACKUP_PHRASE_ROUTE } from '../../../../ui/app/routes'
 import LoadingScreen from './loading-screen'
@@ -88,7 +87,6 @@ class NoticeScreen extends Component {
                   className="tou"
                   onScroll={this.onScroll}
                 >
-                  <ClearyBot/>
                   <div className="tou__title">{title}</div>
                   <Markdown
                     className="tou__body markdown"
