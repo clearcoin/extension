@@ -4,6 +4,7 @@
  * @license   MIT
  */
 
+const config = require('../config')
 const EventEmitter = require('events')
 const pump = require('pump')
 const Dnode = require('dnode')
@@ -1061,8 +1062,7 @@ module.exports = class MetamaskController extends EventEmitter {
       }).then((rawsig) => {
         request({
           method: 'POST',
-          url: 'https://platform.clearcoin.co/extension/track-impression',
-          // url: 'http://localhost:3000/extension/track-impression',
+          url: config.SERVICE_BASE_URL + 'extension/track-impression',
           json: true,
           body: {
             payload: payload,
@@ -1509,8 +1509,7 @@ module.exports = class MetamaskController extends EventEmitter {
 
       request({
           method: 'POST',
-          url: 'https://platform.clearcoin.co/extension/initialize-check',
-          // url: 'http://localhost:3000/extension/initialize-check',
+          url: config.SERVICE_BASE_URL + 'extension/initialize-check',
           json: true,
           body: post_data
         },
@@ -1555,8 +1554,7 @@ module.exports = class MetamaskController extends EventEmitter {
 
       request({
           method: 'POST',
-          url: 'https://platform.clearcoin.co/extension/check-applicant',
-          // url: 'http://localhost:3000/extension/check-applicant',
+          url: config.SERVICE_BASE_URL + 'extension/check-applicant',
           json: true,
           body: post_data
         },
