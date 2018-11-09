@@ -1546,7 +1546,7 @@ module.exports = class MetamaskController extends EventEmitter {
     }
   }
 
-  requestKYCStatus(payload_body, kycSig, cb){
+  requestKYCStatus (payload_body, kycSig, cb) {
       let post_data = {
         payload: payload_body,
         signature: kycSig.rawsign
@@ -1559,28 +1559,32 @@ module.exports = class MetamaskController extends EventEmitter {
           body: post_data
         },
         function (error, response, body) {
-          if(body.status == "complete" || body.status == "consider") {
-            if(!cb.getKYCSubmitted()) {
+          if (body.status === "complete" ||
+              body.status === "consider") {
+            if (!cb.getKYCSubmitted()) {
               cb.setKYCSubmitted()
             }
             cb.setKYCApproved()
-          }
-          else if(body.status == "withdrawn" || body.status == "cancelled"){
-            if(!cb.getKYCSubmitted()) {
+          } else if (body.status === "withdrawn" ||
+                     body.status === "cancelled") {
+            if (!cb.getKYCSubmitted()) {
               cb.setKYCSubmitted()
             }
             cb.setKYCUnapproved()
-          }
-          else if(body.status == "awaiting_data" ||
-              body.status == "awaiting_approval" || body.status == "paused"){
-            if(!cb.getKYCSubmitted()) {
+          } else if (body.status === "awaiting_data" ||
+                     body.status === "awaiting_approval" ||
+                     body.status === "paused") {
+            if (!cb.getKYCSubmitted()) {
               cb.setKYCSubmitted()
             }
             cb.setKYCPending()
-          }
-          else if(body.status == "awaiting_applicant"){
-            if(!cb.getKYCSubmitted()) {
+          } else if (body.status === "awaiting_applicant") {
+            if (!cb.getKYCSubmitted()) {
               cb.setKYCSubmitted()
+            }
+          } else if (body.status === "uninitiated") {
+            if (cb.getKYCSubmitted()) {
+              cb.setKYCUnsubmitted()
             }
           }
       })

@@ -13,9 +13,9 @@ if (ccdynas.length) {
   cc.async = true;
 
   // prod
-  cc.src = 'https://platform.clearcoin.co/ad/display-by-dims/' + btoa(unescape(encodeURIComponent(w_h_ids.join('!'))));
+  // cc.src = 'https://platform.clearcoin.co/ad/display-by-dims/' + btoa(unescape(encodeURIComponent(w_h_ids.join('!'))));
   // dev
-  // cc.src = 'http://localhost:3000/ad/display-by-dims/' + btoa(unescape(encodeURIComponent(w_h_ids.join('!'))));
+  cc.src = 'http://localhost:3000/ad/display-by-dims/' + btoa(unescape(encodeURIComponent(w_h_ids.join('!'))));
 
   // todo: ...so this will only work if there is already a script tag somewhere on page?
   var s = document.getElementsByTagName('script')[0];
