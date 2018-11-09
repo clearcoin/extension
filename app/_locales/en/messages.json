@@ -308,7 +308,7 @@
     "message": "Emails Don't Match" 
   },
   "emailUs": {
-    "message": "Email us!"
+    "message": "Email: help@clearcoin.co"
   },
   "encryptNewDen": {
     "message": "Encrypt your new DEN"
@@ -1166,7 +1166,7 @@
     "message": "View on Etherscan"
   },
   "visitWebSite": {
-    "message": "Visit our web site"
+    "message": "Website: www.clearcoin.co"
   },
   "warning": {
     "message": "Warning"

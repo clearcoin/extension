@@ -15,7 +15,39 @@ class Info extends Component {
   renderInfoLinks () {
     return (
       h('div.settings__content-item.settings__content-item--without-height', [
-        h('div.settings__info-link-header', this.context.t('links')),
+        h('div.settings__info-item',
+          { style: { paddingTop: 0 } },
+          [
+            h('div.settings__info-version-header', 'ClearCoin Extension'),
+            h('div.settings__info-version-number', 'Version ' + this.state.version),
+          ]),
+        
+        h('div.settings__info-item', [
+          this.context.t('builtInCalifornia')
+        ]),
+
+        h('hr.settings__info-separator'),
+
+        
+        h('div.settings__info-link-item', [
+          h('a', {
+            href: 'https://clearcoin.co/',
+            target: '_blank',
+          }, [
+            h('span.settings__info-link', this.context.t('visitWebSite')),
+          ]),
+        ]),
+        h('div.settings__info-link-item', [
+          h('a', {
+            target: '_blank',
+            href: 'mailto:help@clearcoin.co?subject=Extension',
+          }, [
+            h('span.settings__info-link', this.context.t('emailUs')),
+          ]),
+        ]),
+        
+        h('hr.settings__info-separator'),
+        
         h('div.settings__info-link-item', [
           h('a', {
             href: 'https://clearcoin.co/privacy-policy',
@@ -32,23 +64,6 @@ class Info extends Component {
             h('span.settings__info-link', this.context.t('terms')),
           ]),
         ]),
-        h('hr.settings__info-separator'),
-        h('div.settings__info-link-item', [
-          h('a', {
-            href: 'https://clearcoin.co/',
-            target: '_blank',
-          }, [
-            h('span.settings__info-link', this.context.t('visitWebSite')),
-          ]),
-        ]),
-        h('div.settings__info-link-item', [
-          h('a', {
-            target: '_blank',
-            href: 'mailto:help@clearcoin.co?subject=Extension Feedback',
-          }, [
-            h('span.settings__info-link', this.context.t('emailUs')),
-          ]),
-        ]),
       ])
     )
   }
@@ -57,20 +72,10 @@ class Info extends Component {
     return (
       h('div.settings__content', [
         h('div.settings__content-row', [
-          h('div.settings__content-item.settings__content-item--without-height', [
-            h(ClearyBot),
-            h('div.settings__info-item', [
-              h('div.settings__info-version-header', 'ClearCoin Version'),
-              h('div.settings__info-version-number', this.state.version),
-            ]),
-            h('div.settings__info-item', [
-              h(
-                'div.settings__info-about',
-                this.context.t('builtInCalifornia')
-              ),
-            ]),
-          ]),
+          
           this.renderInfoLinks(),
+
+          h(ClearyBot),
         ]),
       ])
     )

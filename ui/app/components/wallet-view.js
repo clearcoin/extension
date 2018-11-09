@@ -19,7 +19,8 @@ const {
   DEFAULT_ROUTE,
   SETTINGS_ROUTE,
   ADD_TOKEN_ROUTE,
-  KYC_ROUTE
+  KYC_ROUTE,
+  INFO_ROUTE,
 } = require('../routes')
 
 module.exports = compose(
@@ -206,6 +207,14 @@ WalletView.prototype.render = function () {
                   },
                 },
                 "KYC"),
+              h('button.btn-clear.wallet-view__details-button.allcaps',
+                { style: { margin: '0 8px 0 0' },
+                  onClick: () => {
+                    history.push(INFO_ROUTE);
+                    sidebarOpen && hideSidebar();
+                  },
+                },
+                "Help"),
               h('button.btn-clear.wallet-view__details-button.allcaps', {
                 onClick: () => {
                   lockMetamask();
