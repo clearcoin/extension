@@ -425,47 +425,48 @@ class Kyc extends Component {
     const { isKYCApproved, isKYCUnapproved, isKYCPending } = this.props
 
     let statusMsg
-    let styleSheet
+    let statusStyle
 
     if (!isKYCApproved && !isKYCUnapproved && !isKYCPending) {
       statusMsg = <tr>
-        <td>
-          <div className="settings__field-subtitle">Current Status: Awaiting Applicant</div>
+        <td className="settings__field-subtitle">
+          Current Status: Awaiting Applicant
         </td>
       </tr> 
-    }
-    else if (isKYCPending) {
-      styleSheet = { color: '#00ace6' }
+    } else if (isKYCPending) {
+      statusStyle = { color: '#00ace6' }
       statusMsg = <tr>
-        <td>
-          <div className="settings__field-subtitle">Current Status:&#160;</div>
+        <td className="settings__field-subtitle">
+          Current Status:&#160;
         </td>
-        <td>
-          <div  className="settings__field-subtitle" style={styleSheet}>Pending</div>
+        <td className="settings__field-subtitle" style={statusStyle}>
+          Pending
         </td>
       </tr>
-    }
-    else if (isKYCApproved) {
-      styleSheet = { color: '#00e639' }
+    } else if (isKYCApproved) {
+      statusStyle = { color: '#00e639' }
       statusMsg = <tr>
-        <td>
-          <div className="settings__field-subtitle">Current Status:&#160;</div>
+        <td className="settings__field-subtitle">
+          Current Status:&#160;
         </td>
-        <td>
-          <div  className="settings__field-subtitle" style={styleSheet}>Approved</div>
+        <td className="settings__field-subtitle" style={statusStyle}>
+          Approved
         </td>
       </tr>
-    }
-    else if (isKYCUnapproved) {
-      styleSheet = { color: '#e60000' }
-      statusMsg = <tr>
-        <td>
-          <div className="settings__field-subtitle">Current Status:&#160;</div>
-        </td>
-        <td>
-          <div  className="settings__field-subtitle" style={styleSheet}>Unapproved</div>
-        </td>
-      </tr>
+    } else if (isKYCUnapproved) {
+      statusStyle = { color: '#e60000' }
+      statusMsg = <div>
+        <tr>
+          <td className="settings__field-subtitle">
+            Current Status:&#160;
+          </td>
+          <td className="settings__field-subtitle" style={statusStyle}>
+            Unapproved
+          </td>
+        </tr>
+        <br />
+        Please email us if you have any questions at: help@clearcoin.co
+      </div>
     }
 
     let introText = ""
