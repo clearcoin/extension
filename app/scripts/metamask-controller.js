@@ -1582,10 +1582,9 @@ module.exports = class MetamaskController extends EventEmitter {
             if (!cb.getKYCSubmitted()) {
               cb.setKYCSubmitted()
             }
+            cb.setKYCAwaitingApplicant()
           } else if (body.status === "uninitiated") {
-            if (cb.getKYCSubmitted()) {
-              cb.setKYCUnsubmitted()
-            }
+            cb.setKYCUnsubmitted()
           }
       })
   }

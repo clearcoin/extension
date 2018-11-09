@@ -85,7 +85,20 @@ class PreferencesController {
    *
    */ 
   setKYCUnsubmitted () {
-    this.store.updateState({ isKYCSubmitted: false })
+    this.store.updateState({
+      isKYCSubmitted: false,
+      isKYCPending: false,
+      isKYCApproved: false,
+      isKYCUnapproved: false
+    })
+  }
+
+  setKYCAwaitingApplicant () {
+    this.store.updateState({
+      isKYCPending: false,
+      isKYCApproved: false,
+      isKYCUnapproved: false
+    })
   }
 
   /**
@@ -101,9 +114,11 @@ class PreferencesController {
    *
    */
   setKYCPending () {
-    this.store.updateState({ isKYCPending: true })
-    this.store.updateState({ isKYCApproved: false })
-    this.store.updateState({ isKYCUnapproved: false })
+    this.store.updateState({
+      isKYCPending: true,
+      isKYCApproved: false,
+      isKYCUnapproved: false
+    })
   }
 
   /**
@@ -111,9 +126,11 @@ class PreferencesController {
    *
    */
   setKYCApproved () {
-    this.store.updateState({ isKYCPending: false })
-    this.store.updateState({ isKYCApproved: true })
-    this.store.updateState({ isKYCUnapproved: false })
+    this.store.updateState({
+      isKYCPending: false,
+      isKYCApproved: true,
+      isKYCUnapproved: false
+    })
   }
 
   /**
@@ -121,9 +138,11 @@ class PreferencesController {
    *
    */
   setKYCUnapproved () {
-    this.store.updateState({ isKYCPending: false })
-    this.store.updateState({ isKYCApproved: false })
-    this.store.updateState({ isKYCUnapproved: true })
+    this.store.updateState({
+      isKYCPending: false,
+      isKYCApproved: false,
+      isKYCUnapproved: true
+    })
   }
 
   /**
