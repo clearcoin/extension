@@ -8,7 +8,7 @@ $wallet-balance-breakpoint-range: "screen and (min-width: #{$break-large}) and (
   background: rgba($wallet-balance-bg, 0);
 
   &--active {
-    background: $manatee;
+    background: #444;
     color: $white;
   }
 }

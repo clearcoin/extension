@@ -582,7 +582,7 @@
     "message": "Log In"
   },
   "logout": {
-    "message": "Log out"
+    "message": "Log Out"
   },
   "loose": {
     "message": "Loose"
@@ -966,6 +966,9 @@
   },
   "info": {
     "message": "Info"
+  },
+  "support": {
+    "message": "Support"
   },
   "scanInstructions": {
     "message": "Place the QR code in front of your camera"

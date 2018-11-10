@@ -97,12 +97,22 @@ $wallet-view-bg: $alabaster;
 
   &__details-button {
     font-size: 10px;
-    border-radius: 17px;
+    border-radius: 7px;
+    box-shadow: 0px 0px 4px 1px #c7ddec;
+    border: none;
     background-color: transparent;
     margin: 0 auto;
     padding: 4px 12px;
     flex: 0 0 auto;
+    transition: all 0.6s 0s ease-out;
+
+    &:hover {
+        box-shadow: 0px 0px 4px 1px #657AFF;
+        color: #657AFF;
+    }
+    
   }
+  
 
   &__tooltip {
     display: flex;

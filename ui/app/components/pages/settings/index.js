@@ -17,7 +17,7 @@ class Config extends Component {
         tabs: [
           { content: this.context.t('settings'), key: SETTINGS_ROUTE },
           { content: this.context.t('kyc'), key: KYC_ROUTE },
-          { content: this.context.t('info'), key: INFO_ROUTE },
+          { content: this.context.t('support'), key: INFO_ROUTE },
         ],
         isActive: key => matchPath(location.pathname, { path: key, exact: true }),
         onSelect: key => history.push(key),

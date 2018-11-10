@@ -164,6 +164,17 @@ WalletView.prototype.render = function () {
             }
           }),
 
+          h('div', {
+            style: {
+              color: "#777",
+              fontSize: "11px",
+              fontWeight: "300",
+              marginBottom: 3,
+              textTransform: "uppercase"
+            }},
+            "Your Wallet Address"
+           ),
+
           h(Tooltip, {
             position: 'bottom',
             title: this.state.hasCopied ? this.context.t('copiedExclamation') : this.context.t('copyToClipboard'),
@@ -208,24 +219,27 @@ WalletView.prototype.render = function () {
                 },
                 "KYC"),
               h('button.btn-clear.wallet-view__details-button.allcaps',
-                { style: { margin: '0 8px 0 0' },
-                  onClick: () => {
+                { onClick: () => {
                     history.push(INFO_ROUTE);
                     sidebarOpen && hideSidebar();
-                  },
+                  }
                 },
-                "Help"),
-              h('button.btn-clear.wallet-view__details-button.allcaps', {
-                onClick: () => {
-                  lockMetamask();
-                  history.push(DEFAULT_ROUTE);
-                }
-              }, this.context.t('logout')),]),
+                "Support"),]),
         ]),
     ]),
 
     h(TokenList),
     this.renderWalletBalance(),
+
+    h('div.flex-row.flex-center', { style: { margin: 'auto  0 18px 0' } },
+      [
+        h('button.btn-clear.wallet-view__details-button.allcaps',
+          { onClick: () => {
+              lockMetamask();
+              history.push(DEFAULT_ROUTE);
+            }
+          }, this.context.t('logout')),
+      ]),
 
     // hide ability to add token
     // h('button.btn-primary.wallet-view__add-token-button', {

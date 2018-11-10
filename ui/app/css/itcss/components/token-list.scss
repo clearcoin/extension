@@ -47,7 +47,7 @@ $wallet-balance-breakpoint-range: "screen and (min-width: #{$break-large}) and (
   }
 
   &--active {
-    background-color: $manatee;
+    background: linear-gradient(to right, #657CFF, #4F9EFF);
     color: $white;
   }
 

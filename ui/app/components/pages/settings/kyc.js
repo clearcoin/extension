@@ -466,6 +466,7 @@ class Kyc extends Component {
         </tr>
         <br />
         Please email us if you have any questions at: help@clearcoin.co
+        <br />(Include your wallet address in the email)
       </div>
     }
 

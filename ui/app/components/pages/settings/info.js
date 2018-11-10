@@ -15,28 +15,16 @@ class Info extends Component {
   renderInfoLinks () {
     return (
       h('div.settings__content-item.settings__content-item--without-height', [
-        h('div.settings__info-item',
+        h('div.settings__info-link-item',
           { style: { paddingTop: 0 } },
           [
-            h('div.settings__info-version-header', 'ClearCoin Extension'),
-            h('div.settings__info-version-number', 'Version ' + this.state.version),
+            h('a', {
+              href: 'https://clearcoin.co/',
+              target: '_blank',
+            }, [
+              h('span.settings__info-link', this.context.t('visitWebSite')),
+            ]),
           ]),
-        
-        h('div.settings__info-item', [
-          this.context.t('builtInCalifornia')
-        ]),
-
-        h('hr.settings__info-separator'),
-
-        
-        h('div.settings__info-link-item', [
-          h('a', {
-            href: 'https://clearcoin.co/',
-            target: '_blank',
-          }, [
-            h('span.settings__info-link', this.context.t('visitWebSite')),
-          ]),
-        ]),
         h('div.settings__info-link-item', [
           h('a', {
             target: '_blank',
@@ -64,6 +52,19 @@ class Info extends Component {
             h('span.settings__info-link', this.context.t('terms')),
           ]),
         ]),
+        
+        h('hr.settings__info-separator'),
+
+        h('div.settings__info-item',
+          [
+            h('div.settings__info-version-header', 'ClearCoin Extension'),
+            h('div.settings__info-version-number', 'Version ' + this.state.version),
+          ]),
+        
+        h('div.settings__info-item', [
+          this.context.t('builtInCalifornia')
+        ]),
+        
       ])
     )
   }
