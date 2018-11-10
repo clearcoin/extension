@@ -138,7 +138,7 @@ class BackupPhraseScreen extends Component {
           >
             Next
           </button>
-          <Breadcrumbs total={3} currentIndex={1} />
+          <Breadcrumbs total={3} currentIndex={2} />
         </div>
       </div>
     )
