@@ -270,11 +270,8 @@ gulp.task('fmt-scss', function () {
 // build js
 
 const buildJsFiles = [
-  'inpage',
-  'contentscript',
   'background',
   'ui',
-  //'blocker/js/replace-ad'
 ]
 
 // bundle tasks
@@ -284,10 +281,9 @@ createTasksForBuildJsMascara({ taskPrefix: 'build:mascara:js' })
 createTasksForBuildJsMascara({ taskPrefix: 'dev:mascara:js', devMode: true })
 
 function createTasksForBuildJsExtension ({ buildJsFiles, taskPrefix, devMode, bundleTaskOpts = {} }) {
-  // inpage must be built before all other scripts:
   const rootDir = './app/scripts'
-  const nonInpageFiles = buildJsFiles.filter(file => file !== 'inpage')
-  const buildPhase1 = ['inpage']
+  const nonInpageFiles = buildJsFiles.filter(file => file !== 'background')
+  const buildPhase1 = ['background']
   const buildPhase2 = nonInpageFiles
   const destinations = browserPlatforms.map(platform => `./dist/${platform}`)
   bundleTaskOpts = Object.assign({
@@ -302,7 +298,6 @@ function createTasksForBuildJsExtension ({ buildJsFiles, taskPrefix, devMode, bu
 }
 
 function createTasksForBuildJsMascara ({ taskPrefix, devMode, bundleTaskOpts = {} }) {
-  // inpage must be built before all other scripts:
   const rootDir = './mascara/src/'
   const buildPhase1 = ['ui', 'proxy', 'background', 'metamascara']
   const destinations = ['./dist/mascara']
