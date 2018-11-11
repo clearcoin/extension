@@ -100,7 +100,7 @@ class NoticeScreen extends Component {
                   >
                     Accept
                   </button>
-                  <Breadcrumbs total={3} currentIndex={2} />
+                  <Breadcrumbs total={3} currentIndex={1} />
                 </div>
               </div>
             </div>
