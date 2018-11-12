@@ -48,7 +48,6 @@
         "https://*/*"
       ],
       "js": [
-        "scripts/contentscript.js"
       ],
       "run_at": "document_start",
       "all_frames": true
@@ -61,7 +60,6 @@
     "https://*.infura.io/"
     ],
   "web_accessible_resources": [
-    "scripts/inpage.js"
   ],
   "externally_connectable": {
     "matches": [
