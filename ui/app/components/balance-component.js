@@ -4,6 +4,7 @@ const h = require('react-hyperscript')
 const inherits = require('util').inherits
 const TokenBalance = require('./token-balance')
 const Identicon = require('./identicon')
+const Tooltip = require('./tooltip')
 const currencyFormatter = require('currency-formatter')
 const currencies = require('currency-formatter/currencies')
 
@@ -49,7 +50,15 @@ BalanceComponent.prototype.renderTokenBalance = function () {
   const { token } = this.props
 
   return h('div.flex-column.balance-display', [
-    h('div.token-amount', [ h(TokenBalance, { token }) ]),
+    (token.symbol === 'XCLR' ?
+     h(Tooltip, {
+       title: "This is the amount of XCLR currently in your wallet. Hover over \"Earned Total\" to learn more about when we send out earned XCLR to your wallet.",
+       position: 'bottom',
+     }, [
+       h('div.token-amount', [ h(TokenBalance, { token }) ]),
+     ])
+     : h('div.token-amount', [ h(TokenBalance, { token }) ])
+    ),
   ])
 }
 
