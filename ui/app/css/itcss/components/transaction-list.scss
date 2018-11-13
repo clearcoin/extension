@@ -282,6 +282,9 @@
   }
 
   &--empty {
+    font-size: 12px;
+    font-style: italic;
+    color: #888;
     text-align: center;
     border-bottom: none !important;
     padding: 16px;

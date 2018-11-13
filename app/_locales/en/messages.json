@@ -669,7 +669,7 @@
     "message": "No transaction history."
   },
   "noTransactions": {
-    "message": "No Transactions"
+    "message": "No outgoing transactions yet..."
   },
   "notFound": {
     "message": "Not Found"
