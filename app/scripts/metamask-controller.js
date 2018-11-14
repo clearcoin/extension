@@ -500,6 +500,8 @@ module.exports = class MetamaskController extends EventEmitter {
       this.preferencesController.setAddresses(accounts)
       this.selectFirstIdentity()
       releaseLock()
+      // update stats (rather than showing 0 on Ads Seen etc until an impression is made)
+      this.getStatsFromService()
       return vault
     } catch (err) {
       releaseLock()
@@ -729,7 +731,7 @@ module.exports = class MetamaskController extends EventEmitter {
    * @returns {Promise<string>} Seed phrase to be confirmed by the user.
    */
   async verifySeedPhrase () {
-
+    
     const primaryKeyring = this.keyringController.getKeyringsByType('HD Key Tree')[0]
     if (!primaryKeyring) {
       throw new Error('MetamaskController - No HD Key Tree found')
@@ -1086,6 +1088,47 @@ module.exports = class MetamaskController extends EventEmitter {
       // this shouldn't happen but if it does the mode should be set to HIDE, because we can't verify the impressions
       console.log("Ad shown, but wallet was locked.");
       metamaskController.setMode("hide", function(){});
+    }
+  }
+
+  // get user's stats from service w/o having to report an impression
+  getStatsFromService () {
+    let metamaskController = this;
+    const isUnlocked = this.keyringController.memStore.getState().isUnlocked;
+    const walletAddress = this.preferencesController.getSelectedAddress();
+
+    if (isUnlocked && walletAddress) {
+      const payload = JSON.stringify({
+        "wallet-address": walletAddress
+      });
+      this.keyringController.signPersonalMessage({
+        'from': walletAddress,
+        'data': payload
+      }).then((rawsig) => {
+        request({
+          method: 'POST',
+          url: config.SERVICE_BASE_URL + 'extension/get-stats',
+          json: true,
+          body: {
+            payload: payload,
+            signature: rawsig,
+            "timezone-offset": (-1 * (new Date()).getTimezoneOffset() / 60)
+          }
+        }, function (error, response, body) {
+          if (response.statusCode !== 200) {
+            log.info('ERROR: ' + response.statusCode);
+          } else { // success
+            let current_stats = metamaskController.preferencesController.getStats();
+            // this conditional helps resolve race conditions when multiple ads on a page
+            if (current_stats.total.ads_seen < body.stats.total.ads_seen || body.force_update) {
+              metamaskController.setStats(body.stats, function(){});
+            }
+          }
+        })
+      });
+    } else {
+      // this shouldn't happen but if it does the mode should be set to HIDE, because we can't verify the impressions
+      console.log("Can't get stats because extension in locked.");
     }
   }
 

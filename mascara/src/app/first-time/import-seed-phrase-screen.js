@@ -87,8 +87,7 @@ class ImportSeedPhraseScreen extends Component {
     } = this.props
 
     leaveImportSeedScreenState()
-    createNewVaultAndRestore(password, this.parseSeedPhrase(seedPhrase))
-      .then(() => history.push(INITIALIZE_NOTICE_ROUTE))
+    createNewVaultAndRestore(password, this.parseSeedPhrase(seedPhrase)).then(() => history.push(INITIALIZE_NOTICE_ROUTE))
   }
 
   hasError () {

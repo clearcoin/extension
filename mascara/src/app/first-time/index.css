@@ -453,6 +453,8 @@ button.backup-phrase__reveal-button:hover {
 .import-account__secret-phrase {
   font-size: 16px;
   margin: initial;
+  height: 92px;
+  min-height: 92px;
 }
 
 .import-account__secret-phrase::placeholder {
