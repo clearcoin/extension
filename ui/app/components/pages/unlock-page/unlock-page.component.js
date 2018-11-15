@@ -114,16 +114,23 @@ export default class UnlockPage extends Component {
     return (
       <div className="unlock-page__container">
         <div className="unlock-page">
-          <div className="unlock-page__mascot-container">
-            <img
-              src="/images/clearybot.svg"
-              width="175"
-              height="175"
-            />
-          </div>
-          <h1 className="unlock-page__title">
-            { t('welcomeBack') }
-          </h1>
+        
+        <img
+          className="app-header__metafox"
+          src="./images/clearybot.svg"
+          style={{
+            height: 230,
+            marginLeft: -7,
+          }} />
+
+        <img
+          src="/images/logo-text.png"
+          style={{
+            width: 185,
+            marginTop: 5,
+            marginBottom: 18,
+          }}  />
+      
           <div>{ t('unlockMessage') }</div>
           <form
             className="unlock-page__form"
