@@ -341,10 +341,10 @@
     "message": "Exchange Rate"
   },
   "exportPrivateKey": {
-    "message": "Export Private Key"
+    "message": "Reveal Private Key"
   },
   "exportPrivateKeyWarning": {
-    "message": "Export private keys at your own risk."
+    "message": "Reveal private keys at your own risk."
   },
   "failed": {
     "message": "Failed"
