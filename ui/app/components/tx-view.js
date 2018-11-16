@@ -22,6 +22,10 @@ module.exports = compose(
 )(TxView)
 
 TxView.contextTypes = {
+  isKYCApproved: PropTypes.bool,
+  isKYCUnapproved: PropTypes.bool,
+  isKYCPending: PropTypes.bool,
+  isKYCSubmitted: PropTypes.bool,
   t: PropTypes.func,
 }
 
@@ -46,6 +50,10 @@ function mapStateToProps (state) {
     identity,
     network,
     isMascara,
+    isKYCSubmitted: state.metamask.isKYCSubmitted,
+    isKYCApproved: state.metamask.isKYCApproved,
+    isKYCUnapproved: state.metamask.isKYCUnapproved,
+    isKYCPending: state.metamask.isKYCPending,
   }
 }
 
@@ -65,11 +73,21 @@ function TxView () {
 }
 
 TxView.prototype.renderHeroBalance = function () {
-  const { selectedToken } = this.props
+  const { selectedToken, isKYCSubmitted, isKYCApproved, isKYCUnapproved, isKYCPending, showModal } = this.props
 
   return h('div.hero-balance', {}, [
 
     h(BalanceComponent, { token: selectedToken }),
+
+    (! isKYCApproved ?
+     h('div.kyc-required',
+       {
+         onClick: () => showModal({
+           name: 'HOW_TO_KYC',
+         }),
+       },
+       "(KYC Required)")
+     : null),
 
     this.renderButtons(),
   ])

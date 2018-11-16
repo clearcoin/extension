@@ -128,3 +128,13 @@
     justify-content: center;
   }
 }
+
+.kyc-required {
+    font-size: 13px;
+    color: rgb(197, 57, 41);
+    cursor: pointer;
+    
+    &:hover {
+        opacity: 0.7;
+    }
+}
