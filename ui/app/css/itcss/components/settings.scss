@@ -341,9 +341,12 @@ button.settigns__kyc--button:hover {
 .settings__info-link {
   color: $curious-blue;
 }
+.settings__info-link:hover {
+  color: #6982FC;
+}
 
 .settings__info-separator {
-  margin: 15px 0;
+  margin: 12px 0;
   width: 80px;
   border-color: $alto;
   border: none;

@@ -19,20 +19,21 @@ class Info extends Component {
           { style: { paddingTop: 0 } },
           [
             h('a', {
+              target: '_blank',
+              href: 'mailto:help@clearcoin.co?subject=Extension',
+            }, [
+              h('span.settings__info-link', this.context.t('emailUs')),
+            ]),
+          ]),
+        h('div.settings__info-link-item',
+          [
+            h('a', {
               href: 'https://clearcoin.co/',
               target: '_blank',
             }, [
               h('span.settings__info-link', this.context.t('visitWebSite')),
             ]),
           ]),
-        h('div.settings__info-link-item', [
-          h('a', {
-            target: '_blank',
-            href: 'mailto:help@clearcoin.co?subject=Extension',
-          }, [
-            h('span.settings__info-link', this.context.t('emailUs')),
-          ]),
-        ]),
         
         h('hr.settings__info-separator'),
         
@@ -61,9 +62,20 @@ class Info extends Component {
             h('div.settings__info-version-number', 'Version ' + this.state.version),
           ]),
         
-        h('div.settings__info-item', [
-          this.context.t('builtInCalifornia')
-        ]),
+        h('div.settings__info-item',
+          {
+            style: {
+              fontSize: 13,
+            },
+          },[
+            this.context.t('builtInCalifornia'),
+            h('br'),
+            h('a', {
+              className: 'settings__info-link',
+              href: 'https://github.com/clearcoin/extension',
+              target: '_blank',
+            }, 'This extension is open source on GitHub.')
+          ]),
         
       ])
     )
