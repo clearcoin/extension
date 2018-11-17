@@ -156,10 +156,6 @@ export default class UnlockPage extends Component {
               onClick={() => {
                 markPasswordForgotten()
                 history.push(RESTORE_VAULT_ROUTE)
-
-                if (getEnvironmentType(window.location.href) === ENVIRONMENT_TYPE_POPUP) {
-                  global.platform.openExtensionInBrowser()
-                }
               }}
             >
               { t('restoreFromSeed') }
@@ -169,10 +165,6 @@ export default class UnlockPage extends Component {
               onClick={() => {
                 markPasswordForgotten()
                 history.push(RESTORE_VAULT_ROUTE)
-
-                if (getEnvironmentType(window.location.href) === ENVIRONMENT_TYPE_POPUP) {
-                  global.platform.openExtensionInBrowser()
-                }
               }}
             >
               { t('importUsingSeed') }
