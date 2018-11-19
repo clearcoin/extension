@@ -63,7 +63,7 @@
 
 .first-view-main,
 .first-view-main__mascara {
-  display: flex;
+  display: block;
   flex-direction: row;
   justify-content: flex-start;
 }
