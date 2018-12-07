@@ -1,0 +1,25 @@
+.referrals {
+    width: 100%;
+    text-align: left;
+    font-size: 14px;
+    color: #777;
+
+    .referrals-explanation {
+        margin-top: 15px;
+    }
+    
+    strong.callout-heading {
+        color: #58A2FC;
+        text-transform: uppercase;
+        /* font-weight: 500; */
+    }
+
+    .purp {
+        color: #657CFF;
+    }
+
+    .clearybot {
+        height: 106px;
+        float: left;
+    }
+}

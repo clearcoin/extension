@@ -15,6 +15,7 @@ const Tooltip = require('./tooltip')
 const TxList = require('./tx-list')
 const ModeSelector = require('./mode-selector')
 const Stats = require('./stats')
+const Referrals = require('./referrals')
 
 module.exports = compose(
   withRouter,
@@ -180,6 +181,17 @@ TxView.prototype.render = function () {
     this.renderHeroBalance(),
 
     h(TxList),
+
+    h('div.flex-row', {
+      style: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: '0 0 auto',
+        margin: 'auto 0 0 0',
+        padding: '0px 0px',
+        // borderTop: '1px solid #e5e5e5',
+      },
+    }, [ h(Referrals) ]),
 
   ])
 }
