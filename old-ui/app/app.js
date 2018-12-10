@@ -6,7 +6,6 @@ const actions = require('../../ui/app/actions')
 const log = require('loglevel')
 // mascara
 const MascaraFirstTime = require('../../mascara/src/app/first-time').default
-const MascaraBuyEtherScreen = require('../../mascara/src/app/first-time/buy-ether-screen').default
 // init
 const InitializeMenuScreen = require('./first-time/init-menu')
 const NewKeyChainScreen = require('./new-keychain')
