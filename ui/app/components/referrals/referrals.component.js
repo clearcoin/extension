@@ -27,7 +27,7 @@ class Referrals extends Component {
   componentWillMount () {
     const { referralCode, getReferralCodeFromService } = this.props
 
-    if ( ! referralCode) {
+    if ( ! referralCode) { // if not already set in our extension storage, then we need to retrieve from web service
       getReferralCodeFromService()
     }
   }
@@ -69,9 +69,9 @@ class Referrals extends Component {
       h('div.referrals-explanation', [
         h('strong.callout-heading', "Invite Your Friends"),
         h('br'),
-        "When they complete KYC,",
+        "Share this link, and both of you will earn",
         h('br'),
-        " you'll both earn ", h('span.purp', "500 XCLR!"),
+        h('span.purp', "500 XCLR"), " when they complete KYC!", 
         (referralCode ? this.renderReferralLink(referralUrl) : ""),
       ]),
     ])
