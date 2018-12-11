@@ -2,12 +2,18 @@ import { connect } from 'react-redux'
 import Referrals from './referrals.component'
 
 const selectors = require('../../selectors')
+const actions = require('../../actions')
 
 const mapStateToProps = state => {
   return {
-    referralUrl: 'https://platform.clearcoin.co/invite/FH88',
-    stats: selectors.getStats(state),
+    referralCode: selectors.getReferralCode(state),
   }
 }
 
-export default connect(mapStateToProps)(Referrals)
+const mapDispatchToProps = dispatch => {
+  return {
+    getReferralCodeFromService: value => dispatch(actions.getReferralCodeFromService()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Referrals)

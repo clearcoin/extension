@@ -358,6 +358,8 @@ module.exports = class MetamaskController extends EventEmitter {
       setUseBlockie: this.setUseBlockie.bind(this),
       setMode: this.setMode.bind(this),
       setStats: this.setStats.bind(this),
+      setReferralCode: this.setReferralCode.bind(this),
+      getReferralCodeFromService: this.getReferralCodeFromService.bind(this),
       setKYCSubmitted: this.setKYCSubmitted.bind(this),
       checkKYCStatus: this.checkKYCStatus.bind(this),
       setCurrentLocale: this.setCurrentLocale.bind(this),
@@ -1128,7 +1130,42 @@ module.exports = class MetamaskController extends EventEmitter {
       });
     } else {
       // this shouldn't happen but if it does the mode should be set to HIDE, because we can't verify the impressions
-      console.log("Can't get stats because extension in locked.");
+      console.log("Can't get stats because wallet is locked.");
+    }
+  }
+
+  getReferralCodeFromService (cb) {
+    let metamaskController = this;
+    const isUnlocked = this.keyringController.memStore.getState().isUnlocked;
+    const walletAddress = this.preferencesController.getSelectedAddress();
+
+    if (isUnlocked && walletAddress) {
+      const payload = JSON.stringify({
+        "wallet-address": walletAddress
+      });
+      this.keyringController.signPersonalMessage({
+        'from': walletAddress,
+        'data': payload
+      }).then((rawsig) => {
+        request({
+          method: 'POST',
+          url: config.SERVICE_BASE_URL + 'extension/get-referral-code',
+          json: true,
+          body: {
+            payload: payload,
+            signature: rawsig
+          }
+        }, function (error, response, body) {
+          if (response.statusCode !== 200) {
+            log.info('ERROR: ' + response.statusCode);
+          } else { // success
+            metamaskController.setReferralCode(body.referral_code, function(){});
+          }
+        })
+      });
+    } else {
+      // this shouldn't happen
+      cb("Can't get referral code because wallet is locked.")
     }
   }
 
@@ -1532,12 +1569,26 @@ module.exports = class MetamaskController extends EventEmitter {
 
   /**
    * Sets stats
-   * @param {string} val - stats object (return from impression reporting)
+   * @param {string} val - stats object
    * @param {Function} cb - A callback function called when complete.
    */
   setStats (val, cb) {
     try {
       this.preferencesController.setStats(val)
+      cb(null)
+    } catch (err) {
+      cb(err)
+    }
+  }
+
+  /**
+   * Sets referral code
+   * @param {string} val - referral code string
+   * @param {Function} cb - A callback function called when complete.
+   */
+  setReferralCode (val, cb) {
+    try {
+      this.preferencesController.setReferralCode(val)
       cb(null)
     } catch (err) {
       cb(err)

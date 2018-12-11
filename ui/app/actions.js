@@ -291,6 +291,10 @@ var actions = {
   SET_STATS: 'SET_STATS',
   setStats,
 
+  SET_REFERRAL_CODE: 'SET_REFERRAL_CODE',
+  setReferralCode,
+  getReferralCodeFromService: getReferralCodeFromService,
+
   // locale
   SET_CURRENT_LOCALE: 'SET_CURRENT_LOCALE',
   SET_LOCALE_MESSAGES: 'SET_LOCALE_MESSAGES',
@@ -2223,6 +2227,32 @@ function setStats (val) {
     dispatch({
       type: actions.SET_STATS,
       value: val,
+    })
+  }
+}
+
+function setReferralCode (val) {
+  return (dispatch) => {
+    log.debug(`background.setReferralCode`)
+    background.setReferralCode(val, (err) => {
+      if (err) {
+        return dispatch(actions.displayWarning(err.message))
+      }
+    })
+    dispatch({
+      type: actions.SET_REFERRAL_CODE,
+      value: val,
+    })
+  }
+}
+
+function getReferralCodeFromService () {
+  return (dispatch) => {
+    log.debug(`background.getReferralCodeFromService`)
+    background.getReferralCodeFromService((err) => {
+      if (err) {
+        return dispatch(actions.displayWarning(err.message))
+      }
     })
   }
 }

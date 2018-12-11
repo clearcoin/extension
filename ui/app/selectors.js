@@ -8,6 +8,7 @@ const {
 const selectors = {
   getMode,
   getStats,
+  getReferralCode,
   getSelectedAddress,
   getSelectedIdentity,
   getSelectedAccount,
@@ -40,6 +41,10 @@ function getMode (state) {
 
 function getStats (state) {
   return state.metamask.stats
+}
+
+function getReferralCode (state) {
+  return state.metamask.referralCode
 }
 
 function getSelectedAddress (state) {
