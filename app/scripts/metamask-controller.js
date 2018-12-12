@@ -1656,46 +1656,50 @@ module.exports = class MetamaskController extends EventEmitter {
   }
 
   requestKYCStatus (payload_body, kycSig, cb) {
-      let post_data = {
-        payload: payload_body,
-        signature: kycSig.rawsign
-      }
+    let post_data = {
+      payload: payload_body,
+      signature: kycSig.rawsign
+    }
 
-      request({
-          method: 'POST',
-          url: config.SERVICE_BASE_URL + 'extension/check-applicant',
-          json: true,
-          body: post_data
-        },
-        function (error, response, body) {
-          if (body.status === "complete" ||
-              body.status === "consider") {
-            if (!cb.getKYCSubmitted()) {
-              cb.setKYCSubmitted()
-            }
-            cb.setKYCApproved()
-          } else if (body.status === "withdrawn" ||
-                     body.status === "cancelled") {
-            if (!cb.getKYCSubmitted()) {
-              cb.setKYCSubmitted()
-            }
-            cb.setKYCUnapproved()
-          } else if (body.status === "awaiting_data" ||
-                     body.status === "awaiting_approval" ||
-                     body.status === "paused") {
-            if (!cb.getKYCSubmitted()) {
-              cb.setKYCSubmitted()
-            }
-            cb.setKYCPending()
-          } else if (body.status === "awaiting_applicant") {
-            if (!cb.getKYCSubmitted()) {
-              cb.setKYCSubmitted()
-            }
-            cb.setKYCAwaitingApplicant()
-          } else if (body.status === "uninitiated") {
-            cb.setKYCUnsubmitted()
-          }
-      })
+    let referred_by_referral_code = this.preferencesController.getReferredByReferralCode()
+    if (referred_by_referral_code) {
+      post_data['referred-by-referral-code'] = referred_by_referral_code
+    }
+
+    request({method: 'POST',
+             url: config.SERVICE_BASE_URL + 'extension/check-applicant',
+             json: true,
+             body: post_data
+            },
+            function (error, response, body) {
+              if (body.status === "complete" ||
+                  body.status === "consider") {
+                if (!cb.getKYCSubmitted()) {
+                  cb.setKYCSubmitted()
+                }
+                cb.setKYCApproved()
+              } else if (body.status === "withdrawn" ||
+                         body.status === "cancelled") {
+                if (!cb.getKYCSubmitted()) {
+                  cb.setKYCSubmitted()
+                }
+                cb.setKYCUnapproved()
+              } else if (body.status === "awaiting_data" ||
+                         body.status === "awaiting_approval" ||
+                         body.status === "paused") {
+                if (!cb.getKYCSubmitted()) {
+                  cb.setKYCSubmitted()
+                }
+                cb.setKYCPending()
+              } else if (body.status === "awaiting_applicant") {
+                if (!cb.getKYCSubmitted()) {
+                  cb.setKYCSubmitted()
+                }
+                cb.setKYCAwaitingApplicant()
+              } else if (body.status === "uninitiated") {
+                cb.setKYCUnsubmitted()
+              }
+            })
   }
 
   checkKYCStatus (cb) {
