@@ -2,7 +2,7 @@
 // const SERVICE_BASE_URL = "https://platform.clearcoin.co/"
 const SERVICE_BASE_URL = "http://localhost:3000/"
 
-// const REFERRAL_BASE_URL = "https://invite.clearcoin.co/"
+// const REFERRAL_BASE_URL = "https://x.clearcoin.co/invite/"
 const REFERRAL_BASE_URL = "http://localhost:3000/invite/"
 
 const XCLR_ADDRESS = "0x1e26b3d07e57f453cae30f7ddd2f945f5bf3ef33"

@@ -440,3 +440,12 @@ function triggerUi () {
     }
   })
 }
+
+// On first install, open new tab for Thank You For Installing page
+// (this page is important because it retrieves the referral code from cookies (if it exists))
+extension.runtime.onInstalled.addListener(function (details) {	
+  if ((details.reason === 'install') // && (!METAMASK_DEBUG)
+     ) {	
+    extension.tabs.create({url: 'http://localhost:3000/install-thank-you'})	
+  }	
+})
