@@ -360,6 +360,7 @@ module.exports = class MetamaskController extends EventEmitter {
       setStats: this.setStats.bind(this),
       setReferralCode: this.setReferralCode.bind(this),
       getReferralCodeFromService: this.getReferralCodeFromService.bind(this),
+      setReferredByReferralCode: this.setReferredByReferralCode.bind(this),
       setKYCSubmitted: this.setKYCSubmitted.bind(this),
       checkKYCStatus: this.checkKYCStatus.bind(this),
       setCurrentLocale: this.setCurrentLocale.bind(this),
@@ -1589,6 +1590,20 @@ module.exports = class MetamaskController extends EventEmitter {
   setReferralCode (val, cb) {
     try {
       this.preferencesController.setReferralCode(val)
+      cb(null)
+    } catch (err) {
+      cb(err)
+    }
+  }
+
+  /**
+   * Sets referral code that this user was --referred by--, if any. (different from setReferralCode, that one is for the user's referral code)
+   * @param {string} val - referred by referral code string
+   * @param {Function} cb - A callback function called when complete.
+   */
+  setReferredByReferralCode (val, cb) {
+    try {
+      this.preferencesController.setReferredByReferralCode(val)
       cb(null)
     } catch (err) {
       cb(err)

@@ -446,6 +446,28 @@ function triggerUi () {
 extension.runtime.onInstalled.addListener(function (details) {	
   if ((details.reason === 'install') // && (!METAMASK_DEBUG)
      ) {	
-    extension.tabs.create({url: 'http://localhost:3000/install-thank-you'})	
+    extension.tabs.create(
+      {url: 'http://localhost:3000/install-thank-you'},
+      function (tab) {
+        extension.tabs.executeScript(
+          tab.id,
+          {
+            code: "function getCookie(name) {" +
+              "  var value = '; ' + document.cookie;" +
+              "  var parts = value.split('; ' + name + '=');" +
+              "  if (parts.length == 2) return parts.pop().split(';').shift();" +
+              "}" +
+              "var referralCode = getCookie('referral_code');" +
+              "vAPI.messaging.send('contentscript', {" +
+              "  what: 'registerReferralCode'," +
+              "  referral_code: referralCode," +
+              "  origin: origin," +
+              "}, function(response){" +
+              // "  console.log(response);" +
+              "});"
+          }
+        )
+      }
+    )	
   }	
 })

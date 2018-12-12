@@ -47,6 +47,10 @@ function getReferralCode (state) {
   return state.metamask.referralCode
 }
 
+function getReferredByReferralCode (state) {
+  return state.metamask.referredByReferralCode
+}
+
 function getSelectedAddress (state) {
   const selectedAddress = state.metamask.selectedAddress || Object.keys(state.metamask.accounts)[0]
 
