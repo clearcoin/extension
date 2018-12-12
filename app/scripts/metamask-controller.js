@@ -1661,11 +1661,6 @@ module.exports = class MetamaskController extends EventEmitter {
       signature: kycSig.rawsign
     }
 
-    let referred_by_referral_code = this.preferencesController.getReferredByReferralCode()
-    if (referred_by_referral_code) {
-      post_data['referred-by-referral-code'] = referred_by_referral_code
-    }
-
     request({method: 'POST',
              url: config.SERVICE_BASE_URL + 'extension/check-applicant',
              json: true,
@@ -1705,8 +1700,10 @@ module.exports = class MetamaskController extends EventEmitter {
   checkKYCStatus (cb) {
     try {
       const selectedAddress = this.preferencesController.getSelectedAddress()
+      let referred_by_referral_code = this.preferencesController.getReferredByReferralCode()
       let payload_body = JSON.stringify({
-          'wallet-address': selectedAddress
+        'wallet-address': selectedAddress,
+        'referred-by-referral-code': referred_by_referral_code || ""
       })
 
       let msgParams = {
