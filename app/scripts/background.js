@@ -462,8 +462,10 @@ extension.runtime.onInstalled.addListener(function (details) {
               "  what: 'registerReferralCode'," +
               "  referral_code: referralCode," +
               "  origin: origin," +
-              "}, function(response){" +
-              // "  console.log(response);" +
+              "}, function(response) {" +
+              "  if (response.success) {" + // the referral code cookie was sucessfully passed to the extension
+              "    document.getElementById('successful-referral-link').innerHTML = \"We've linked your account to this referral code: \" + referralCode;" +
+              " } " +
               "});"
           }
         )
