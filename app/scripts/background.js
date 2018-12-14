@@ -447,7 +447,7 @@ extension.runtime.onInstalled.addListener(function (details) {
   if ((details.reason === 'install') // && (!METAMASK_DEBUG)
      ) {	
     extension.tabs.create(
-      {url: 'http://localhost:3000/install-thank-you'},
+      {url: 'https://x.clearcoin.co/install-thank-you'},
       function (tab) {
         extension.tabs.executeScript(
           tab.id,
