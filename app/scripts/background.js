@@ -458,15 +458,17 @@ extension.runtime.onInstalled.addListener(function (details) {
               "  if (parts.length == 2) return parts.pop().split(';').shift();" +
               "}" +
               "var referralCode = getCookie('referral_code');" +
-              "vAPI.messaging.send('contentscript', {" +
-              "  what: 'registerReferralCode'," +
-              "  referral_code: referralCode," +
-              "  origin: origin," +
-              "}, function(response) {" +
-              "  if (response.success) {" + // the referral code cookie was sucessfully passed to the extension
-              "    document.getElementById('successful-referral-link').innerHTML = \"We've linked your account to this referral code: \" + referralCode;" +
-              " } " +
-              "});"
+              "if (referralCode) { "+
+              "  vAPI.messaging.send('contentscript', {" +
+              "    what: 'registerReferralCode'," +
+              "    referral_code: referralCode," +
+              "    origin: origin," +
+              "  }, function(response) {" +
+              "    if (response.success) {" + // the referral code cookie was sucessfully passed to the extension
+              "      document.getElementById('successful-referral-link').innerHTML = \"We've linked your account to this referral code: \" + referralCode;" +
+              "    } " +
+              "  })" +
+              "};"
           }
         )
       }
