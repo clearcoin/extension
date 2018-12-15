@@ -181,6 +181,22 @@ class PreferencesController {
   }
 
   /**
+   * Setter for the `referralCode` property
+   *
+   */
+  setReferralCode (val) {
+    this.store.updateState({ referralCode: val })
+  }
+
+  /**
+   * Setter for the `referredByReferralCode` property
+   *
+   */
+  setReferredByReferralCode (val) {
+    this.store.updateState({ referredByReferralCode: val })
+  }
+
+  /**
    * Getter for the `stats` property
    *
    * @returns {string} this.store.stats
@@ -188,6 +204,26 @@ class PreferencesController {
    */
   getStats () {
     return this.store.getState().stats
+  }
+
+  /**
+   * Getter for the `referralCode` property
+   *
+   * @returns {string} this.store.referralCode
+   *
+   */
+  getReferralCode () {
+    return this.store.getState().referralCode
+  }
+
+  /**
+   * Getter for the `referredByReferralCode` property
+   *
+   * @returns {string} this.store.referredByReferralCode
+   *
+   */
+  getReferredByReferralCode () {
+    return this.store.getState().referredByReferralCode
   }
 
   /**

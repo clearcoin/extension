@@ -1,0 +1,32 @@
+.referrals {
+    width: 100%;
+    text-align: left;
+    font-size: 13px;
+    color: #777;
+
+    .referrals-explanation {
+        margin-top: 15px;
+    }
+    
+    strong.callout-heading {
+        color: #58A2FC;
+        text-transform: uppercase;
+        font-size: 14px;
+        /* font-weight: 500; */
+    }
+
+    .purp {
+        color: #657CFF;
+    }
+
+    .clearybot {
+        height: 106px;
+        margin-right: -10px;
+        margin-left: -8px;
+        float: left;
+    }
+
+    button.wallet-view__address {
+        margin-top: 3px;
+    }
+}

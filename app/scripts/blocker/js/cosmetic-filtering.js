@@ -1186,7 +1186,8 @@
          */
         var ad_slot_code = "" +
             "document.querySelectorAll('" + // select all of the cosmetic-filtered elements
-            out.injected.replace(/\n/g, "").replace(/#\\5f/g, "#\\x5f") + 
+            //                                                          circumvent youtube bug that shows edge of ad under fullscreen video
+            out.injected.replace(/\n/g, "").replace(/#\\5f/g, "#\\x5f").replace(/\.video-ads/g, "") + 
             "').forEach(function (x) {" + // function to run on each selected element
             "  var element_width = x.scrollWidth,    " + // get the best fit dimensions
             "      element_height = x.scrollHeight;  " +

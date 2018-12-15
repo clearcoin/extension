@@ -440,3 +440,38 @@ function triggerUi () {
     }
   })
 }
+
+// On first install, open new tab for Thank You For Installing page
+// (this page is important because it retrieves the referral code from cookies (if it exists))
+extension.runtime.onInstalled.addListener(function (details) {	
+  if ((details.reason === 'install') // && (!METAMASK_DEBUG)
+     ) {	
+    extension.tabs.create(
+      {url: 'https://x.clearcoin.co/install-thank-you'},
+      function (tab) {
+        extension.tabs.executeScript(
+          tab.id,
+          {
+            code: "function getCookie(name) {" +
+              "  var value = '; ' + document.cookie;" +
+              "  var parts = value.split('; ' + name + '=');" +
+              "  if (parts.length == 2) return parts.pop().split(';').shift();" +
+              "}" +
+              "var referralCode = getCookie('referral_code');" +
+              "if (referralCode) { "+
+              "  vAPI.messaging.send('contentscript', {" +
+              "    what: 'registerReferralCode'," +
+              "    referral_code: referralCode," +
+              "    origin: origin," +
+              "  }, function(response) {" +
+              "    if (response.success) {" + // the referral code cookie was sucessfully passed to the extension
+              "      document.getElementById('successful-referral-link').innerHTML = \"We've linked your account to this referral code: \" + referralCode;" +
+              "    } " +
+              "  })" +
+              "};"
+          }
+        )
+      }
+    )	
+  }	
+})

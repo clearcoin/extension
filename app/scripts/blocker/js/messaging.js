@@ -602,6 +602,28 @@ vAPI.messaging.listen('popupPanel', onMessage);
       
       break;
 
+    case 'registerReferralCode':
+      // start with simple sanity checks to limit attack vector
+      if (/^[a-z0-9]+$/i.test(request.referral_code) &&
+          (request.origin === "https://x.clearcoin.co" ||
+           request.origin === "http://x.clearcoin.co" ||
+           request.origin === "https://platform.clearcoin.co" ||
+           request.origin === "http://platform.clearcoin.co" ||
+           request.origin === "http://localhost:3000" // for tests locally
+          )) {
+        window.metamaskController.setReferredByReferralCode(
+          request.referral_code,
+          function(){}
+        );
+
+        response = { success: true };
+      } else {
+        // failed the tests, or there was just no referral code
+        response = { success: false };
+      }
+      
+      break;
+
     default:
         return vAPI.messaging.UNHANDLED;
     }
