@@ -1,9 +1,6 @@
-// when changing SERVICE_BASE_URL keep in mind that the base url is also hard coded in scripts/blocker/replace-ad.js
-const SERVICE_BASE_URL = "https://platform.clearcoin.co/"
-//const SERVICE_BASE_URL = "http://localhost:3000/"
-
-const REFERRAL_BASE_URL = "https://x.clearcoin.co/invite/"
-//const REFERRAL_BASE_URL = "http://localhost:3000/invite/"
+// when changing SERVICE_BASE_URL keep in mind that the base url is also hard coded in scripts/blocker/js/replace-ad.js
+const SERVICE_BASE_URL = process.env.SERVICE_BASE_URL;
+const REFERRAL_BASE_URL = process.env.REFERRAL_BASE_URL;
 
 const XCLR_ADDRESS = "0x1e26b3d07e57f453cae30f7ddd2f945f5bf3ef33"
 const XCLR_SYMBOL = "XCLR"

@@ -452,6 +452,8 @@ function generateBundler (opts, performBundle) {
   bundler.transform(envify({
     METAMASK_DEBUG: opts.devMode,
     NODE_ENV: opts.devMode ? 'development' : 'production',
+    SERVICE_BASE_URL: opts.devMode ? 'http://localhost:3000/' : 'https://platform.clearcoin.co/',
+    REFERRAL_BASE_URL: opts.devMode ? 'http://localhost:3000/invite/' : 'https://x.clearcoin.co/invite/',
   }))
 
   if (opts.watch) {
