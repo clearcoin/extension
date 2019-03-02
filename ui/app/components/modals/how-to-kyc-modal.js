@@ -111,11 +111,12 @@ HowToKycModal.prototype.render = function () {
       h('div.deposit-ether-modal__buy-rows', [
 
         this.renderRow({
-          logo: h('img', {
-            src: './images/onfido-logo.png',
-            width: "165px",
-            height: "40px"
-          }),
+          // temporarily handling KYC outside of Onfido
+          // logo: h('img', {
+          //   src: './images/onfido-logo.png',
+          //   width: "165px",
+          //   height: "40px"
+          // }),
           title: "Start Your KYC",
           text: this.context.t('describeNeedToKyc'),
           buttonLabel: "Start Your KYC",

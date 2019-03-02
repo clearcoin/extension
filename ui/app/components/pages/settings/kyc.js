@@ -478,11 +478,7 @@ class Kyc extends Component {
           </p>
     } else {
       introText = <p>
-            Thank you for beginning your KYC application. An email from Onfido will
-            arrive in your inbox shortly detailing steps on how to continue.
-            <br /><br />
-            Upon completion, please allow 3-4 business days for your application to be processed.
-            Please note that if you already have an approved application on file, you will instead receive an email from ClearCoin with a link to verify your account update.
+            Thank you for beginning your KYC application. You will receive an email shortly detailing steps on how to continue.
             <br /><br />
           </p>
     }

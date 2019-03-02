@@ -1,4 +1,4 @@
-// when changing SERVICE_BASE_URL keep in mind that the base url is also hard coded in scripts/blocker/js/replace-ad.js
+// WARNING: base url is also hard coded in scripts/blocker/js/replace-ad.js
 const SERVICE_BASE_URL = process.env.SERVICE_BASE_URL;
 const REFERRAL_BASE_URL = process.env.REFERRAL_BASE_URL;
 
