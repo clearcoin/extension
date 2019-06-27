@@ -39,8 +39,6 @@ const browserPlatforms = [
   'opera',
 ]
 const commonPlatforms = [
-  // browser webapp
-  'mascara',
   // browser extensions
   ...browserPlatforms,
 ]
@@ -99,14 +97,6 @@ createCopyTasks('manifest', {
   source: './app/',
   pattern: '/*.json',
   destinations: browserPlatforms.map(platform => `./dist/${platform}`),
-})
-
-// copy mascara
-
-createCopyTasks('html:mascara', {
-  source: './mascara/',
-  pattern: 'proxy/index.html',
-  destinations: [`./dist/mascara/`],
 })
 
 function createCopyTasks (label, opts) {
@@ -277,8 +267,6 @@ const buildJsFiles = [
 // bundle tasks
 createTasksForBuildJsExtension({ buildJsFiles, taskPrefix: 'dev:extension:js', devMode: true })
 createTasksForBuildJsExtension({ buildJsFiles, taskPrefix: 'build:extension:js' })
-createTasksForBuildJsMascara({ taskPrefix: 'build:mascara:js' })
-createTasksForBuildJsMascara({ taskPrefix: 'dev:mascara:js', devMode: true })
 
 function createTasksForBuildJsExtension ({ buildJsFiles, taskPrefix, devMode, bundleTaskOpts = {} }) {
   const rootDir = './app/scripts'
@@ -287,21 +275,6 @@ function createTasksForBuildJsExtension ({ buildJsFiles, taskPrefix, devMode, bu
   bundleTaskOpts = Object.assign({
     buildSourceMaps: devMode, //true,
     sourceMapDir: devMode ? './' : '../sourcemaps',
-    minifyBuild: !devMode,
-    buildWithFullPaths: devMode,
-    watch: devMode,
-    devMode,
-  }, bundleTaskOpts)
-  createTasksForBuildJs({ rootDir, taskPrefix, bundleTaskOpts, destinations, buildPhase })
-}
-
-function createTasksForBuildJsMascara ({ taskPrefix, devMode, bundleTaskOpts = {} }) {
-  const rootDir = './mascara/src/'
-  const buildPhase = ['ui', 'proxy', 'background', 'metamascara']
-  const destinations = ['./dist/mascara']
-  bundleTaskOpts = Object.assign({
-    buildSourceMaps: devMode, //true,
-    sourceMapDir: './',
     minifyBuild: !devMode,
     buildWithFullPaths: devMode,
     watch: devMode,
@@ -356,7 +329,6 @@ gulp.task('dev',
             'dev:scss',
             gulp.parallel(
               'dev:extension:js',
-              'dev:mascara:js',
               'dev:copy',
               'dev:reload'
             )
@@ -375,25 +347,12 @@ gulp.task('dev:extension',
           )
          )
 
-gulp.task('dev:mascara',
-          gulp.series(
-            'clean',
-            'dev:scss',
-            gulp.parallel(
-              'dev:mascara:js',
-              'dev:copy',
-              'dev:reload'
-            )
-          )
-         )
-
 gulp.task('build',
           gulp.series(
             'clean',
             'build:scss',
             gulpParallel(
               'build:extension:js',
-              'build:mascara:js',
               'copy'
             )
           )
@@ -405,17 +364,6 @@ gulp.task('build:extension',
             'build:scss',
             gulp.parallel(
               'build:extension:js',
-              'copy'
-            )
-          )
-         )
-
-gulp.task('build:mascara',
-          gulp.series(
-            'clean',
-            'build:scss',
-            gulp.parallel(
-              'build:mascara:js',
               'copy'
             )
           )
